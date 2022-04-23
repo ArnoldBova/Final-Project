@@ -20,8 +20,9 @@ class Knight extends Thread{
     }
     //To determine the validity of a move and to move the piece to 
     //said tile. 
-    public Tile moveTo(Tile end){
-        
+    //thjis will undergo changes eventually. 
+    public void moveTo(Tile end){
+        position = end;
     }
 
 

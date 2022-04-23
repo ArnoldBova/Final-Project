@@ -1,5 +1,5 @@
 import java.util.List;
-public class Pawn {
+public class Pawn extends Thread {
     protected int moves;
     protected boolean captured;
     protected List[] movements;

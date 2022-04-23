@@ -1,5 +1,8 @@
+package src.pieces;
+
 import java.util.List;
-public class Pawn extends Thread {
+
+public class Queen extends Thread {
     protected int moves;
     protected boolean captured;
     protected List[] movements;
@@ -11,33 +14,34 @@ public class Pawn extends Thread {
         this.captured = captured;
         this.position = position;
     }
-    public int getMoves(){
+
+    public int getMoves() {
         return moves;
     }
-    public list getMovements(int moves){
-        if(moves > 0) {
+
+    public list getMovements(int moves) {
+        if (moves > 0) {
             movemnts.remove(0);
             return movements;
-        }else{
+        } else {
             return moves;
         }
     }
 
-    public boolean getCaptured(){
+    public boolean getCaptured() {
         return captured;
-    
+
     }
 
-    public Tile getPostion(){
+    public Tile getPostion() {
         return position;
     }
 
-    
-
-    public void setCaptured(){
+    public void setCaptured() {
         captured = true;
     }
-    public void moveTo(Tile end){
+
+    public void moveTo(Tile end) {
         position = end;
     }
 

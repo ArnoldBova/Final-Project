@@ -1,5 +1,13 @@
 package src.game;
 
-public class Tile {
+import src.structures.Piece;
 
+public class Tile {
+    private Piece piece;
+    private String color;
+
+    public Tile(Piece piece, String color) {
+        this.piece = piece;
+        this.color = color;
+    }
 }

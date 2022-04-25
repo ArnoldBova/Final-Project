@@ -6,17 +6,17 @@ import src.game.Tile;
 import src.structures.Piece;
 
 public class Bishop extends Piece {
-    // instance varialbe that are unanimous amoung all pieces are in the Pieces
+    // instance variables that are unanimous among all pieces are in the Pieces
     // abstract class. There may be relevant
     // 'per piece' instance variables that can be defined, such as hasMoved for a
     // rook to check for castling.
 
     public Bishop(Tile tile, String color) {
         super(tile, color);
-        // do any other calculations per piece here
+        // do any other calculations per piece here if needed
     }
 
-    // saving this implementaion as a comment for reference later
+    // saving this implementation as a comment for reference later
 
     // public list getMovements(int moves){
     // if(moves > 0) {

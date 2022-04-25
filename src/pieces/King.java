@@ -1,18 +1,28 @@
+package src.pieces;
+
+import src.game.Tile;
+import src.structures.Piece;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class King extends Thread {
-    protected int moves;
-    protected boolean captured;
-    protected List[] movements;
-    protected TIle position;
+public class King extends Piece {
 
-    public Pawn(int moves, boolean captured, List[] movements, Tile position){
-        this.moves = moves;
-        this.movements = movements;
-        this.captured = captured;
-        this.position = position;
+    public King(Tile tile, String color) {
+        super(tile, color);
     }
-    public int getMoves(){
+
+    @Override
+    public ArrayList<Tile> getValidMoves() {
+        return null;
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    /*    public int getMoves(){
         return moves;
     }
     public list getMovements(int moves){
@@ -40,7 +50,7 @@ public class King extends Thread {
     }
     public void moveTo(Tile end){
         position = end;
-    }
+    }*/
 
     
 }

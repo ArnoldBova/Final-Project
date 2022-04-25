@@ -1,48 +1,44 @@
 package src.pieces;
 
+import src.game.Tile;
+import src.structures.Piece;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Pawn extends Thread {
-    protected int moves;
-    protected boolean captured;
-    protected List[] movements;
-    protected TIle position;
+public class Pawn extends Piece {
 
-    public Pawn(int moves, boolean captured, List[] movements, Tile position) {
-        this.moves = moves;
-        this.movements = movements;
-        this.captured = captured;
-        this.position = position;
+    public Pawn(Tile tile, String color) {
+        super(tile, color);
     }
 
-    public int getMoves() {
-        return moves;
+    @Override
+    public ArrayList<Tile> getValidMoves() {
+        return null;
     }
 
-    public list getMovements(int moves) {
-        if (moves > 0) {
-            movemnts.remove(0);
-            return movements;
-        } else {
-            return moves;
-        }
-    }
-
-    public boolean getCaptured() {
-        return captured;
+    @Override
+    public void run() {
 
     }
 
-    public Tile getPostion() {
-        return position;
-    }
-
-    public void setCaptured() {
-        captured = true;
-    }
-
-    public void moveTo(Tile end) {
-        position = end;
-    }
+    //
+//
+//    public boolean getCaptured() {
+//        return captured;
+//
+//    }
+//
+//    public Tile getPostion() {
+//        return position;
+//    }
+//
+//    public void setCaptured() {
+//        captured = true;
+//    }
+//
+//    public void moveTo(Tile end) {
+//        position = end;
+//    }
 
 }

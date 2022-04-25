@@ -24,6 +24,10 @@ public abstract class Piece extends Thread {
         return tile;
     }
 
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
     public String getColor() {
         return color;
     }
@@ -31,5 +35,7 @@ public abstract class Piece extends Thread {
     public boolean isCaputured() {
         return captured;
     }
+
+    public abstract void run();
 
 }

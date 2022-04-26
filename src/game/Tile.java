@@ -3,10 +3,11 @@ package src.game;
 import src.structures.Piece;
 
 /**
- *
  * Implementation of a Tile on a chess board.
  * Stores knowledge of the tiles around it and what piece is on it.
  *
+ * @version 1.0
+ * @author Arnold Bova
  */
 public class Tile {
     private Piece piece;
@@ -103,6 +104,10 @@ public class Tile {
      */
     public Tile right() {
         return right;
+    }
+
+    public boolean hasPiece() {
+        return piece != null;
     }
 
 }

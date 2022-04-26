@@ -7,6 +7,9 @@ import src.structures.Piece;
  * Implementation of an object representing a board. Will be the overall
  * structure that contains all the
  * moving game components
+ *
+ * @version 1.0
+ * @author Arnold Bova
  */
 public class Board {
     Tile[][] tiles;

@@ -5,7 +5,7 @@ import src.structures.Piece;
 
 /**
  * Implementation of an object representing a board. Will be the overall
- * structure that contains all of the
+ * structure that contains all the
  * moving game components
  */
 public class Board {
@@ -15,13 +15,17 @@ public class Board {
      * constructs a new board, populating the 2d array of tile objects with each
      * piece in the correct place to start a new game.
      * 
-     * The board will be oriented such that the white piece player will be on the
-     * bottom of the screen.
+     * The board will be oriented such that the white piece player will be at the bottom of the screen.
      */
     public Board() {
         tiles = new Tile[8][8];
+        populate();
+        createLinks();
     }
 
+    /**
+     * Populates the Tiles 2d array with tiles and generates Pieces where needed
+     */
     private void populate() {
         for (int i = 0; i < tiles.length; i++) {
             switch (i) {
@@ -75,6 +79,13 @@ public class Board {
         }
     }
 
+    /**
+     * Helper method that creates a tile and will create a piece if it is necessary for the current pos
+     * @param pos The position within a given row
+     * @param tileColor The color of the tile
+     * @param pieceColor The color of the piece
+     * @return A tile with a piece bound to it if necessary
+     */
     private Tile createTile(int pos, String tileColor, String pieceColor) {
         Piece piece;
         Tile tile = new Tile(tileColor);
@@ -101,4 +112,29 @@ public class Board {
 
         return tile;
     }
+
+    /**
+     * Links the tiles together
+     */
+    private void createLinks() {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                Tile tile = tiles[i][j];
+                if (!(i - 1 < 0)) {
+                    tile.setUp(tiles[i-1][j]);
+                }
+                if(!(i + 1 <= tiles.length)) {
+                    tile.setDown(tiles[i + 1][j]);
+                }
+                if (!(j - 1 < 0)) {
+                    tile.setLeft(tiles[i][j - 1]);
+                }
+                if (!(j + 1 <= tiles[i].length)) {
+                    tile.setRight(tiles[i][j + 1]);
+                }
+            }
+        }
+    }
+
+    //will be responsible for painting the board on the panel.
 }

@@ -2,17 +2,107 @@ package src.game;
 
 import src.structures.Piece;
 
+/**
+ *
+ * Implementation of a Tile on a chess board.
+ * Stores knowledge of the tiles around it and what piece is on it.
+ *
+ */
 public class Tile {
     private Piece piece;
     private String color;
+    // each of these represent tiles around this one, each corresponding to their respective direction
+    private Tile up;
+    private Tile down;
+    private Tile left;
+    private Tile right;
 
+    /**
+     *
+     * Constructs a new tile, setting all the surrounding tiles to null
+     * and the piece to null, as a tile will not always have a piece on it.
+     *
+     * @param color the color of the tile, either black or white
+     */
     public Tile(String color) {
         this.piece = null;
+        this.up = null;
+        this.down = null;
+        this.right = null;
+        this.left = null;
         this.color = color;
     }
 
+    /**
+     * Setter for the instance variable piece
+     * @param piece the piece to be stored
+     */
     void setPiece(Piece piece) {
         this.piece = piece;
+    }
+
+    /**
+     * Setter for the instance variable up
+     * @param up The tile above this
+     */
+    void setUp(Tile up) {
+        this.up = up;
+    }
+
+    /**
+     * Setter for the instance variable down
+     * @param down The tile below this
+     */
+    void setDown(Tile down) {
+        this.down = down;
+    }
+
+    /**
+     * Setter for the instance variable left
+     * @param left The tile to the left of this
+     */
+    void setLeft(Tile left) {
+        this.left = left;
+    }
+
+    /**
+     * Setter for the instance variable right
+     * @param right The tile to the right of this
+     */
+    void setRight(Tile right) {
+        this.right = right;
+    }
+
+    /**
+     * Getter for the instance variable up
+     * @return The tile above this
+     */
+    public Tile up() {
+        return up;
+    }
+
+    /**
+     * Getter for the instance variable down
+     * @return The tile below this
+     */
+    public Tile down() {
+        return down;
+    }
+
+    /**
+     * Getter for the instance variable left
+     * @return The tile to the left of this
+     */
+    public Tile left() {
+        return left;
+    }
+
+    /**
+     * Getter for the instance variable right
+     * @return The tile to the right of this
+     */
+    public Tile right() {
+        return right;
     }
 
 }

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import src.game.Tile;
 
 public abstract class Piece extends Thread {
-    private Tile tile;
+    protected Tile tile;
     // could make this a boolean such as 'isWhite' which would determine its color
-    private String color;
+    protected boolean isWhite;
 
-    private boolean captured;
+    protected boolean captured;
 
-    public Piece(Tile tile, String color) {
+    public Piece(Tile tile, boolean isWhite) {
         this.tile = tile;
-        this.color = color;
+        this.isWhite = isWhite;
     }
 
     // retuns an array of tiles representing the end point for all valid moves for
@@ -28,9 +28,7 @@ public abstract class Piece extends Thread {
         this.tile = tile;
     }
 
-    public String getColor() {
-        return color;
-    }
+    public boolean isWhite() {return isWhite;}
 
     public boolean isCaputured() {
         return captured;

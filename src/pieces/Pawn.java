@@ -70,7 +70,7 @@ public class Pawn extends Piece {
                 outcomes.add(captureTileLeft);
             }
 
-            if (captureTileRight != null && captureTileRight.hasPiece()) {
+            if (captureTileRight != null && captureTileRight.hasPiece() && !captureTileRight.piece().isWhite()) {
                 outcomes.add(captureTileRight);
             }
 

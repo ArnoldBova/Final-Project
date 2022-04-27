@@ -8,8 +8,8 @@ import java.util.List;
 
 public class King extends Piece {
 
-    public King(Tile tile, String color) {
-        super(tile, color);
+    public King(Tile tile, boolean isWhite) {
+        super(tile, isWhite);
     }
 
     @Override

@@ -110,4 +110,8 @@ public class Tile {
         return piece != null;
     }
 
+    public Piece piece() {
+        return piece;
+    }
+
 }

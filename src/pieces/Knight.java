@@ -9,8 +9,8 @@ import src.structures.Piece;
 public class Knight extends Piece {
 
 
-    public Knight(Tile tile, String color) {
-        super(tile, color);
+    public Knight(Tile tile, boolean isWhite) {
+        super(tile, isWhite);
     }
 
     @Override

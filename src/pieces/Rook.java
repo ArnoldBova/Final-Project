@@ -8,8 +8,8 @@ import src.structures.Piece;
 
 public class Rook extends Piece {
 
-    public Rook(Tile tile, String color) {
-        super(tile, color);
+    public Rook(Tile tile, boolean isWhite) {
+        super(tile, isWhite);
     }
 
     @Override

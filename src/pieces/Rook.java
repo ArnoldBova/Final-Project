@@ -25,6 +25,8 @@ public class Rook extends Piece {
 
         captureTileLeft = tile.left();
         captureTileRight = tile.right();
+        captureTileUp = tile.up();
+        captureTileDown = tile.down();
         boolean wall = false;
         if(isWhite){
         while(captureTileLeft != null && wall == false){

@@ -11,8 +11,8 @@ public class Bishop extends Piece {
     // 'per piece' instance variables that can be defined, such as hasMoved for a
     // rook to check for castling.
 
-    public Bishop(Tile tile, String color) {
-        super(tile, color);
+    public Bishop(Tile tile, boolean isWhite) {
+        super(tile, isWhite);
         // do any other calculations per piece here if needed
     }
 

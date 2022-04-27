@@ -1,5 +1,7 @@
 package src.game;
 
+import java.lang.Math;
+
 public class Timer extends Thread {
     // True only if the timer is running
     boolean running;
@@ -73,6 +75,8 @@ public class Timer extends Thread {
     // Converts a time in seconds to its equivalent time in minutes and seconds
     // (This is the format that the timer will display)
     public String convertToMinutes() {
+        double minutes = Math.floor(timeElapsed / 60);
+        int seconds = timeElapsed % 60;
         return "";
     }
 

@@ -12,10 +12,13 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
     JLabel playerOne = new JLabel("Player One: White");
     JLabel playerTwo = new JLabel("Player Two: Black");
     boolean speedChessMode = false;
+    //these two labels aren't used yet but are there for speed chess mode
+    JLabel playerOneClock = new JLabel("Time Remaining: ");
+    JLabel playerTwoClock = new JLabel("Time Remaining: ");
 
     public void run(){
         JFrame frame = new JFrame("Chess");
-        frame.setDefaultLookAndFeelDecorated(true);
+        JFrame.setDefaultLookAndFeelDecorated(true);
         frame.setResizable(false);
         frame.setPreferredSize(new Dimension(600, 800));
         JPanel gamePanel = new JPanel(new BorderLayout());
@@ -46,6 +49,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == speedChess){
             speedChessMode = !speedChessMode;
+            //add or remove chess clock labels
         }
         if(e.getSource() == restartGame){
             //restart the game

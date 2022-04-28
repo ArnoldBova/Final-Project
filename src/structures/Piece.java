@@ -30,7 +30,7 @@ public abstract class Piece extends Thread {
 
     public boolean isWhite() {return isWhite;}
 
-    public boolean isCaputured() {
+    public boolean isCaptured() {
         return captured;
     }
 

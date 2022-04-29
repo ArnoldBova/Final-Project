@@ -6,12 +6,28 @@ import src.structures.Piece;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The King class models the King piece in the game of Chess
+ * 
+ * @author Emma Flatland, Arnold Bova, Ethan Tubia, Nicholas Morgan
+ */
 public class King extends Piece {
 
+    /**
+     * Constructs a King object
+     * 
+     * @param tile    The tile that the king starts on
+     * @param isWhite Whether the king is white or not
+     */
     public King(Tile tile, boolean isWhite) {
         super(tile, isWhite);
     }
 
+    /**
+     * Determines the tiles that the king could move to
+     * 
+     * @return the tiles that the king could move to
+     */
     @Override
     public ArrayList<Tile> getValidMoves() {
 

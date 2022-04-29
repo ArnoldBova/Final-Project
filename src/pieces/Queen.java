@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Queen extends Piece {
 
-    public Queen(Tile tile, String color) {
-        super(tile, color);
+    public Queen(Tile tile, boolean isWhite) {
+        super(tile, isWhite);
     }
 
     @Override

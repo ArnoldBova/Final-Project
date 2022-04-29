@@ -36,6 +36,256 @@ public class Bishop extends Piece {
         // possible moves
         // only ones based on the current position.
 
+        Tile captureTileUpR;
+        Tile captureTileUpL;
+        Tile captureTileDL;
+        Tile captureTileDR;
+        Tile nonCaptureTile1 = null;
+        Tile nonCpatureTile2 = null;
+        boolean wall = false;
+        if(tile.up() != null){       
+             captureTileUpR = tile.up();
+             if(captureTileUpR.right() != null){
+                captureTileUpR = captureTileUpR.right();
+             }else{
+                 captureTileUpR = null;
+             }
+            
+        }else{
+            captureTileUpR = null;
+        }
+
+        if(tile.up() != null){
+            captureTileUpL = tile.up();
+            if(captureTileUpL.left() != null){
+                captureTileUpL = captureTileUpL.left();
+            }else{
+                captureTileUpL = null;
+            }
+        }else{
+            captureTileUpL = null;
+        }
+
+        if(tile.down() != null){
+            captureTileDL = tile.down();
+            if(captureTileDL.left() != null){
+                captureTileDL = captureTileDL.left();
+            }else{
+                captureTileDL = null;
+            }
+
+        }else{
+            captureTileDL = null;
+        }
+        if(tile.down() != null){
+            captureTileDR = tile.down();
+            if(captureTileDR.right() != null){
+                captureTileDR = captureTileDR.right();
+            }else{
+                captureTileDR = null;
+            }
+        }else{
+            captureTileDR = null;
+        }
+
+
+        if(isWhite){
+            wall = false;
+            while(captureTileUpR != null && wall == false){
+               if(captureTileUpR.hasPiece() && !captureTileUpR.piece().isWhite()){
+                   outcomes.add(captureTileUpR);
+                   wall = true;
+               }else{
+                   if(!captureTileUpR.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileUpR);
+                       if(captureTileUpR.right() != null){
+                           captureTileUpR = captureTileUpR.right();
+                           if(captureTileUpR.up() != null){
+                               captureTileUpR = captureTileUpR.up();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+            wall = false;
+            while(captureTileUpL != null && wall == false){
+               if(captureTileUpL.hasPiece() && !captureTileUpL.piece().isWhite()){
+                   outcomes.add(captureTileUpL);
+                   wall = true;
+               }else{
+                   if(captureTileUpL.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileUpL);
+                       if(captureTileUpL.left() != null){
+                           captureTileUpL = captureTileUpL.left();
+                           if(captureTileUpL.up() != null){
+                               captureTileUpL = captureTileUpL.up();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+            wall = false;
+            while(captureTileDR != null && wall == false){
+               if(captureTileDR.hasPiece() && !captureTileDR.piece().isWhite()){
+                   outcomes.add(captureTileDR);
+                   wall = true;
+               }else{
+                   if(captureTileDR.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileDR);
+                       if(captureTileDR.right() != null){
+                           captureTileDR = captureTileDR.left();
+                           if(captureTileDR.down() != null){
+                               captureTileDR = captureTileDR.down();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+            wall = false;
+            while(captureTileDL != null && wall == false){
+               if(captureTileDL.hasPiece() && !captureTileDL.piece().isWhite()){
+                   outcomes.add(captureTileDL);
+                   wall = true;
+               }else{
+                   if(captureTileDR.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileDL);
+                       if(captureTileDL.left() != null){
+                           captureTileDL = captureTileDL.left();
+                           if(captureTileDL.down() != null){
+                               captureTileDL = captureTileDL.down();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+            
+        }else{
+            wall = false;
+            while(captureTileUpR != null && wall == false){
+               if(captureTileUpR.hasPiece() && captureTileUpR.piece().isWhite()){
+                   outcomes.add(captureTileUpR);
+                   wall = true;
+               }else{
+                   if(captureTileUpR.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileUpR);
+                       if(captureTileUpR.right() != null){
+                           captureTileUpR = captureTileUpR.right();
+                           if(captureTileUpR.up() != null){
+                               captureTileUpR = captureTileUpR.up();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+            wall = false;
+            while(captureTileUpL != null && wall == false){
+               if(captureTileUpL.hasPiece() && captureTileUpL.piece().isWhite()){
+                   outcomes.add(captureTileUpL);
+                   wall = true;
+               }else{
+                   if(captureTileUpL.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileUpL);
+                       if(captureTileUpL.left() != null){
+                           captureTileUpL = captureTileUpL.left();
+                           if(captureTileUpL.up() != null){
+                               captureTileUpL = captureTileUpL.up();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+            wall = false;
+            while(captureTileDR != null && wall == false){
+               if(captureTileDR.hasPiece() && captureTileDR.piece().isWhite()){
+                   outcomes.add(captureTileDR);
+                   wall = true;
+               }else{
+                   if(captureTileDR.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileDR);
+                       if(captureTileDR.right() != null){
+                           captureTileDR = captureTileDR.left();
+                           if(captureTileDR.down() != null){
+                               captureTileDR = captureTileDR.down();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+            wall = false;
+            while(captureTileDL != null && wall == false){
+               if(captureTileDL.hasPiece() && captureTileDL.piece().isWhite()){
+                   outcomes.add(captureTileDL);
+                   wall = true;
+               }else{
+                   if(captureTileDR.hasPiece()){
+                        wall = true;
+                   }else{
+                       outcomes.add(captureTileDL);
+                       if(captureTileDL.left() != null){
+                           captureTileDL = captureTileDL.left();
+                           if(captureTileDL.down() != null){
+                               captureTileDL = captureTileDL.down();
+                           }else{
+                               wall = true;
+                           }
+                       }else{
+                           wall = true;
+                       }
+                   }
+               }
+            }
+
+        }
+
         return outcomes;
     }
 

@@ -18,7 +18,8 @@ public class Board {
      * constructs a new board, populating the 2d array of tile objects with each
      * piece in the correct place to start a new game.
      * 
-     * The board will be oriented such that the white piece player will be at the bottom of the screen.
+     * The board will be oriented such that the white piece player will be at the
+     * bottom of the screen.
      */
     public Board() {
         tiles = new Tile[8][8];
@@ -35,45 +36,41 @@ public class Board {
                 // generating black back line
                 case 0:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        String color = (j % 2 == 0) ? "white" : "black";
-                        tiles[i][j] = createTile(j, color, "black");
+                        tiles[i][j] = createTile(j, j % 2 == 0, false);
                     }
                     break;
                 // Generating black pawn line
                 case 1:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        String color = (j % 2 == 0) ? "black" : "white";
-                        Tile tile = new Tile(color);
-                        Piece piece = new Pawn(tile, "black");
+                        Tile tile = new Tile(j % 2 != 0);
+                        Piece piece = new Pawn(tile, false);
                         tile.setPiece(piece);
                     }
                     break;
                 case 2:
                 case 4:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        String color = (j % 2 == 0) ? "white" : "black";
-                        tiles[i][j] = new Tile(color);
+                        tiles[i][j] = new Tile(j % 2 == 0);
                     }
                     break;
                 case 3:
                 case 5:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        String color = (j % 2 == 0) ? "black" : "white";
-                        tiles[i][j] = new Tile(color);
+                        tiles[i][j] = new Tile(j % 2 != 0);
                     }
                     break;
+                // Generating White pawn line
                 case 6:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        String color = (j % 2 == 0) ? "white" : "black";
-                        Tile tile = new Tile(color);
-                        Piece piece = new Pawn(tile, "white");
+                        Tile tile = new Tile(j % 2 == 0);
+                        Piece piece = new Pawn(tile, true);
                         tile.setPiece(piece);
                     }
                     break;
+                // Generating White back line
                 case 7:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        String color = (j % 2 == 0) ? "black" : "white";
-                        tiles[i][j] = createTile(j, color, "white");
+                        tiles[i][j] = createTile(j, j % 2 != 0, true);
                     }
                     break;
                 default:
@@ -83,31 +80,33 @@ public class Board {
     }
 
     /**
-     * Helper method that creates a tile and will create a piece if it is necessary for the current pos
-     * @param pos The position within a given row
-     * @param tileColor The color of the tile
+     * Helper method that creates a tile and will create a piece if it is necessary
+     * for the current pos
+     * 
+     * @param pos        The position within a given row
+     * @param tileColor  The color of the tile
      * @param pieceColor The color of the piece
      * @return A tile with a piece bound to it if necessary
      */
-    private Tile createTile(int pos, String tileColor, String pieceColor) {
+    private Tile createTile(int pos, boolean isWhiteTile, boolean isWhitePiece) {
         Piece piece;
-        Tile tile = new Tile(tileColor);
+        Tile tile = new Tile(isWhiteTile);
         // determine which piece should be generated
         piece = switch (pos) {
             // rook case
-            case 0 -> new Rook(tile, pieceColor);
+            case 0 -> new Rook(tile, isWhitePiece);
             // Knight case
-            case 1 -> new Knight(tile, pieceColor);
+            case 1 -> new Knight(tile, isWhitePiece);
             // Bishop case
-            case 2 -> new Bishop(tile, pieceColor);
+            case 2 -> new Bishop(tile, isWhitePiece);
             // Queen case
-            case 3 -> new Queen(tile, pieceColor);
+            case 3 -> new Queen(tile, isWhitePiece);
             // King case
-            case 4 -> new King(tile, pieceColor);
+            case 4 -> new King(tile, isWhitePiece);
             // rest of the case are the same just mirrored;
-            case 5 -> new Bishop(tile, pieceColor);
-            case 6 -> new Knight(tile, pieceColor);
-            case 7 -> new Rook(tile, pieceColor);
+            case 5 -> new Bishop(tile, isWhitePiece);
+            case 6 -> new Knight(tile, isWhitePiece);
+            case 7 -> new Rook(tile, isWhitePiece);
             default -> null;
         };
 
@@ -124,9 +123,9 @@ public class Board {
             for (int j = 0; j < tiles[i].length; j++) {
                 Tile tile = tiles[i][j];
                 if (!(i - 1 < 0)) {
-                    tile.setUp(tiles[i-1][j]);
+                    tile.setUp(tiles[i - 1][j]);
                 }
-                if(!(i + 1 <= tiles.length)) {
+                if (!(i + 1 <= tiles.length)) {
                     tile.setDown(tiles[i + 1][j]);
                 }
                 if (!(j - 1 < 0)) {
@@ -139,5 +138,5 @@ public class Board {
         }
     }
 
-    //will be responsible for painting the board on the panel.
+    // will be responsible for painting the board on the panel.
 }

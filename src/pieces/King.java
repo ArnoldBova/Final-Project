@@ -33,7 +33,7 @@ public class King extends Piece {
     }
 
     public boolean isValidMove(Tile tile) {
-        return !this.isCheck() && (tile.piece() == null || this.isOpponent(tile.piece()));
+        return !this.isCheck(tile) && (tile.piece() == null || this.isOpponent(tile.piece()));
     }
 
     /**
@@ -41,8 +41,30 @@ public class King extends Piece {
      * 
      * @return true if a move will put the king into check
      */
-    public boolean isCheck() {
-        return false;
+
+    public boolean isCheck(Tile tile) {
+        boolean isCheck = false;
+
+        // Go through each tile on the board, and get the piece that is on it
+        // (we would need a reference to the board before this will work)
+        for (Tile currentTile : tiles) {
+            Piece nextPiece = currentTile.piece();
+
+            // Go through the valid moves of each opposing piece
+            // Determine if any valid move would kill the king
+            if (nextPiece != null && this.isOpponent(nextPiece)) {
+                ArrayList<Tile> validMoves = nextPiece.getValidMoves();
+                int i = 0;
+                while (!isCheck && i < validMoves.size()) {
+                    Tile validMove = validMoves.get(i);
+                    if (validMove == tile) {
+                        isCheck = true;
+                    }
+                    i++;
+                }
+            }
+        }
+        return isCheck;
     }
 
     @Override

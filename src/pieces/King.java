@@ -4,7 +4,7 @@ import src.game.Tile;
 import src.structures.Piece;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class King extends Piece {
 
@@ -14,29 +14,27 @@ public class King extends Piece {
 
     @Override
     public ArrayList<Tile> getValidMoves() {
-        ArrayList<Tile> outcomes = new ArrayList<>();
 
-        // if left tile contains an opposing piece or is empty, then add tile to the
-        // list of outcomes
-        Tile left = tile.left();
+        // the array of valid moves that will be returned
+        ArrayList<Tile> validMoves = new ArrayList<>();
 
-        Tile right;
+        // all tiles neighboring the king
+        ArrayList<Tile> potentialMoves = new ArrayList<>(
+                Arrays.asList(tile.left(), tile.right(), tile.down(), tile.up(),
+                        tile.left().up(), tile.right().up(), tile.down().left(), tile.down().right()));
 
-        Tile top;
-        Tile bottom;
-
-        Tile topLeft;
-        Tile topRight;
-
-        Tile bottomLeft;
-        Tile bottomRight;
-
-        return null;
+        // Go through the neighboring tiles and filter out the ones that are valid next
+        // moves
+        for (Tile tile : potentialMoves) {
+            if (isValidMove(tile))
+                validMoves.add(tile);
+        }
+        return validMoves;
     }
 
-    // public boolean isValidMove(Tile tile){
-    // return !this.isCheck() && (tile.piece() == null || left.pieceisOpponent) ;
-    // }
+    public boolean isValidMove(Tile tile) {
+        return !this.isCheck() && (tile.piece() == null || this.isOpponent(tile.piece()));
+    }
 
     /**
      * Returns true if a move will put the King into check
@@ -45,16 +43,6 @@ public class King extends Piece {
      */
     public boolean isCheck() {
         return false;
-    }
-
-    /**
-     * Returns true if this piece and another piece are on opposite teams
-     * 
-     * @param other another piece
-     * @return true if this piece and the other piece are on opposing teams
-     */
-    public boolean isOpponent(Piece other) {
-        return other.isWhite() != this.isWhite();
     }
 
     @Override

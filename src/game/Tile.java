@@ -11,8 +11,9 @@ import src.structures.Piece;
  */
 public class Tile {
     private Piece piece;
-    private String color;
-    // each of these represent tiles around this one, each corresponding to their respective direction
+    private boolean isWhite;
+    // each of these represent tiles around this one, each corresponding to their
+    // respective direction
     private Tile up;
     private Tile down;
     private Tile left;
@@ -25,17 +26,18 @@ public class Tile {
      *
      * @param color the color of the tile, either black or white
      */
-    public Tile(String color) {
+    public Tile(boolean isWhite) {
         this.piece = null;
         this.up = null;
         this.down = null;
         this.right = null;
         this.left = null;
-        this.color = color;
+        this.isWhite = isWhite;
     }
 
     /**
      * Setter for the instance variable piece
+     * 
      * @param piece the piece to be stored
      */
     void setPiece(Piece piece) {
@@ -44,6 +46,7 @@ public class Tile {
 
     /**
      * Setter for the instance variable up
+     * 
      * @param up The tile above this
      */
     void setUp(Tile up) {
@@ -52,6 +55,7 @@ public class Tile {
 
     /**
      * Setter for the instance variable down
+     * 
      * @param down The tile below this
      */
     void setDown(Tile down) {
@@ -60,6 +64,7 @@ public class Tile {
 
     /**
      * Setter for the instance variable left
+     * 
      * @param left The tile to the left of this
      */
     void setLeft(Tile left) {
@@ -68,6 +73,7 @@ public class Tile {
 
     /**
      * Setter for the instance variable right
+     * 
      * @param right The tile to the right of this
      */
     void setRight(Tile right) {
@@ -76,6 +82,7 @@ public class Tile {
 
     /**
      * Getter for the instance variable up
+     * 
      * @return The tile above this
      */
     public Tile up() {
@@ -84,6 +91,7 @@ public class Tile {
 
     /**
      * Getter for the instance variable down
+     * 
      * @return The tile below this
      */
     public Tile down() {
@@ -92,6 +100,7 @@ public class Tile {
 
     /**
      * Getter for the instance variable left
+     * 
      * @return The tile to the left of this
      */
     public Tile left() {
@@ -100,6 +109,7 @@ public class Tile {
 
     /**
      * Getter for the instance variable right
+     * 
      * @return The tile to the right of this
      */
     public Tile right() {

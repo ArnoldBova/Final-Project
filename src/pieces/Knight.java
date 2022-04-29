@@ -31,7 +31,7 @@ public class Knight extends Piece {
             if (horizontalL1 != null) {
                 horizontalL1 = horizontalL1.right();
                 if (horizontalL1 != null) {
-                    if ((horizontalL1.hasPiece() && horizontalL1.piece().isWhite() != isWhite) || (!horizontalL1.hasPiece())) {
+                    if ((horizontalL1.hasPiece() && horizontalL1.piece().isOpponent(this)) || (!horizontalL1.hasPiece())) {
                         outcomes.add(horizontalL1);
                     }
                 }
@@ -45,7 +45,7 @@ public class Knight extends Piece {
             if (horizontalL2 != null) {
                 horizontalL2 = horizontalL2.right();
                 if (horizontalL2 != null) {
-                    if ((horizontalL2.hasPiece() && horizontalL2.piece().isWhite() != isWhite) || (!horizontalL2.hasPiece())) {
+                    if ((horizontalL2.hasPiece() && horizontalL2.piece().isOpponent(this)) || (!horizontalL2.hasPiece())) {
                         outcomes.add(horizontalL2);
                     }
                 }
@@ -59,7 +59,7 @@ public class Knight extends Piece {
             if (horizontalL3 != null) {
                 horizontalL3 = horizontalL3.left();
                 if (horizontalL3 != null) {
-                    if ((horizontalL3.hasPiece() && horizontalL3.piece().isWhite() != isWhite) || (!horizontalL3.hasPiece())) {
+                    if ((horizontalL3.hasPiece() && horizontalL3.piece().isOpponent(this)) || (!horizontalL3.hasPiece())) {
                         outcomes.add(horizontalL3);
                     }
                 }
@@ -73,7 +73,7 @@ public class Knight extends Piece {
             if (horizontalL4 != null) {
                 horizontalL4 = horizontalL4.left();
                 if (horizontalL4 != null) {
-                    if ((horizontalL4.hasPiece() && horizontalL4.piece().isWhite() != isWhite) || (!horizontalL4.hasPiece())) {
+                    if ((horizontalL4.hasPiece() && horizontalL4.piece().isOpponent(this)) || (!horizontalL4.hasPiece())) {
                         outcomes.add(horizontalL4);
                     }
                 }
@@ -87,7 +87,7 @@ public class Knight extends Piece {
             if (verticalL1 != null) {
                 verticalL1 = verticalL1.right();
                 if (verticalL1 != null) {
-                    if ((verticalL1.hasPiece() && verticalL1.piece().isWhite() != isWhite) || (!verticalL1.hasPiece())) {
+                    if ((verticalL1.hasPiece() && verticalL1.piece().isOpponent(this)) || (!verticalL1.hasPiece())) {
                         outcomes.add(verticalL1);
                     }
                 }
@@ -101,7 +101,7 @@ public class Knight extends Piece {
             if (verticalL2 != null) {
                 verticalL2 = verticalL2.right();
                 if (verticalL2 != null) {
-                    if ((verticalL2.hasPiece() && verticalL2.piece().isWhite() != isWhite) || (!verticalL2.hasPiece())) {
+                    if ((verticalL2.hasPiece() && verticalL2.piece().isOpponent(this)) || (!verticalL2.hasPiece())) {
                         outcomes.add(verticalL2);
                     }
                 }
@@ -115,7 +115,7 @@ public class Knight extends Piece {
             if (verticalL3 != null) {
                 verticalL3 = verticalL3.left();
                 if (verticalL3 != null) {
-                    if ((verticalL3.hasPiece() && verticalL3.piece().isWhite() != isWhite) || (!verticalL3.hasPiece())) {
+                    if ((verticalL3.hasPiece() && verticalL3.piece().isOpponent(this)) || (!verticalL3.hasPiece())) {
                         outcomes.add(verticalL3);
                     }
                 }
@@ -128,7 +128,7 @@ public class Knight extends Piece {
             if (verticalL4 != null) {
                 verticalL4 = verticalL4.left();
                 if (verticalL4 != null) {
-                    if ((verticalL4.hasPiece() && verticalL4.piece().isWhite() != isWhite) || (!verticalL4.hasPiece())) {
+                    if ((verticalL4.hasPiece() && verticalL4.piece().isOpponent(this)) || (!verticalL4.hasPiece())) {
                         outcomes.add(verticalL4);
                     }
                 }

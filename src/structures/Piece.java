@@ -28,10 +28,22 @@ public abstract class Piece extends Thread {
         this.tile = tile;
     }
 
-    public boolean isWhite() {return isWhite;}
+    public boolean isWhite() {
+        return isWhite;
+    }
 
     public boolean isCaptured() {
         return captured;
+    }
+
+    /**
+     * Returns true if this piece and another piece are on opposite teams
+     * 
+     * @param other another piece
+     * @return true if this piece and the other piece are on opposing teams
+     */
+    public boolean isOpponent(Piece other) {
+        return other.isWhite() != this.isWhite();
     }
 
     public abstract void run();

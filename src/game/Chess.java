@@ -15,7 +15,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
 
     public void run(){
         JFrame frame = new JFrame("Chess");
-        frame.setDefaultLookAndFeelDecorated(true);
         frame.setResizable(false);
         frame.setPreferredSize(new Dimension(600, 800));
         JPanel gamePanel = new JPanel(new BorderLayout());
@@ -48,16 +47,19 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
             speedChessMode = !speedChessMode;
         }
         if(e.getSource() == restartGame){
-            //restart the game
+            //TODO: restart the game
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e){
-        //if the mouse is pressed on a tile with a piece of the active player's color, all the possible moves for that tile should be highlighted
-        //if the mouse has already pressed on a piece, pressing on a tile that is a legal move should result in the move happening
-        //if the mouse has already pressed on a piece, pressing on a new piece of the active player's color should unhighlight all the previously highlighted spots and highlight the new legal moves
+        /*TODO:
+        *if the mouse is pressed on a tile with a piece of the active player's color, all the possible moves for that tile should be highlighted
+        *if the mouse has already pressed on a piece, pressing on a tile that is a legal move should result in the move happening
+        *if the mouse has already pressed on a piece, pressing on a new piece of the active player's color should unhighlight all the previously highlighted spots and highlight the new legal moves
+        */
     }
+
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Chess()); 

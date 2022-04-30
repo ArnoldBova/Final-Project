@@ -3,6 +3,7 @@ package src.pieces;
 import src.game.Tile;
 import src.structures.Piece;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.Graphics;
@@ -95,17 +96,17 @@ public class King extends Piece {
     @Override
     public void paint(Graphics g) {
 
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image pieceImage;
         if (this.isWhite) {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteKing.png");
+            pieceImage = new ImageIcon("../Images/WhitePieces/WhiteKing.png").getImage();
         } else {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackKing.png");
+            pieceImage = new ImageIcon("../Images/WhitePieces/BlackKing.png").getImage();
         }
-        Image scaledImage = pieceImage.getScaledInstance(this.SIZE, this.SIZE, Image.SCALE_DEFAULT);
+        Image scaledImage = pieceImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
 
         // we will need to include x coordinates within the correct tile
         g.drawImage(scaledImage, tile.location().x * 50, tile.location().y * 50, null);
+        System.out.println("image drawn");
 
     }
 

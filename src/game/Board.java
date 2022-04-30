@@ -178,6 +178,11 @@ public class Board {
                 g.fillRect(i * 50 + 40, j * 50, 50, 50);
                 g.setColor(Color.BLACK);
                 g.drawRect(i * 50 + 40, j * 50, 50, 50);
+
+                if (drawingTile.hasPiece() && drawingTile.piece() instanceof King) {
+                    drawingTile.piece().paint(g);
+                    System.out.println("tile with king drawn");
+                }
             }
         }
     }

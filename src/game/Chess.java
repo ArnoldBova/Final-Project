@@ -18,7 +18,10 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
 
     public void run(){
         JFrame frame = new JFrame("Chess");
+<<<<<<< HEAD
         JFrame.setDefaultLookAndFeelDecorated(true);
+=======
+>>>>>>> 9f8e32aa07cabb70630fdf641973183cfb248e11
         frame.setResizable(false);
         frame.setPreferredSize(new Dimension(600, 800));
         JPanel gamePanel = new JPanel(new BorderLayout());
@@ -52,16 +55,19 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
             //add or remove chess clock labels
         }
         if(e.getSource() == restartGame){
-            //restart the game
+            //TODO: restart the game
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e){
-        //if the mouse is pressed on a tile with a piece of the active player's color, all the possible moves for that tile should be highlighted
-        //if the mouse has already pressed on a piece, pressing on a tile that is a legal move should result in the move happening
-        //if the mouse has already pressed on a piece, pressing on a new piece of the active player's color should unhighlight all the previously highlighted spots and highlight the new legal moves
+        /*TODO:
+        *if the mouse is pressed on a tile with a piece of the active player's color, all the possible moves for that tile should be highlighted
+        *if the mouse has already pressed on a piece, pressing on a tile that is a legal move should result in the move happening
+        *if the mouse has already pressed on a piece, pressing on a new piece of the active player's color should unhighlight all the previously highlighted spots and highlight the new legal moves
+        */
     }
+
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Chess()); 

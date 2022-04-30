@@ -35,11 +35,11 @@ public class Pawn extends Piece {
                 captureTileRight = captureTileRight.up();
             }
 
-            if (captureTileLeft != null && captureTileLeft.hasPiece()) {
+            if (captureTileLeft != null && captureTileLeft.hasPiece() && captureTileLeft.piece().isOpponent(this)) {
                 outcomes.add(captureTileLeft);
             }
 
-            if (captureTileRight != null && captureTileRight.hasPiece()) {
+            if (captureTileRight != null && captureTileRight.hasPiece() && captureTileRight.piece().isOpponent(this)) {
                 outcomes.add(captureTileRight);
             }
 

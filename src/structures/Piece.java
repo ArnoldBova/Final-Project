@@ -12,6 +12,8 @@ public abstract class Piece extends Thread {
 
     protected boolean captured;
 
+    protected static final int SIZE = 50;
+
     public Piece(Tile tile, boolean isWhite) {
         this.tile = tile;
         this.isWhite = isWhite;

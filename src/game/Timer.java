@@ -1,5 +1,6 @@
 package src.game;
 
+import java.awt.Graphics;
 import java.lang.Math;
 
 public class Timer extends Thread {
@@ -32,6 +33,7 @@ public class Timer extends Thread {
                 try {
                     sleep(DELAY_TIME);
                     timeElapsed++;
+
                 } catch (InterruptedException e) {
                 }
             }
@@ -42,7 +44,11 @@ public class Timer extends Thread {
     }
 
     // Paints the current elapsed time
-    public void paint() {
+    public void paint(Graphics g) {
+        int minutes = (int) Math.floor(timeElapsed / 60);
+        int seconds = timeElapsed - (int) (minutes * 60);
+        String timeToDisplay = Integer.toString(minutes) + ":" + Integer.toString(seconds);
+        g.drawString(timeToDisplay, 0, 0);
 
     }
 
@@ -70,14 +76,6 @@ public class Timer extends Thread {
     // Turns the timer off
     public void turnOff() {
         this.on = false;
-    }
-
-    // Converts a time in seconds to its equivalent time in minutes and seconds
-    // (This is the format that the timer will display)
-    public String convertToMinutes() {
-        double minutes = Math.floor(timeElapsed / 60);
-        int seconds = timeElapsed % 60;
-        return "";
     }
 
 }

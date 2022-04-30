@@ -169,11 +169,13 @@ public class Board {
             for (int j = 0; j < 8; j++) {
                 Tile drawingTile = tiles[i][j];
                 if(drawingTile.isWhite){
-                    g.setColor(Color.BLACK);
-                }else{
                     g.setColor(Color.WHITE);
+                }else{
+                    g.setColor(Color.BLACK);
                 }
-                g.fillRect(i * 60, j * 60, 60, 60);
+                g.fillRect(i * 50 + 40, j * 50, 50, 50);
+                g.setColor(Color.BLACK);
+                g.drawRect(i * 50 + 40, j * 50, 50, 50);
             }
         }
     }

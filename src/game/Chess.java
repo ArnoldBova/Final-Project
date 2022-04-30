@@ -22,7 +22,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
         JFrame frame = new JFrame("Chess");
         JFrame.setDefaultLookAndFeelDecorated(true);
         frame.setResizable(false);
-        frame.setPreferredSize(new Dimension(600, 800));
+        frame.setPreferredSize(new Dimension(500, 550));
         JPanel gamePanel = new JPanel(new BorderLayout());
 	    frame.add(gamePanel);
         //the player panel will hold the players and if they are in speed chess mode, the timers
@@ -48,7 +48,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
         buttonPanel.add(speedChess);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(500, 500));
         frame.pack();
 	    frame.setVisible(true);    
     }

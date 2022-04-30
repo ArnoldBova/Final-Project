@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import src.game.Tile;
 import src.structures.Piece;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 public class Knight extends Piece {
 
@@ -139,5 +142,21 @@ public class Knight extends Piece {
 
     @Override
     public void run() {
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image pieceImage;
+        if (this.isWhite) {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteKnight.png");
+        } else {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackKnight.png");
+        }
+
+        // we will need to include x coordinates within the correct tile
+        g.drawImage(pieceImage, 0, 0, null);
+
     }
 }

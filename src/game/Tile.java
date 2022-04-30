@@ -24,7 +24,7 @@ public class Tile {
      * Constructs a new tile, setting all the surrounding tiles to null
      * and the piece to null, as a tile will not always have a piece on it.
      *
-     * @param color the color of the tile, either black or white
+     * @param isWhite the color of the tile, either black or white
      */
     public Tile(boolean isWhite) {
         this.piece = null;

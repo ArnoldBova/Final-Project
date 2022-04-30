@@ -3,6 +3,8 @@ package src.game;
 import src.pieces.*;
 import src.structures.Piece;
 
+import java.util.ArrayList;
+
 /**
  * Implementation of an object representing a board. Will be the overall
  * structure that contains all the
@@ -14,6 +16,9 @@ import src.structures.Piece;
 public class Board {
     Tile[][] tiles;
 
+    ArrayList<Piece> whitePieces;
+    ArrayList<Piece> blackPieces;
+
 
     /**
      * constructs a new board, populating the 2d array of tile objects with each
@@ -24,6 +29,8 @@ public class Board {
      */
     public Board() {
         tiles = new Tile[8][8];
+        whitePieces = new ArrayList<>();
+        blackPieces = new ArrayList<>();
         populate();
         createLinks();
     }
@@ -93,23 +100,37 @@ public class Board {
         Piece piece;
         Tile tile = new Tile(isWhiteTile);
         // determine which piece should be generated
-        piece = switch (pos) {
+        switch (pos) {
             // rook case
-            case 0 -> new Rook(tile, isWhitePiece);
+            case 0:
+                piece = new Rook(tile, isWhitePiece);
             // Knight case
-            case 1 -> new Knight(tile, isWhitePiece);
+            case 1:
+                piece = new Knight(tile, isWhitePiece);
             // Bishop case
-            case 2 -> new Bishop(tile, isWhitePiece);
+            case 2:
+                piece = new Bishop(tile, isWhitePiece);
             // Queen case
-            case 3 -> new Queen(tile, isWhitePiece);
+            case 3:
+                piece = new Queen(tile, isWhitePiece);
             // King case
-            case 4 -> new King(tile, isWhitePiece);
+            case 4:
+                piece = new King(tile, isWhitePiece);
             // rest of the case are the same just mirrored;
-            case 5 -> new Bishop(tile, isWhitePiece);
-            case 6 -> new Knight(tile, isWhitePiece);
-            case 7 -> new Rook(tile, isWhitePiece);
-            default -> null;
+            case 5:
+                piece = new Bishop(tile, isWhitePiece);
+            case 6:
+                piece = new Knight(tile, isWhitePiece);
+            case 7:
+                piece = new Rook(tile, isWhitePiece);
+            default:
+                piece = null;
         };
+
+        if (piece != null) {
+            if (isWhitePiece) whitePieces.add(piece);
+            else blackPieces.add(piece);
+        }
 
         tile.setPiece(piece);
 

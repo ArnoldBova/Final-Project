@@ -3,6 +3,9 @@ package src.pieces;
 import java.util.ArrayList;
 import src.game.Tile;
 import src.structures.Piece;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 public class Queen extends Piece {
 
@@ -125,6 +128,22 @@ public class Queen extends Piece {
 
   @Override
   public void run() {}
+
+  @Override
+  public void paint(Graphics g) {
+
+      Toolkit toolkit = Toolkit.getDefaultToolkit();
+      Image pieceImage;
+      if (this.isWhite) {
+          pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteQueen.png");
+      } else {
+          pieceImage = toolkit.getImage("../Images/WhitePieces/BlackQueen.png");
+      }
+
+      // we will need to include x coordinates within the correct tile
+      g.drawImage(pieceImage, 0, 0, null);
+
+  }
   //
   //    public int getMoves() {
   //        return moves;

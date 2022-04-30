@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import src.game.Tile;
 import src.structures.Piece;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 public class Bishop extends Piece {
     // instance variables that are unanimous among all pieces are in the Pieces
@@ -292,6 +295,22 @@ public class Bishop extends Piece {
     @Override
     public void run() {
         // this is here for animation things
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image pieceImage;
+        if (this.isWhite) {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteBishop.png");
+        } else {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackBishop.png");
+        }
+
+        // we will need to include x coordinates within the correct tile
+        g.drawImage(pieceImage, 0, 0, null);
+
     }
 
 }

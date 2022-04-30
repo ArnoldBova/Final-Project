@@ -84,8 +84,8 @@ public class Board {
      * for the current pos
      * 
      * @param pos        The position within a given row
-     * @param tileColor  The color of the tile
-     * @param pieceColor The color of the piece
+     * @param isWhiteTile  The color of the tile represented as a boolean
+     * @param isWhitePiece The color of the piece represented as a boolean
      * @return A tile with a piece bound to it if necessary
      */
     private Tile createTile(int pos, boolean isWhiteTile, boolean isWhitePiece) {

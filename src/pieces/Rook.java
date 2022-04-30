@@ -5,6 +5,9 @@ import java.util.List;
 
 import src.game.Tile;
 import src.structures.Piece;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 public class Rook extends Piece {
 
@@ -141,6 +144,22 @@ public class Rook extends Piece {
 
     @Override
     public void run() {
+
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image pieceImage;
+        if (this.isWhite) {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteCastle.png");
+        } else {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackCastle.png");
+        }
+
+        // we will need to include x coordinates within the correct tile
+        g.drawImage(pieceImage, 0, 0, null);
 
     }
 

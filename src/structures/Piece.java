@@ -3,6 +3,7 @@ package src.structures;
 import java.util.ArrayList;
 
 import src.game.Tile;
+import java.awt.Graphics;
 
 public abstract class Piece extends Thread {
     protected Tile tile;
@@ -47,5 +48,14 @@ public abstract class Piece extends Thread {
     }
 
     public abstract void run();
+
+    /**
+     * Displays a piece
+     * 
+     * @param g The graphics object needed to display the piece
+     */
+    public void paint(Graphics g) {
+
+    };
 
 }

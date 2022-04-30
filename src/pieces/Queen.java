@@ -24,7 +24,7 @@ public class Queen extends Piece {
     Tile downRight = this.getTile().down().right();
     boolean loopDone = false;
     
-      while (!loopDone) {
+      while (!loopDone && up != null) {
         if (up.hasPiece()) {
           if (up.piece().isWhite() != white) {
             outcomes.add(up);
@@ -36,7 +36,7 @@ public class Queen extends Piece {
         }
       }
       loopDone = false;
-      while (!loopDone) {
+      while (!loopDone && down != null) {
         if (down.hasPiece()) {
           if (down.piece().isWhite() != white) {
             outcomes.add(down);
@@ -48,7 +48,7 @@ public class Queen extends Piece {
         }
       }
       loopDone = false;
-      while (!loopDone) {
+      while (!loopDone && right != null) {
         if (right.hasPiece()) {
           if (right.piece().isWhite() != white) {
             outcomes.add(right);
@@ -60,7 +60,7 @@ public class Queen extends Piece {
         }
       }
       loopDone = false;
-      while (!loopDone) {
+      while (!loopDone && left != null) {
         if (left.hasPiece()) {
           if (left.piece().isWhite() != white) {
             outcomes.add(left);
@@ -72,7 +72,7 @@ public class Queen extends Piece {
         }
       }
       loopDone = false;
-      while (!loopDone) {
+      while (!loopDone && upLeft != null) {
         if (upLeft.hasPiece()) {
           if (upLeft.piece().isWhite() != white) {
             outcomes.add(upLeft);
@@ -84,7 +84,7 @@ public class Queen extends Piece {
         }
       }
       loopDone = false;
-      while (!loopDone) {
+      while (!loopDone && upRight != null) {
         if (upRight.hasPiece()) {
           if (upRight.piece().isWhite() != white) {
             outcomes.add(upRight);
@@ -96,7 +96,7 @@ public class Queen extends Piece {
         }
       }
       loopDone = false;
-      while (!loopDone) {
+      while (!loopDone && downLeft != null) {
         if (downLeft.hasPiece()) {
           if (downLeft.piece().isWhite() != white) {
             outcomes.add(downLeft);
@@ -108,7 +108,7 @@ public class Queen extends Piece {
         }
       }
       loopDone = false;
-      while (!loopDone) {
+      while (!loopDone && downRight != null) {
         if (downRight.hasPiece()) {
           if (downRight.piece().isWhite() != white) {
             outcomes.add(downRight);

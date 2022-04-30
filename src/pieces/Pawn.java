@@ -4,6 +4,10 @@ import src.game.Tile;
 import src.structures.Piece;
 
 import java.util.ArrayList;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.Image;
+
 
 public class Pawn extends Piece {
 
@@ -93,6 +97,22 @@ public class Pawn extends Piece {
 
     @Override
     public void run() {
+
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image pieceImage;
+        if (this.isWhite) {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/WhitePawn.png");
+        } else {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackPawn.png");
+        }
+
+        // we will need to include x coordinates within the correct tile
+        g.drawImage(pieceImage, 0, 0, null);
 
     }
 

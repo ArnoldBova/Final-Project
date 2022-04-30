@@ -6,6 +6,8 @@ import src.structures.Piece;
 
 import java.awt.Graphics;
 
+import java.awt.Point;
+
 /**
  * Implementation of a Tile on a chess board.
  * Stores knowledge of the tiles around it and what piece is on it.
@@ -22,6 +24,7 @@ public class Tile {
     private Tile down;
     private Tile left;
     private Tile right;
+    protected Point location;
 
     /**
      *
@@ -30,13 +33,14 @@ public class Tile {
      *
      * @param color the color of the tile, either black or white
      */
-    public Tile(boolean isWhite) {
+    public Tile(boolean isWhite, int x, int y) {
         this.piece = null;
         this.up = null;
         this.down = null;
         this.right = null;
         this.left = null;
         this.isWhite = isWhite;
+        this.location = new Point(x, y);
     }
 
     /**
@@ -128,6 +132,8 @@ public class Tile {
         return piece;
     }
 
-    
+    public Point location() {
+        return location;
+    }
 
 }

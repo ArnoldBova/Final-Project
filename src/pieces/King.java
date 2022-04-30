@@ -102,9 +102,10 @@ public class King extends Piece {
         } else {
             pieceImage = toolkit.getImage("../Images/WhitePieces/BlackKing.png");
         }
+        Image scaledImage = pieceImage.getScaledInstance(this.SIZE, this.SIZE, Image.SCALE_DEFAULT);
 
         // we will need to include x coordinates within the correct tile
-        g.drawImage(pieceImage, 0, 0, null);
+        g.drawImage(scaledImage, tile.location().x * 50, tile.location().y * 50, null);
 
     }
 

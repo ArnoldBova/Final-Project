@@ -16,6 +16,8 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
     JLabel playerOneClock = new JLabel("Time Remaining: ");
     JLabel playerTwoClock = new JLabel("Time Remaining: ");
 
+    Board board;
+
     public void run(){
         JFrame frame = new JFrame("Chess");
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -29,7 +31,13 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
         playerPanel.add(playerOne);
         playerPanel.add(playerTwo);
         //the board panel will hold the game board that is being played on
-        JPanel boardPanel = new JPanel(new FlowLayout());
+        board = new Board();
+        JPanel boardPanel = new JPanel(new FlowLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                board.paintComponent(g);
+            }
+        };
         gamePanel.add(boardPanel, BorderLayout.CENTER);
         //the button panel will hold the buttons, such as restart game, speed chess mode, and other buttons as needed
         JPanel buttonPanel = new JPanel(new FlowLayout());

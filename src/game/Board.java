@@ -55,6 +55,7 @@ public class Board {
                         Tile tile = new Tile(j % 2 != 0);
                         Piece piece = new Pawn(tile, false);
                         tile.setPiece(piece);
+                        tiles[i][j] = tile;
                     }
                     break;
                 case 2:
@@ -75,6 +76,7 @@ public class Board {
                         Tile tile = new Tile(j % 2 == 0);
                         Piece piece = new Pawn(tile, true);
                         tile.setPiece(piece);
+                        tiles[i][j] = tile;
                     }
                     break;
                 // Generating White back line

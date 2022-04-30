@@ -5,6 +5,9 @@ import src.structures.Piece;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.Image;
 
 /**
  * The King class models the King piece in the game of Chess
@@ -86,6 +89,22 @@ public class King extends Piece {
 
     @Override
     public void run() {
+
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image pieceImage;
+        if (this.isWhite) {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteKing.png");
+        } else {
+            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackKing.png");
+        }
+
+        // we will need to include x coordinates within the correct tile
+        g.drawImage(pieceImage, 0, 0, null);
 
     }
 

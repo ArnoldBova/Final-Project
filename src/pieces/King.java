@@ -3,12 +3,18 @@ package src.pieces;
 import src.game.Tile;
 import src.structures.Piece;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * The King class models the King piece in the game of Chess
@@ -98,15 +104,21 @@ public class King extends Piece {
 
         Image pieceImage;
         if (this.isWhite) {
-            pieceImage = new ImageIcon("../Images/WhitePieces/WhiteKing.png").getImage();
+            // pieceImage = new ImageIcon("./WhitePieces/WhiteKing.png");
+            // System.out.println("white king " + pieceImage.toString());
         } else {
-            pieceImage = new ImageIcon("../Images/WhitePieces/BlackKing.png").getImage();
+            try {
+                pieceImage = ImageIO.read(new File("/src/pieces/BlackKing.png"));
+                // Image scaledImage = pieceImage.getScaledInstance(SIZE, SIZE,
+                // Image.SCALE_DEFAULT);
+                g.drawImage(pieceImage, 0, 0, null);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        Image scaledImage = pieceImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
 
         // we will need to include x coordinates within the correct tile
-        g.drawImage(scaledImage, tile.location().x * 50, tile.location().y * 50, null);
-        System.out.println("image drawn");
 
     }
 

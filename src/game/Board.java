@@ -107,27 +107,36 @@ public class Board {
             // rook case
             case 0:
                 piece = new Rook(tile, isWhitePiece);
-                // Knight case
+                break;
+            // Knight case
             case 1:
                 piece = new Knight(tile, isWhitePiece);
-                // Bishop case
+                break;
+            // Bishop case
             case 2:
                 piece = new Bishop(tile, isWhitePiece);
-                // Queen case
+                break;
+            // Queen case
             case 3:
                 piece = new Queen(tile, isWhitePiece);
-                // King case
+                break;
+            // King case
             case 4:
                 piece = new King(tile, isWhitePiece);
-                // rest of the case are the same just mirrored;
+                break;
+            // rest of the case are the same just mirrored;
             case 5:
                 piece = new Bishop(tile, isWhitePiece);
+                break;
             case 6:
                 piece = new Knight(tile, isWhitePiece);
+                break;
             case 7:
                 piece = new Rook(tile, isWhitePiece);
+                break;
             default:
                 piece = null;
+                break;
         }
         ;
 
@@ -181,8 +190,8 @@ public class Board {
 
                 if (drawingTile.hasPiece() && drawingTile.piece() instanceof King) {
                     drawingTile.piece().paint(g);
-                    System.out.println("tile with king drawn");
                 }
+                System.out.println("repainted");
             }
         }
     }

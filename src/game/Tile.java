@@ -1,6 +1,10 @@
 package src.game;
 
+import java.awt.Color;
+
 import src.structures.Piece;
+
+import java.awt.Graphics;
 
 /**
  * Implementation of a Tile on a chess board.
@@ -11,7 +15,7 @@ import src.structures.Piece;
  */
 public class Tile {
     private Piece piece;
-    private boolean isWhite;
+    protected boolean isWhite;
     // each of these represent tiles around this one, each corresponding to their
     // respective direction
     private Tile up;
@@ -24,7 +28,7 @@ public class Tile {
      * Constructs a new tile, setting all the surrounding tiles to null
      * and the piece to null, as a tile will not always have a piece on it.
      *
-     * @param isWhite the color of the tile, either black or white
+     * @param color the color of the tile, either black or white
      */
     public Tile(boolean isWhite) {
         this.piece = null;
@@ -123,5 +127,7 @@ public class Tile {
     public Piece piece() {
         return piece;
     }
+
+    
 
 }

@@ -4,6 +4,8 @@ import src.pieces.*;
 import src.structures.Piece;
 
 import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * Implementation of an object representing a board. Will be the overall
@@ -53,6 +55,7 @@ public class Board {
                         Tile tile = new Tile(j % 2 != 0);
                         Piece piece = new Pawn(tile, false);
                         tile.setPiece(piece);
+                        tiles[i][j] = tile;
                     }
                     break;
                 case 2:
@@ -73,6 +76,7 @@ public class Board {
                         Tile tile = new Tile(j % 2 == 0);
                         Piece piece = new Pawn(tile, true);
                         tile.setPiece(piece);
+                        tiles[i][j] = tile;
                     }
                     break;
                 // Generating White back line
@@ -160,5 +164,17 @@ public class Board {
         }
     }
 
-    // will be responsible for painting the board on the panel.
+    public void paintComponent(Graphics g){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Tile drawingTile = tiles[i][j];
+                if(drawingTile.isWhite){
+                    g.setColor(Color.BLACK);
+                }else{
+                    g.setColor(Color.WHITE);
+                }
+                g.fillRect(i * 60, j * 60, 60, 60);
+            }
+        }
+    }
 }

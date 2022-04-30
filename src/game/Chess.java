@@ -18,10 +18,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
 
     public void run(){
         JFrame frame = new JFrame("Chess");
-<<<<<<< HEAD
         JFrame.setDefaultLookAndFeelDecorated(true);
-=======
->>>>>>> 9f8e32aa07cabb70630fdf641973183cfb248e11
         frame.setResizable(false);
         frame.setPreferredSize(new Dimension(600, 800));
         JPanel gamePanel = new JPanel(new BorderLayout());
@@ -45,9 +42,9 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(500, 500));
         frame.pack();
-	    frame.setVisible(true);
-        
+	    frame.setVisible(true);    
     }
+
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == speedChess){
@@ -55,7 +52,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener{
             //add or remove chess clock labels
         }
         if(e.getSource() == restartGame){
-            //TODO: restart the game
+            //Get the game to restart
         }
     }
 

@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import src.game.Tile;
 import java.awt.Graphics;
 
+import java.awt.Image;
+
 public abstract class Piece extends Thread {
     protected Tile tile;
     // could make this a boolean such as 'isWhite' which would determine its color
     protected boolean isWhite;
 
     protected boolean captured;
+
+    protected Image image;
 
     protected static final int SIZE = 50;
 

@@ -44,7 +44,7 @@ public class King extends Piece {
         // Try to read in the piece's image, and scale it to the proper size
         try {
             Image unscaledImage = ImageIO.read(file);
-            image = unscaledImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+            this.image = unscaledImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
 
         } catch (IOException e) {
             e.printStackTrace();

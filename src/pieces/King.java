@@ -30,7 +30,26 @@ public class King extends Piece {
      * @param isWhite Whether the king is white or not
      */
     public King(Tile tile, boolean isWhite) {
+
         super(tile, isWhite);
+        File file;
+
+        // Get the file path to the piece's image
+        if (isWhite) {
+            file = new File("src/pieces/WhiteKing.png");
+        } else {
+            file = new File("src/pieces/BlackKing.png");
+        }
+
+        // Try to read in the piece's image, and scale it to the proper size
+        try {
+            Image unscaledImage = ImageIO.read(file);
+            image = unscaledImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -101,26 +120,8 @@ public class King extends Piece {
 
     @Override
     public void paint(Graphics g) {
-
-        File imageFile;
-        if (this.isWhite) {
-            imageFile = new File("src/pieces/WhiteKing.png");
-
-        } else {
-            imageFile = new File("src/pieces/BlackKing.png");
-        }
-        try {
-            Image pieceImage = ImageIO.read(imageFile);
-            Image scaledImage = pieceImage.getScaledInstance(SIZE, SIZE,
-                    Image.SCALE_DEFAULT);
-            g.drawImage(scaledImage, tile.location().x * 50 + 40, tile.location().y, null);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y, null);
     }
-
-    // we will need to include x coordinates within the correct tile
 
     /*
      * public int getMoves(){

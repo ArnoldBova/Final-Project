@@ -102,25 +102,25 @@ public class King extends Piece {
     @Override
     public void paint(Graphics g) {
 
-        Image pieceImage;
+        File imageFile;
         if (this.isWhite) {
-            // pieceImage = new ImageIcon("./WhitePieces/WhiteKing.png");
-            // System.out.println("white king " + pieceImage.toString());
+            imageFile = new File("src/pieces/WhiteKing.png");
+
         } else {
-            try {
-                pieceImage = ImageIO.read(new File("/src/pieces/BlackKing.png"));
-                // Image scaledImage = pieceImage.getScaledInstance(SIZE, SIZE,
-                // Image.SCALE_DEFAULT);
-                g.drawImage(pieceImage, 0, 0, null);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            imageFile = new File("src/pieces/BlackKing.png");
         }
+        try {
+            Image pieceImage = ImageIO.read(imageFile);
+            Image scaledImage = pieceImage.getScaledInstance(SIZE, SIZE,
+                    Image.SCALE_DEFAULT);
+            g.drawImage(scaledImage, tile.location().x * 50 + 40, tile.location().y, null);
 
-        // we will need to include x coordinates within the correct tile
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    // we will need to include x coordinates within the correct tile
 
     /*
      * public int getMoves(){

@@ -2,6 +2,8 @@ package src.pieces;
 
 import java.util.ArrayList;
 
+import javax.swing.JComponent;
+
 import src.game.Tile;
 import src.structures.Piece;
 import java.awt.Graphics;
@@ -14,8 +16,8 @@ public class Bishop extends Piece {
     // 'per piece' instance variables that can be defined, such as hasMoved for a
     // rook to check for castling.
 
-    public Bishop(Tile tile, boolean isWhite) {
-        super(tile, isWhite);
+    public Bishop(Tile tile, boolean isWhite, JComponent container) {
+        super(tile, isWhite, container);
         // do any other calculations per piece here if needed
     }
 
@@ -46,245 +48,243 @@ public class Bishop extends Piece {
         Tile nonCaptureTile1 = null;
         Tile nonCpatureTile2 = null;
         boolean wall = false;
-        if(tile.up() != null){       
-             captureTileUpR = tile.up();
-             if(captureTileUpR.right() != null){
+        if (tile.up() != null) {
+            captureTileUpR = tile.up();
+            if (captureTileUpR.right() != null) {
                 captureTileUpR = captureTileUpR.right();
-             }else{
-                 captureTileUpR = null;
-             }
-            
-        }else{
+            } else {
+                captureTileUpR = null;
+            }
+
+        } else {
             captureTileUpR = null;
         }
 
-        if(tile.up() != null){
+        if (tile.up() != null) {
             captureTileUpL = tile.up();
-            if(captureTileUpL.left() != null){
+            if (captureTileUpL.left() != null) {
                 captureTileUpL = captureTileUpL.left();
-            }else{
+            } else {
                 captureTileUpL = null;
             }
-        }else{
+        } else {
             captureTileUpL = null;
         }
 
-        if(tile.down() != null){
+        if (tile.down() != null) {
             captureTileDL = tile.down();
-            if(captureTileDL.left() != null){
+            if (captureTileDL.left() != null) {
                 captureTileDL = captureTileDL.left();
-            }else{
+            } else {
                 captureTileDL = null;
             }
 
-        }else{
+        } else {
             captureTileDL = null;
         }
-        if(tile.down() != null){
+        if (tile.down() != null) {
             captureTileDR = tile.down();
-            if(captureTileDR.right() != null){
+            if (captureTileDR.right() != null) {
                 captureTileDR = captureTileDR.right();
-            }else{
+            } else {
                 captureTileDR = null;
             }
-        }else{
+        } else {
             captureTileDR = null;
         }
 
-
-        if(isWhite){
+        if (isWhite) {
             wall = false;
-            while(captureTileUpR != null && wall == false){
-               if(captureTileUpR.hasPiece() && !captureTileUpR.piece().isWhite()){
-                   outcomes.add(captureTileUpR);
-                   wall = true;
-               }else{
-                   if(!captureTileUpR.hasPiece()){
+            while (captureTileUpR != null && wall == false) {
+                if (captureTileUpR.hasPiece() && !captureTileUpR.piece().isWhite()) {
+                    outcomes.add(captureTileUpR);
+                    wall = true;
+                } else {
+                    if (!captureTileUpR.hasPiece()) {
                         wall = true;
-                   }else{
-                       outcomes.add(captureTileUpR);
-                       if(captureTileUpR.right() != null){
-                           captureTileUpR = captureTileUpR.right();
-                           if(captureTileUpR.up() != null){
-                               captureTileUpR = captureTileUpR.up();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
+                    } else {
+                        outcomes.add(captureTileUpR);
+                        if (captureTileUpR.right() != null) {
+                            captureTileUpR = captureTileUpR.right();
+                            if (captureTileUpR.up() != null) {
+                                captureTileUpR = captureTileUpR.up();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
             }
 
             wall = false;
-            while(captureTileUpL != null && wall == false){
-               if(captureTileUpL.hasPiece() && !captureTileUpL.piece().isWhite()){
-                   outcomes.add(captureTileUpL);
-                   wall = true;
-               }else{
-                   if(captureTileUpL.hasPiece()){
+            while (captureTileUpL != null && wall == false) {
+                if (captureTileUpL.hasPiece() && !captureTileUpL.piece().isWhite()) {
+                    outcomes.add(captureTileUpL);
+                    wall = true;
+                } else {
+                    if (captureTileUpL.hasPiece()) {
                         wall = true;
-                   }else{
-                       outcomes.add(captureTileUpL);
-                       if(captureTileUpL.left() != null){
-                           captureTileUpL = captureTileUpL.left();
-                           if(captureTileUpL.up() != null){
-                               captureTileUpL = captureTileUpL.up();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
+                    } else {
+                        outcomes.add(captureTileUpL);
+                        if (captureTileUpL.left() != null) {
+                            captureTileUpL = captureTileUpL.left();
+                            if (captureTileUpL.up() != null) {
+                                captureTileUpL = captureTileUpL.up();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
             }
 
             wall = false;
-            while(captureTileDR != null && wall == false){
-               if(captureTileDR.hasPiece() && !captureTileDR.piece().isWhite()){
-                   outcomes.add(captureTileDR);
-                   wall = true;
-               }else{
-                   if(captureTileDR.hasPiece()){
+            while (captureTileDR != null && wall == false) {
+                if (captureTileDR.hasPiece() && !captureTileDR.piece().isWhite()) {
+                    outcomes.add(captureTileDR);
+                    wall = true;
+                } else {
+                    if (captureTileDR.hasPiece()) {
                         wall = true;
-                   }else{
-                       outcomes.add(captureTileDR);
-                       if(captureTileDR.right() != null){
-                           captureTileDR = captureTileDR.left();
-                           if(captureTileDR.down() != null){
-                               captureTileDR = captureTileDR.down();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
+                    } else {
+                        outcomes.add(captureTileDR);
+                        if (captureTileDR.right() != null) {
+                            captureTileDR = captureTileDR.left();
+                            if (captureTileDR.down() != null) {
+                                captureTileDR = captureTileDR.down();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
             }
 
             wall = false;
-            while(captureTileDL != null && wall == false){
-               if(captureTileDL.hasPiece() && !captureTileDL.piece().isWhite()){
-                   outcomes.add(captureTileDL);
-                   wall = true;
-               }else{
-                   if(captureTileDR.hasPiece()){
+            while (captureTileDL != null && wall == false) {
+                if (captureTileDL.hasPiece() && !captureTileDL.piece().isWhite()) {
+                    outcomes.add(captureTileDL);
+                    wall = true;
+                } else {
+                    if (captureTileDR.hasPiece()) {
                         wall = true;
-                   }else{
-                       outcomes.add(captureTileDL);
-                       if(captureTileDL.left() != null){
-                           captureTileDL = captureTileDL.left();
-                           if(captureTileDL.down() != null){
-                               captureTileDL = captureTileDL.down();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
+                    } else {
+                        outcomes.add(captureTileDL);
+                        if (captureTileDL.left() != null) {
+                            captureTileDL = captureTileDL.left();
+                            if (captureTileDL.down() != null) {
+                                captureTileDL = captureTileDL.down();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
             }
 
-            
-        }else{
+        } else {
             wall = false;
-            while(captureTileUpR != null && wall == false){
-               if(captureTileUpR.hasPiece() && captureTileUpR.piece().isWhite()){
-                   outcomes.add(captureTileUpR);
-                   wall = true;
-               }else{
-                   if(captureTileUpR.hasPiece()){
+            while (captureTileUpR != null && wall == false) {
+                if (captureTileUpR.hasPiece() && captureTileUpR.piece().isWhite()) {
+                    outcomes.add(captureTileUpR);
+                    wall = true;
+                } else {
+                    if (captureTileUpR.hasPiece()) {
                         wall = true;
-                   }else{
-                       outcomes.add(captureTileUpR);
-                       if(captureTileUpR.right() != null){
-                           captureTileUpR = captureTileUpR.right();
-                           if(captureTileUpR.up() != null){
-                               captureTileUpR = captureTileUpR.up();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
-            }
-
-            wall = false;
-            while(captureTileUpL != null && wall == false){
-               if(captureTileUpL.hasPiece() && captureTileUpL.piece().isWhite()){
-                   outcomes.add(captureTileUpL);
-                   wall = true;
-               }else{
-                   if(captureTileUpL.hasPiece()){
-                        wall = true;
-                   }else{
-                       outcomes.add(captureTileUpL);
-                       if(captureTileUpL.left() != null){
-                           captureTileUpL = captureTileUpL.left();
-                           if(captureTileUpL.up() != null){
-                               captureTileUpL = captureTileUpL.up();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
+                    } else {
+                        outcomes.add(captureTileUpR);
+                        if (captureTileUpR.right() != null) {
+                            captureTileUpR = captureTileUpR.right();
+                            if (captureTileUpR.up() != null) {
+                                captureTileUpR = captureTileUpR.up();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
             }
 
             wall = false;
-            while(captureTileDR != null && wall == false){
-               if(captureTileDR.hasPiece() && captureTileDR.piece().isWhite()){
-                   outcomes.add(captureTileDR);
-                   wall = true;
-               }else{
-                   if(captureTileDR.hasPiece()){
+            while (captureTileUpL != null && wall == false) {
+                if (captureTileUpL.hasPiece() && captureTileUpL.piece().isWhite()) {
+                    outcomes.add(captureTileUpL);
+                    wall = true;
+                } else {
+                    if (captureTileUpL.hasPiece()) {
                         wall = true;
-                   }else{
-                       outcomes.add(captureTileDR);
-                       if(captureTileDR.right() != null){
-                           captureTileDR = captureTileDR.left();
-                           if(captureTileDR.down() != null){
-                               captureTileDR = captureTileDR.down();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
+                    } else {
+                        outcomes.add(captureTileUpL);
+                        if (captureTileUpL.left() != null) {
+                            captureTileUpL = captureTileUpL.left();
+                            if (captureTileUpL.up() != null) {
+                                captureTileUpL = captureTileUpL.up();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
             }
 
             wall = false;
-            while(captureTileDL != null && wall == false){
-               if(captureTileDL.hasPiece() && captureTileDL.piece().isWhite()){
-                   outcomes.add(captureTileDL);
-                   wall = true;
-               }else{
-                   if(captureTileDR.hasPiece()){
+            while (captureTileDR != null && wall == false) {
+                if (captureTileDR.hasPiece() && captureTileDR.piece().isWhite()) {
+                    outcomes.add(captureTileDR);
+                    wall = true;
+                } else {
+                    if (captureTileDR.hasPiece()) {
                         wall = true;
-                   }else{
-                       outcomes.add(captureTileDL);
-                       if(captureTileDL.left() != null){
-                           captureTileDL = captureTileDL.left();
-                           if(captureTileDL.down() != null){
-                               captureTileDL = captureTileDL.down();
-                           }else{
-                               wall = true;
-                           }
-                       }else{
-                           wall = true;
-                       }
-                   }
-               }
+                    } else {
+                        outcomes.add(captureTileDR);
+                        if (captureTileDR.right() != null) {
+                            captureTileDR = captureTileDR.left();
+                            if (captureTileDR.down() != null) {
+                                captureTileDR = captureTileDR.down();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
+            }
+
+            wall = false;
+            while (captureTileDL != null && wall == false) {
+                if (captureTileDL.hasPiece() && captureTileDL.piece().isWhite()) {
+                    outcomes.add(captureTileDL);
+                    wall = true;
+                } else {
+                    if (captureTileDR.hasPiece()) {
+                        wall = true;
+                    } else {
+                        outcomes.add(captureTileDL);
+                        if (captureTileDL.left() != null) {
+                            captureTileDL = captureTileDL.left();
+                            if (captureTileDL.down() != null) {
+                                captureTileDL = captureTileDL.down();
+                            } else {
+                                wall = true;
+                            }
+                        } else {
+                            wall = true;
+                        }
+                    }
+                }
             }
 
         }

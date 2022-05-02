@@ -5,14 +5,16 @@ import java.util.List;
 
 import src.game.Tile;
 import src.structures.Piece;
+
+import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
 
 public class Rook extends Piece {
 
-    public Rook(Tile tile, boolean isWhite) {
-        super(tile, isWhite);
+    public Rook(Tile tile, boolean isWhite, JComponent container) {
+        super(tile, isWhite, container);
     }
 
     @Override

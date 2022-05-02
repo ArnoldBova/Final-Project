@@ -3,14 +3,16 @@ package src.pieces;
 import java.util.ArrayList;
 import src.game.Tile;
 import src.structures.Piece;
+
+import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
 
 public class Queen extends Piece {
 
-  public Queen(Tile tile, boolean isWhite) {
-    super(tile, isWhite);
+  public Queen(Tile tile, boolean isWhite, JComponent container) {
+    super(tile, isWhite, container);
   }
 
   @Override

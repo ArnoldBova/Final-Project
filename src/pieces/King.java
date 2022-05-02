@@ -1,5 +1,6 @@
 package src.pieces;
 
+import src.game.Board;
 import src.game.Tile;
 import src.structures.Piece;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -15,6 +16,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.awt.image.ImageObserver;
 
 /**
  * The King class models the King piece in the game of Chess
@@ -29,9 +31,9 @@ public class King extends Piece {
      * @param tile    The tile that the king starts on
      * @param isWhite Whether the king is white or not
      */
-    public King(Tile tile, boolean isWhite) {
+    public King(Tile tile, boolean isWhite, JComponent container) {
 
-        super(tile, isWhite);
+        super(tile, isWhite, container);
         File file;
 
         // Get the file path to the piece's image
@@ -120,39 +122,14 @@ public class King extends Piece {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y, null);
+        if (!isWhite) {
+            //        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y * 50, null);
+            g.drawImage(this.image, 30,0 , null);
+        } else {
+            g.drawImage(this.image, 100, 200, null);
+        }
     }
 
-    /*
-     * public int getMoves(){
-     * return moves;
-     * }
-     * public list getMovements(int moves){
-     * if(moves > 0) {
-     * movemnts.remove(0);
-     * return movements;
-     * }else{
-     * return moves;
-     * }
-     * }
-     * 
-     * public boolean getCaptured(){
-     * return captured;
-     * 
-     * }
-     * 
-     * public Tile getPostion(){
-     * return position;
-     * }
-     * 
-     * 
-     * 
-     * public void setCaptured(){
-     * captured = true;
-     * }
-     * public void moveTo(Tile end){
-     * position = end;
-     * }
-     */
+
 
 }

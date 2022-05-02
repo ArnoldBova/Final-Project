@@ -3,6 +3,8 @@ package src.structures;
 import java.awt.*;
 import java.util.ArrayList;
 
+import javax.swing.JComponent;
+
 import src.game.Tile;
 
 import java.awt.Image;
@@ -16,11 +18,14 @@ public abstract class Piece extends Thread {
 
     protected Image image;
 
+    protected JComponent container;
+
     protected static final int SIZE = 50;
 
-    public Piece(Tile tile, boolean isWhite) {
+    public Piece(Tile tile, boolean isWhite, JComponent container) {
         this.tile = tile;
         this.isWhite = isWhite;
+        this.container = container;
     }
 
     // retuns an array of tiles representing the end point for all valid moves for

@@ -3,6 +3,7 @@ package src.game;
 import src.pieces.*;
 import src.structures.Piece;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -21,6 +22,8 @@ public class Board {
     ArrayList<Piece> whitePieces;
     ArrayList<Piece> blackPieces;
 
+    JComponent container;
+
     /**
      * constructs a new board, populating the 2d array of tile objects with each
      * piece in the correct place to start a new game.
@@ -28,12 +31,13 @@ public class Board {
      * The board will be oriented such that the white piece player will be at the
      * bottom of the screen.
      */
-    public Board() {
+    public Board(JComponent container) {
         tiles = new Tile[8][8];
         whitePieces = new ArrayList<>();
         blackPieces = new ArrayList<>();
         populate();
         createLinks();
+        this.container = container;
     }
 
     /**
@@ -52,7 +56,7 @@ public class Board {
                 case 1:
                     for (int j = 0; j < tiles[i].length; j++) {
                         Tile tile = new Tile(j % 2 != 0, i, j);
-                        Piece piece = new Pawn(tile, false);
+                        Piece piece = new Pawn(tile, false, container);
                         tile.setPiece(piece);
                         tiles[i][j] = tile;
                     }
@@ -73,7 +77,7 @@ public class Board {
                 case 6:
                     for (int j = 0; j < tiles[i].length; j++) {
                         Tile tile = new Tile(j % 2 == 0, i, j);
-                        Piece piece = new Pawn(tile, true);
+                        Piece piece = new Pawn(tile, true, container);
                         tile.setPiece(piece);
                         tiles[i][j] = tile;
                     }
@@ -99,40 +103,34 @@ public class Board {
      * @param isWhitePiece The color of the piece represented as a boolean
      * @return A tile with a piece bound to it if necessary
      */
-    private Tile createTile(int pos, boolean isWhiteTile, boolean isWhitePiece, int x, int y) {
+    private Tile createTile(int pos, boolean isWhiteTile, boolean isWhitePiece, int y, int x) {
         Piece piece;
         Tile tile = new Tile(isWhiteTile, x, y);
         // determine which piece should be generated
         switch (pos) {
             // rook case
             case 0:
-                piece = new Rook(tile, isWhitePiece);
+            case 7:
+                piece = new Rook(tile, isWhitePiece, container);
                 break;
             // Knight case
             case 1:
-                piece = new Knight(tile, isWhitePiece);
+            case 6:
+                piece = new Knight(tile, isWhitePiece, container);
                 break;
             // Bishop case
             case 2:
-                piece = new Bishop(tile, isWhitePiece);
+                // rest of the case are the same just mirrored;
+            case 5:
+                piece = new Bishop(tile, isWhitePiece, container);
                 break;
             // Queen case
             case 3:
-                piece = new Queen(tile, isWhitePiece);
+                piece = new Queen(tile, isWhitePiece, container);
                 break;
             // King case
             case 4:
-                piece = new King(tile, isWhitePiece);
-                break;
-            // rest of the case are the same just mirrored;
-            case 5:
-                piece = new Bishop(tile, isWhitePiece);
-                break;
-            case 6:
-                piece = new Knight(tile, isWhitePiece);
-                break;
-            case 7:
-                piece = new Rook(tile, isWhitePiece);
+                piece = new King(tile, isWhitePiece, container);
                 break;
             default:
                 piece = null;
@@ -184,14 +182,14 @@ public class Board {
                 } else {
                     g.setColor(Color.BLACK);
                 }
-                g.fillRect(i * 50 + 40, j * 50, 50, 50);
+                g.fillRect(i * 50 , j * 50, 50, 50);
                 g.setColor(Color.BLACK);
-                g.drawRect(i * 50 + 40, j * 50, 50, 50);
+                g.drawRect(i * 50, j * 50, 50, 50);
 
                 if (drawingTile.hasPiece() && drawingTile.piece() instanceof King) {
+                    System.out.println("drawing black king");
                     drawingTile.piece().paint(g);
                 }
-                System.out.println("repainted");
             }
         }
     }

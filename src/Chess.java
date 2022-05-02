@@ -32,13 +32,13 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         playerPanel.add(playerOne);
         playerPanel.add(playerTwo);
         // the board panel will hold the game board that is being played on
-        board = new Board();
         JPanel boardPanel = new JPanel(new FlowLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
                 board.paintComponent(g);
             }
         };
+        board = new Board(boardPanel);
         frame.add(boardPanel);
         // the button panel will hold the buttons, such as restart game, speed chess
         // mode, and other buttons as needed

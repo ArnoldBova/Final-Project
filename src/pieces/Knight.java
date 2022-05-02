@@ -14,6 +14,18 @@ public class Knight extends Piece {
 
     public Knight(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            if (isWhite) {
+                this.image = toolkit.getImage("src/pieces/WhiteKnight.png");
+            } else {
+                this.image = toolkit.getImage("src/pieces/BlackKnight.png");
+            }
+            this.image = this.image.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -144,21 +156,5 @@ public class Knight extends Piece {
 
     @Override
     public void run() {
-    }
-
-    @Override
-    public void paint(Graphics g) {
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image pieceImage;
-        if (this.isWhite) {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteKnight.png");
-        } else {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackKnight.png");
-        }
-
-        // we will need to include x coordinates within the correct tile
-        g.drawImage(pieceImage, 0, 0, null);
-
     }
 }

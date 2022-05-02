@@ -16,7 +16,18 @@ public class Pawn extends Piece {
 
     public Pawn(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
-        hasMoved = false;
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            if (isWhite) {
+                this.image = toolkit.getImage("src/pieces/WhitePawn.png");
+            } else {
+                this.image = toolkit.getImage("src/pieces/BlackPawn.png");
+            }
+            this.image = this.image.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -100,40 +111,4 @@ public class Pawn extends Piece {
     public void run() {
 
     }
-
-    @Override
-    public void paint(Graphics g) {
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image pieceImage;
-        if (this.isWhite) {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/WhitePawn.png");
-        } else {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackPawn.png");
-        }
-
-        // we will need to include x coordinates within the correct tile
-        g.drawImage(pieceImage, 0, 0, null);
-
-    }
-
-    //
-//
-//    public boolean getCaptured() {
-//        return captured;
-//
-//    }
-//
-//    public Tile getPostion() {
-//        return position;
-//    }
-//
-//    public void setCaptured() {
-//        captured = true;
-//    }
-//
-//    public void moveTo(Tile end) {
-//        position = end;
-//    }
-
 }

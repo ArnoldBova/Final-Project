@@ -18,6 +18,18 @@ public class Bishop extends Piece {
 
     public Bishop(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            if (isWhite) {
+                this.image = toolkit.getImage("src/pieces/WhiteBishop.png");
+            } else {
+                this.image = toolkit.getImage("src/pieces/BlackBishop.png");
+            }
+            this.image = this.image.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // do any other calculations per piece here if needed
     }
 
@@ -296,21 +308,4 @@ public class Bishop extends Piece {
     public void run() {
         // this is here for animation things
     }
-
-    @Override
-    public void paint(Graphics g) {
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image pieceImage;
-        if (this.isWhite) {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteBishop.png");
-        } else {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackBishop.png");
-        }
-
-        // we will need to include x coordinates within the correct tile
-        g.drawImage(pieceImage, 0, 0, null);
-
-    }
-
 }

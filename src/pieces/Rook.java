@@ -15,6 +15,18 @@ public class Rook extends Piece {
 
     public Rook(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            if (isWhite) {
+                this.image = toolkit.getImage("src/pieces/WhiteCastle.png");
+            } else {
+                this.image = toolkit.getImage("src/pieces/BlackCastle.png");
+            }
+            this.image = this.image.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -148,52 +160,4 @@ public class Rook extends Piece {
     public void run() {
 
     }
-
-    @Override
-    public void paint(Graphics g) {
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image pieceImage;
-        if (this.isWhite) {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteCastle.png");
-        } else {
-            pieceImage = toolkit.getImage("../Images/WhitePieces/BlackCastle.png");
-        }
-
-        // we will need to include x coordinates within the correct tile
-        g.drawImage(pieceImage, 0, 0, null);
-
-    }
-
-    //
-//    public int getMoves() {
-//        return moves;
-//    }
-//
-//    public list getMovements(int moves) {
-//        if (moves > 0) {
-//            movemnts.remove(0);
-//            return movements;
-//        } else {
-//            return moves;
-//        }
-//    }
-//
-//    public boolean getCaptured() {
-//        return captured;
-//
-//    }
-//
-//    public Tile getPostion() {
-//        return position;
-//    }
-//
-//    public void setCaptured() {
-//        captured = true;
-//    }
-//
-//    public void moveTo(Tile end) {
-//        position = end;
-//    }
-
 }

@@ -13,12 +13,25 @@ public class Queen extends Piece {
 
   public Queen(Tile tile, boolean isWhite, JComponent container) {
     super(tile, isWhite, container);
+    try {
+      Toolkit toolkit = Toolkit.getDefaultToolkit();
+      if (isWhite) {
+        this.image = toolkit.getImage("src/pieces/WhiteQueen.png");
+      } else {
+        this.image = toolkit.getImage("src/pieces/BlackQueen.png");
+      }
+      this.image = this.image.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public ArrayList<Tile> getValidMoves() {
     ArrayList<Tile> outcomes = new ArrayList<>();
     boolean white = this.isWhite();
+    // these can return null leading to null pointer exception
     Tile up = this.getTile().up();
     Tile down = this.getTile().down();
     Tile left = this.getTile().left();
@@ -130,51 +143,5 @@ public class Queen extends Piece {
 
   @Override
   public void run() {}
-
-  @Override
-  public void paint(Graphics g) {
-
-      Toolkit toolkit = Toolkit.getDefaultToolkit();
-      Image pieceImage;
-      if (this.isWhite) {
-          pieceImage = toolkit.getImage("../Images/WhitePieces/WhiteQueen.png");
-      } else {
-          pieceImage = toolkit.getImage("../Images/WhitePieces/BlackQueen.png");
-      }
-
-      // we will need to include x coordinates within the correct tile
-      g.drawImage(pieceImage, 0, 0, null);
-
-  }
-  //
-  //    public int getMoves() {
-  //        return moves;
-  //    }
-  //
-  //    public list getMovements(int moves) {
-  //        if (moves > 0) {
-  //            movemnts.remove(0);
-  //            return movements;
-  //        } else {
-  //            return moves;
-  //        }
-  //    }
-  //
-  //    public boolean getCaptured() {
-  //        return captured;
-  //
-  //    }
-  //
-  //    public Tile getPostion() {
-  //        return position;
-  //    }
-  //
-  //    public void setCaptured() {
-  //        captured = true;
-  //    }
-  //
-  //    public void moveTo(Tile end) {
-  //        position = end;
-  //    }
 
 }

@@ -35,9 +35,9 @@ public class Board {
         tiles = new Tile[8][8];
         whitePieces = new ArrayList<>();
         blackPieces = new ArrayList<>();
+        this.container = container;
         populate();
         createLinks();
-        this.container = container;
     }
 
     /**
@@ -55,8 +55,9 @@ public class Board {
                 // Generating black pawn line
                 case 1:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        Tile tile = new Tile(j % 2 != 0, i, j);
-                        Piece piece = new Pawn(tile, false, container);
+                        Tile tile = new Tile(j % 2 != 0, j, i);
+                        Piece piece = new Pawn(tile, false, this.container);
+                        blackPieces.add(piece);
                         tile.setPiece(piece);
                         tiles[i][j] = tile;
                     }
@@ -76,8 +77,9 @@ public class Board {
                 // Generating White pawn line
                 case 6:
                     for (int j = 0; j < tiles[i].length; j++) {
-                        Tile tile = new Tile(j % 2 == 0, i, j);
-                        Piece piece = new Pawn(tile, true, container);
+                        Tile tile = new Tile(j % 2 == 0, j, i);
+                        Piece piece = new Pawn(tile, true, this.container);
+                        whitePieces.add(piece);
                         tile.setPiece(piece);
                         tiles[i][j] = tile;
                     }
@@ -111,26 +113,26 @@ public class Board {
             // rook case
             case 0:
             case 7:
-                piece = new Rook(tile, isWhitePiece, container);
+                piece = new Rook(tile, isWhitePiece, this.container);
                 break;
             // Knight case
             case 1:
             case 6:
-                piece = new Knight(tile, isWhitePiece, container);
+                piece = new Knight(tile, isWhitePiece, this.container);
                 break;
             // Bishop case
             case 2:
                 // rest of the case are the same just mirrored;
             case 5:
-                piece = new Bishop(tile, isWhitePiece, container);
+                piece = new Bishop(tile, isWhitePiece, this.container);
                 break;
             // Queen case
             case 3:
-                piece = new Queen(tile, isWhitePiece, container);
+                piece = new Queen(tile, isWhitePiece, this.container);
                 break;
             // King case
             case 4:
-                piece = new King(tile, isWhitePiece, container);
+                piece = new King(tile, isWhitePiece, this.container);
                 break;
             default:
                 piece = null;
@@ -182,15 +184,18 @@ public class Board {
                 } else {
                     g.setColor(Color.BLACK);
                 }
-                g.fillRect(i * 50 , j * 50, 50, 50);
+                g.fillRect(i * 50 + 40 , j * 50, 50, 50);
                 g.setColor(Color.BLACK);
-                g.drawRect(i * 50, j * 50, 50, 50);
+                g.drawRect(i * 50 + 40, j * 50, 50, 50);
 
-                if (drawingTile.hasPiece() && drawingTile.piece() instanceof King) {
-                    System.out.println("drawing black king");
-                    drawingTile.piece().paint(g);
-                }
             }
+        }
+
+        for (Piece whitePiece: whitePieces) {
+            whitePiece.paint(g);
+        }
+        for(Piece blackPiece: blackPieces) {
+            blackPiece.paint(g);
         }
     }
 }

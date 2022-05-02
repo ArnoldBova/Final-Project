@@ -1,8 +1,6 @@
 package src.pieces;
-
 import src.game.Tile;
 import src.structures.Piece;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;

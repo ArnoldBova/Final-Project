@@ -1,12 +1,28 @@
 package src.pieces;
+<<<<<<< HEAD
 import src.game.Tile;
 import src.structures.Piece;
 import javax.swing.*;
+=======
+
+import src.game.Board;
+import src.game.Tile;
+import src.structures.Piece;
+
+>>>>>>> 4eb59dcf74506ea5c14bf27d28662e3cbaedbf42
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.image.ImageObserver;
 
 /**
  * The King class models the King piece in the game of Chess
@@ -21,8 +37,27 @@ public class King extends Piece {
      * @param tile    The tile that the king starts on
      * @param isWhite Whether the king is white or not
      */
-    public King(Tile tile, boolean isWhite) {
-        super(tile, isWhite);
+    public King(Tile tile, boolean isWhite, JComponent container) {
+
+        super(tile, isWhite, container);
+        File file;
+
+        // Get the file path to the piece's image
+        if (isWhite) {
+            file = new File("src/pieces/WhiteKing.png");
+        } else {
+            file = new File("src/pieces/BlackKing.png");
+        }
+
+        // Try to read in the piece's image, and scale it to the proper size
+        try {
+            Image unscaledImage = ImageIO.read(file);
+            this.image = unscaledImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -65,7 +100,7 @@ public class King extends Piece {
 
         // Go through each tile on the board, and get the piece that is on it
         // (we would need a reference to the board before this will work)
-        ArrayList<Tile> tiles = new ArrayList();
+        ArrayList<Tile> tiles = new ArrayList<>();
         for (Tile currentTile : tiles) {
             Piece nextPiece = currentTile.piece();
 
@@ -93,51 +128,14 @@ public class King extends Piece {
 
     @Override
     public void paint(Graphics g) {
-
-        Image pieceImage;
-        if (this.isWhite) {
-            pieceImage = new ImageIcon("../Images/WhitePieces/WhiteKing.png").getImage();
+        if (!isWhite) {
+            //        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y * 50, null);
+            g.drawImage(this.image, 30,0 , null);
         } else {
-            pieceImage = new ImageIcon("../Images/WhitePieces/BlackKing.png").getImage();
+            g.drawImage(this.image, 100, 200, null);
         }
-        Image scaledImage = pieceImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
-
-        // we will need to include x coordinates within the correct tile
-        g.drawImage(scaledImage, tile.location().x * 50, tile.location().y * 50, null);
-        System.out.println("image drawn");
-
     }
 
-    /*
-     * public int getMoves(){
-     * return moves;
-     * }
-     * public list getMovements(int moves){
-     * if(moves > 0) {
-     * movemnts.remove(0);
-     * return movements;
-     * }else{
-     * return moves;
-     * }
-     * }
-     * 
-     * public boolean getCaptured(){
-     * return captured;
-     * 
-     * }
-     * 
-     * public Tile getPostion(){
-     * return position;
-     * }
-     * 
-     * 
-     * 
-     * public void setCaptured(){
-     * captured = true;
-     * }
-     * public void moveTo(Tile end){
-     * position = end;
-     * }
-     */
+
 
 }

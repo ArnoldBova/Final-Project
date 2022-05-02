@@ -3,6 +3,7 @@ package src.pieces;
 import src.game.Tile;
 import src.structures.Piece;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -13,8 +14,8 @@ public class Pawn extends Piece {
 
     boolean hasMoved;
 
-    public Pawn(Tile tile, boolean isWhite) {
-        super(tile, isWhite);
+    public Pawn(Tile tile, boolean isWhite, JComponent container) {
+        super(tile, isWhite, container);
         hasMoved = false;
     }
 

@@ -1,15 +1,15 @@
 package src.pieces;
-<<<<<<< HEAD
+
 import src.game.Tile;
 import src.structures.Piece;
 import javax.swing.*;
-=======
+
 
 import src.game.Board;
 import src.game.Tile;
 import src.structures.Piece;
 
->>>>>>> 4eb59dcf74506ea5c14bf27d28662e3cbaedbf42
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -130,7 +130,7 @@ public class King extends Piece {
     public void paint(Graphics g) {
         if (!isWhite) {
             //        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y * 50, null);
-            g.drawImage(this.image, 30,0 , null);
+            g.drawImage(this.image, 30 ,0 , null);
         } else {
             g.drawImage(this.image, 100, 200, null);
         }

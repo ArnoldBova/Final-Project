@@ -1,9 +1,9 @@
 package src.structures;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import src.game.Tile;
-import java.awt.Graphics;
 
 public abstract class Piece extends Thread {
     protected Tile tile;
@@ -11,6 +11,8 @@ public abstract class Piece extends Thread {
     protected boolean isWhite;
 
     protected boolean captured;
+
+    protected Image image;
 
     protected static final int SIZE = 50;
 

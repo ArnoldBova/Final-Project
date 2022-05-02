@@ -31,6 +31,7 @@ public class King extends Piece {
      */
     public King(Tile tile, boolean isWhite) {
         super(tile, isWhite);
+        this.image = new I
     }
 
     /**
@@ -73,7 +74,7 @@ public class King extends Piece {
 
         // Go through each tile on the board, and get the piece that is on it
         // (we would need a reference to the board before this will work)
-        ArrayList<Tile> tiles = new ArrayList();
+        ArrayList<Tile> tiles = new ArrayList<>();
         for (Tile currentTile : tiles) {
             Piece nextPiece = currentTile.piece();
 

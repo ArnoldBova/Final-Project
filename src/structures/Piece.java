@@ -1,6 +1,7 @@
 package src.structures;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -9,7 +10,7 @@ import src.game.Tile;
 
 import java.awt.Image;
 
-public abstract class Piece extends Thread {
+public abstract class Piece extends Thread implements ImageObserver {
     protected Tile tile;
     // could make this a boolean such as 'isWhite' which would determine its color
     protected boolean isWhite;
@@ -62,11 +63,22 @@ public abstract class Piece extends Thread {
 
     /**
      * Displays a piece
-     * 
+     *
      * @param g The graphics object needed to display the piece
      */
     public void paint(Graphics g) {
-
+        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y * 50, this);
     };
+
+    @Override
+    public boolean imageUpdate(Image img, int infoflags, int x, int y,
+                               int width, int height) {
+
+        if ((infoflags & ImageObserver.ALLBITS) > 0) {
+            container.repaint();
+            return false;
+        }
+        return true;
+    }
 
 }

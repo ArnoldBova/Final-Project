@@ -4,32 +4,22 @@ import src.game.Tile;
 import src.structures.Piece;
 import javax.swing.*;
 
-
-import src.game.Board;
-import src.game.Tile;
-import src.structures.Piece;
-
-
+import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
-import java.awt.Graphics;
-import java.awt.Toolkit;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.image.ImageObserver;
 
 /**
  * The King class models the King piece in the game of Chess
  * 
  * @author Emma Flatland, Arnold Bova, Ethan Tubia, Nicholas Morgan
  */
-public class King extends Piece {
+public class King extends Piece implements ImageObserver {
 
     /**
      * Constructs a King object
@@ -38,23 +28,20 @@ public class King extends Piece {
      * @param isWhite Whether the king is white or not
      */
     public King(Tile tile, boolean isWhite, JComponent container) {
-
         super(tile, isWhite, container);
-        File file;
 
-        // Get the file path to the piece's image
-        if (isWhite) {
-            file = new File("src/pieces/WhiteKing.png");
-        } else {
-            file = new File("src/pieces/BlackKing.png");
-        }
 
         // Try to read in the piece's image, and scale it to the proper size
         try {
-            Image unscaledImage = ImageIO.read(file);
-            this.image = unscaledImage.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            if (isWhite) {
+                this.image = toolkit.getImage("src/pieces/WhiteKing.png");
+            } else {
+                this.image = toolkit.getImage("src/pieces/BlackKing.png");
+            }
+            this.image = this.image.getScaledInstance(SIZE, SIZE, Image.SCALE_DEFAULT);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -125,17 +112,4 @@ public class King extends Piece {
     public void run() {
 
     }
-
-    @Override
-    public void paint(Graphics g) {
-        if (!isWhite) {
-            //        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y * 50, null);
-            g.drawImage(this.image, 30 ,0 , null);
-        } else {
-            g.drawImage(this.image, 100, 200, null);
-        }
-    }
-
-
-
 }

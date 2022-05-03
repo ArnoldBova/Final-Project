@@ -90,16 +90,16 @@ public class Board {
                 if (!(y - 1 < 0)) {
                     currTile.setUp(tiles[y - 1][x]);
                 }
-                //down
-                if (!(y + 1 >=8)) {
+                // down
+                if (!(y + 1 >= 8)) {
                     currTile.setDown(tiles[y + 1][x]);
                 }
-                //left
+                // left
                 if (!(x - 1 < 0)) {
                     currTile.setLeft(tiles[y][x - 1]);
                 }
-                //right
-                if(!(x + 1 >=8)) {
+                // right
+                if (!(x + 1 >= 8)) {
                     currTile.setRight(tiles[y][x + 1]);
                 }
             }
@@ -126,7 +126,7 @@ public class Board {
                 piece = new Queen(tile, isWhitePiece, this.container);
                 break;
             case 4:
-                piece = new King(tile, isWhitePiece, this.container);
+                piece = new King(tile, isWhitePiece, this.container, this);
                 break;
             default:
                 piece = null;
@@ -165,12 +165,12 @@ public class Board {
                 g.drawRect(x * 50 + 40, y * 50, 50, 50);
             }
         }
-        for(Piece piece : whitePieces) {
-                piece.paint(g);
+        for (Piece piece : whitePieces) {
+            piece.paint(g);
         }
 
         for (Piece piece : blackPieces) {
-                piece.paint(g);
+            piece.paint(g);
         }
     }
 
@@ -178,12 +178,15 @@ public class Board {
         Tile tile = null;
 
         int x = point.x, y = point.y;
-        int tileX = (x + 10)/50 - 1;
+        int tileX = (x + 10) / 50 - 1;
         int tileY = y / 50;
 
         tile = tiles[tileY][tileX];
 
-
         return tile;
+    }
+
+    public Tile[][] getTiles() {
+        return this.tiles;
     }
 }

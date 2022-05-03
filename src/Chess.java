@@ -79,31 +79,12 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         gamePaused = !gamePaused;
         if (e.getSource() == pause) {
 
+
             if (isWhitePlayerTurn) {
                 // whitePlayerTimer.pause();
             } else {
                 // blackPlayerTimer.pause();
             }
-
-            paused = !paused;
-            // String input = JOptionPane.showInputDialog(frame, "Enter which Piece you
-            // want");
-            // boolean inputIsValid = false;
-            // while(!inputIsValid){
-            // input = input.toLowerCase();
-            // if(input.equals("queen")){
-            // inputIsValid = true;
-            // }else if(input.equals("bishop")){
-            // inputIsValid = true;
-            // }else if(input.equals("rook")){
-            // inputIsValid = true;
-            // }else if(input.equals("knight")){
-            // inputIsValid = true;
-            // }else{
-            // input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece
-            // Name");
-            // }
-            // }
             // add or remove chess clock labels
 
         }

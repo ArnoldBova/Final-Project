@@ -112,4 +112,8 @@ public class Pawn extends Piece {
 
     }
 
+    public void moved () {
+        this.hasMoved = true;
+    }
+
 }

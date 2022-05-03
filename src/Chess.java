@@ -17,6 +17,8 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     JPanel boardPanel;
     JFrame frame;
     Board board;
+    boolean blackCheck;
+    boolean whiteCheck;
 
     boolean isWhitePlayerTurn = true;
 
@@ -219,16 +221,23 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 moves = null;
             } else {
                 if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == isWhitePlayerTurn) {
-                    Piece currentPiece = tileOnClick.piece();
-                    currTile = tileOnClick;
-                    currentlySelectingMove = true;
-                    ArrayList<Tile> moves = currentPiece.getValidMoves();
-                    this.moves = moves;
-                    for (Tile tile : moves) {
-                        if (tile.hasPiece()) {
-                            tile.highlightForCapture();
-                        } else {
-                            tile.highlight();
+                    if ((whiteCheck && this.isWhitePlayerTurn) || (blackCheck && !isWhitePlayerTurn)) {
+                        // only be able to move the king in this case
+
+                    }
+                    {
+
+                        Piece currentPiece = tileOnClick.piece();
+                        currTile = tileOnClick;
+                        currentlySelectingMove = true;
+                        ArrayList<Tile> moves = currentPiece.getValidMoves();
+                        this.moves = moves;
+                        for (Tile tile : moves) {
+                            if (tile.hasPiece()) {
+                                tile.highlightForCapture();
+                            } else {
+                                tile.highlight();
+                            }
                         }
                     }
 
@@ -250,9 +259,13 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     }
 
     /**
-     * Checks if the king has been put into check
+     * After each player's turn, this method checks if the opposing king has been
+     * put into check
+     * 
+     * If the opposing king is in check, the opponent can only move the king on
+     * their next turn
      */
-    public void inCheck() {
+    public void seeIfInCheck() {
 
         // Determine which king may have been put into check
         if (isWhitePlayerTurn) {

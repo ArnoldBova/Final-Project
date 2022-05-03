@@ -66,26 +66,33 @@ public class King extends Piece {
         // the array of valid moves that will be returned
         ArrayList<Tile> validMoves = new ArrayList<>();
 
-        // all tiles neighboring the king
-        ArrayList<Tile> potentialMoves = new ArrayList<>(
-                Arrays.asList(tile.left(), tile.right(), tile.down(), tile.up()));
-        if (tile.left() != null) {
-            potentialMoves.add(tile.left().up());
-        }
-        if (tile.right() != null) {
-            potentialMoves.add(tile.right().up());
-        }
-        if (tile.down() != null) {
-            potentialMoves.add(tile.down().right());
-            potentialMoves.add(tile.down().left());
+        if (inCheck) {
+            // add code so the only valid moves are the ones that get the king out of check
+
+        } else {
+            // all tiles neighboring the king
+            ArrayList<Tile> potentialMoves = new ArrayList<>(
+                    Arrays.asList(tile.left(), tile.right(), tile.down(), tile.up()));
+            if (tile.left() != null) {
+                potentialMoves.add(tile.left().up());
+            }
+            if (tile.right() != null) {
+                potentialMoves.add(tile.right().up());
+            }
+            if (tile.down() != null) {
+                potentialMoves.add(tile.down().right());
+                potentialMoves.add(tile.down().left());
+            }
+
+            // Go through the neighboring tiles and filter out the ones that are valid next
+            // moves
+            for (Tile tile : potentialMoves) {
+                if (isValidMove(tile))
+                    validMoves.add(tile);
+            }
+
         }
 
-        // Go through the neighboring tiles and filter out the ones that are valid next
-        // moves
-        for (Tile tile : potentialMoves) {
-            if (isValidMove(tile))
-                validMoves.add(tile);
-        }
         return validMoves;
     }
 

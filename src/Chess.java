@@ -1,10 +1,10 @@
 package src;
 
+import src.game.Timer;
 import src.pieces.*;
 import src.structures.Piece;
 import src.game.*;
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     JPanel boardPanel;
     JFrame frame;
     Board board;
+
+    boolean isWhitePlayerTurn = true;
 
 
     boolean currentlySelectingMove = false;
@@ -100,6 +102,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     tileOnClick.setPiece(currTile.piece());
                     currTile.piece().setTile(tileOnClick);
                     currTile.setPiece(null);
+                    isWhitePlayerTurn = !isWhitePlayerTurn;
                     boardPanel.repaint();
                 }
                 currentlySelectingMove = false;
@@ -109,7 +112,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 }
                 moves = null;
             } else {
-                if (tileOnClick.hasPiece()) {
+                if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == isWhitePlayerTurn) {
                     Piece currentPiece = tileOnClick.piece();
                     currTile = tileOnClick;
                     currentlySelectingMove = true;

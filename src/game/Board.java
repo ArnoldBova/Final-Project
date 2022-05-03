@@ -219,4 +219,27 @@ public class Board {
             blackPieces.add(piece);
         }
     }
+
+    /**
+     * Gets the king
+     * 
+     * @param Whether the king to get is white or not
+     */
+    public King getKing(boolean white) {
+        if (white) {
+            for (Piece piece : whitePieces) {
+                if (piece instanceof King) {
+                    return (King) piece;
+                }
+            }
+        } else {
+            for (Piece piece : blackPieces) {
+                if (piece instanceof King) {
+                    return (King) piece;
+                }
+            }
+        }
+        return null;
+
+    }
 }

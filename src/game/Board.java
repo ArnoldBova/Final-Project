@@ -166,15 +166,11 @@ public class Board {
             }
         }
         for(Piece piece : whitePieces) {
-          
                 piece.paint(g);
-            
         }
 
         for (Piece piece : blackPieces) {
-                
                 piece.paint(g);
-
         }
     }
 

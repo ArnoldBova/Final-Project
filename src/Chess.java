@@ -16,7 +16,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     JLabel playerTwo = new JLabel("Player Two: BlackTime Remaining: ");
     boolean paused = false;
     JPanel boardPanel;
-
+    JFrame frame;
     Board board;
 
 
@@ -26,7 +26,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
 
     public void run() {
 
-        JFrame frame = new JFrame("Chess");
+        frame = new JFrame("Chess");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JFrame.setDefaultLookAndFeelDecorated(true);
         frame.setPreferredSize(new Dimension(500, 550));
@@ -66,6 +66,8 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pause) {
             paused = !paused;
+            JOptionPane.showConfirmDialog(frame, "Yo yo it's Snop Dogg");
+
             // add or remove chess clock labels
         }
         if (e.getSource() == restartGame) {

@@ -13,12 +13,18 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     // ChessTimer whitePlayerTimer = new ChessTimer(600000);
     // ChessTimer blackPlayerTimer = new ChessTimer(600000);
     JButton pause = new JButton("Pause");
-    JLabel playerOne = new JLabel("White Player: " /**+ whitePlayerTimer.timeInMin()**/);
-    JLabel playerTwo = new JLabel("Black Player: " /**+ blackPlayerTimer.timeInMin()**/);
+    JLabel playerOne = new JLabel("White Player: " /** + whitePlayerTimer.timeInMin() **/
+    );
+    JLabel playerTwo = new JLabel("Black Player: " /** + blackPlayerTimer.timeInMin() **/
+    );
     boolean paused = false;
     JPanel boardPanel;
     JFrame frame;
     Board board;
+
+    boolean blackCheck;
+    boolean whiteCheck;
+
     boolean gamePaused;
 
     boolean isWhitePlayerTurn = true;
@@ -72,13 +78,15 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
         gamePaused = !gamePaused;
         if (e.getSource() == pause) {
-            if(isWhitePlayerTurn){
-                //whitePlayerTimer.pause();
-            }else{
-                //blackPlayerTimer.pause();
-            }
 
-            paused = !paused;
+
+            if (isWhitePlayerTurn) {
+                // whitePlayerTimer.pause();
+            } else {
+                // blackPlayerTimer.pause();
+            }
+            // add or remove chess clock labels
+
         }
         if (e.getSource() == restartGame) {
             this.board = new Board(this.boardPanel);
@@ -109,15 +117,15 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     tileOnClick.setPiece(currTile.piece());
                     currTile.piece().setTile(tileOnClick);
                     currTile.setPiece(null);
-                    //if(!gamePaused){
+                    // if(!gamePaused){
                     // if(isWhitePlayerTurn){
-                    //     whitePlayerTimer.pause();
-                    //     blackPlayerTimer.start();
+                    // whitePlayerTimer.pause();
+                    // blackPlayerTimer.start();
                     // }else{
-                    //     blackPlayerTimer.pause();
-                    //     whitePlayerTimer.start();
-                    //  }
-                    //}
+                    // blackPlayerTimer.pause();
+                    // whitePlayerTimer.start();
+                    // }
+                    // }
                     isWhitePlayerTurn = !isWhitePlayerTurn;
                     if (tileOnClick.piece() instanceof Pawn) {
                         if (tileOnClick.piece().isWhite()) {
@@ -222,16 +230,23 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 moves = null;
             } else {
                 if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == isWhitePlayerTurn) {
-                    Piece currentPiece = tileOnClick.piece();
-                    currTile = tileOnClick;
-                    currentlySelectingMove = true;
-                    ArrayList<Tile> moves = currentPiece.getValidMoves();
-                    this.moves = moves;
-                    for (Tile tile : moves) {
-                        if (tile.hasPiece()) {
-                            tile.highlightForCapture();
-                        } else {
-                            tile.highlight();
+                    if ((whiteCheck && this.isWhitePlayerTurn) || (blackCheck && !isWhitePlayerTurn)) {
+                        // only be able to move the king in this case
+
+                    }
+                    {
+
+                        Piece currentPiece = tileOnClick.piece();
+                        currTile = tileOnClick;
+                        currentlySelectingMove = true;
+                        ArrayList<Tile> moves = currentPiece.getValidMoves();
+                        this.moves = moves;
+                        for (Tile tile : moves) {
+                            if (tile.hasPiece()) {
+                                tile.highlightForCapture();
+                            } else {
+                                tile.highlight();
+                            }
                         }
                     }
 
@@ -253,9 +268,13 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     }
 
     /**
-     * Checks if the king has been put into check
+     * After each player's turn, this method checks if the opposing king has been
+     * put into check
+     * 
+     * If the opposing king is in check, the opponent can only move the king on
+     * their next turn
      */
-    public void inCheck() {
+    public void seeIfInCheck() {
 
         // Determine which king may have been put into check
         if (isWhitePlayerTurn) {

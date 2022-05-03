@@ -91,9 +91,14 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     if (currTile.piece() instanceof Pawn) {
                         ((Pawn) currTile.piece()).moved();
                     }
+                    if(tileOnClick.hasPiece()){
+                        tileOnClick.piece().setCapture();
+                        tileOnClick.removePiece();
+                    }
                     tileOnClick.setPiece(currTile.piece());
                     currTile.piece().setTile(tileOnClick);
                     currTile.setPiece(null);
+                    boardPanel.repaint();
                 }
                 currentlySelectingMove = false;
                 currTile = null;

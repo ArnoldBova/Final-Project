@@ -160,4 +160,8 @@ public class Tile {
         this.highlighted = false;
         this.highlightedForCapture = false;
     }
+
+    public void removePiece(){
+        this.piece = null;
+    }
 }

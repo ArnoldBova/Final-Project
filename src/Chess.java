@@ -250,11 +250,23 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
             } else {
                 if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == isWhitePlayerTurn) {
                     if ((whiteCheck && this.isWhitePlayerTurn) || (blackCheck && !isWhitePlayerTurn)) {
-                        // only be able to move the king in this case
-
+                        // only be able to move the king in this case because it is in check
+                        Piece currentPiece = tileOnClick.piece();
+                        if (currentPiece instanceof King) {
+                            currTile = tileOnClick;
+                            currentlySelectingMove = true;
+                            ArrayList<Tile> moves = currentPiece.getValidMoves();
+                            this.moves = moves;
+                            for (Tile tile : moves) {
+                                if (tile.hasPiece()) {
+                                    tile.highlightForCapture();
+                                } else {
+                                    tile.highlight();
+                                }
+                            }
+                        }
                     }
                     {
-
                         Piece currentPiece = tileOnClick.piece();
                         currTile = tileOnClick;
                         currentlySelectingMove = true;
@@ -268,7 +280,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                             }
                         }
                     }
-
                 }
             }
             boardPanel.repaint();

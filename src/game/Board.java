@@ -208,16 +208,15 @@ public class Board {
         return tile;
     }
 
-<<<<<<< HEAD
     public Tile[][] getTiles() {
         return this.tiles;
-=======
-    public void addPiece(Piece piece){
-        if(piece.isWhite()){
+    }
+
+    public void addPiece(Piece piece) {
+        if (piece.isWhite()) {
             whitePieces.add(piece);
-        }else{
+        } else {
             blackPieces.add(piece);
         }
->>>>>>> 179d541b72fb6ceb2378e9ad37c4848465744fa2
     }
 }

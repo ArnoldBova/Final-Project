@@ -167,20 +167,22 @@ public class Board {
         }
         for (int i = 0; i < whitePieces.size(); i++) {
             Piece piece = whitePieces.get(i);
-            if(!piece.isCaptured()){
-                    piece.paint(g);
-           }else{
-               whitePieces.remove(piece);
-           }
+            if (piece.isCaptured()) {
+                whitePieces.remove(i);
+                i--;
+                continue;
+            }
+            piece.paint(g);
         }
 
         for (int i = 0; i < blackPieces.size(); i++) {
             Piece piece = blackPieces.get(i);
-            if(!piece.isCaptured()){
-                     piece.paint(g);
-            }else{
-                blackPieces.remove(piece);
+            if(piece.isCaptured()) {
+                blackPieces.remove(i);
+                i--;
+                continue;
             }
+            piece.paint(g);
          }
     }
 

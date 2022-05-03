@@ -3,7 +3,7 @@ package src.game;
 import java.awt.Graphics;
 import java.lang.Math;
 
-public class Timer extends Thread {
+public class ChessTimer extends Thread {
     // True only if the timer is running
     boolean running;
 
@@ -20,7 +20,7 @@ public class Timer extends Thread {
     // The number of milliseconds the program waits before changing animation frames
     public static final int DELAY_TIME = 1000;
 
-    public Timer(int gameLength) {
+    public ChessTimer(int gameLength) {
         this.timeElapsed = 0;
         this.running = false;
         this.gameLength = gameLength;
@@ -77,5 +77,4 @@ public class Timer extends Thread {
     public void turnOff() {
         this.on = false;
     }
-
 }

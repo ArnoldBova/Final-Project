@@ -10,15 +10,22 @@ import java.util.ArrayList;
 
 public class Chess extends MouseAdapter implements Runnable, ActionListener {
     JButton restartGame = new JButton("Restart Game");
+    // ChessTimer whitePlayerTimer = new ChessTimer(600000);
+    // ChessTimer blackPlayerTimer = new ChessTimer(600000);
     JButton pause = new JButton("Pause");
-    JLabel playerOne = new JLabel("Player One: WhiteTime Remaining: ");
-    JLabel playerTwo = new JLabel("Player Two: BlackTime Remaining: ");
+    JLabel playerOne = new JLabel("White Player: " /** + whitePlayerTimer.timeInMin() **/
+    );
+    JLabel playerTwo = new JLabel("Black Player: " /** + blackPlayerTimer.timeInMin() **/
+    );
     boolean paused = false;
     JPanel boardPanel;
     JFrame frame;
     Board board;
+
     boolean blackCheck;
     boolean whiteCheck;
+
+    boolean gamePaused;
 
     boolean isWhitePlayerTurn = true;
 
@@ -58,6 +65,9 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         container.add(boardPanel, BorderLayout.CENTER);
         container.add(playContainer, BorderLayout.NORTH);
         container.add(buttonContainer, BorderLayout.SOUTH);
+        // whitePlayerTimer.run();
+        // blackPlayerTimer.run();
+        // whitePlayerTimer.start();
 
         frame.add(container);
 
@@ -66,7 +76,15 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        gamePaused = !gamePaused;
         if (e.getSource() == pause) {
+
+            if (isWhitePlayerTurn) {
+                // whitePlayerTimer.pause();
+            } else {
+                // blackPlayerTimer.pause();
+            }
+
             paused = !paused;
             // String input = JOptionPane.showInputDialog(frame, "Enter which Piece you
             // want");
@@ -87,6 +105,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
             // }
             // }
             // add or remove chess clock labels
+
         }
         if (e.getSource() == restartGame) {
             this.board = new Board(this.boardPanel);
@@ -117,6 +136,15 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     tileOnClick.setPiece(currTile.piece());
                     currTile.piece().setTile(tileOnClick);
                     currTile.setPiece(null);
+                    // if(!gamePaused){
+                    // if(isWhitePlayerTurn){
+                    // whitePlayerTimer.pause();
+                    // blackPlayerTimer.start();
+                    // }else{
+                    // blackPlayerTimer.pause();
+                    // whitePlayerTimer.start();
+                    // }
+                    // }
                     isWhitePlayerTurn = !isWhitePlayerTurn;
                     if (tileOnClick.piece() instanceof Pawn) {
                         if (tileOnClick.piece().isWhite()) {

@@ -16,7 +16,7 @@ public class Player {
     protected Board board;
 
     // The timer that tracks how much time this player has used
-    Timer timer;
+    ChessTimer timer;
 
     /**
      * Constructs a new Player
@@ -25,7 +25,7 @@ public class Player {
      * @param pieces The pieces the player will use
      * @param timer  The timer the player will use
      */
-    public Player(Board board, Piece[] pieces, Timer timer) {
+    public Player(Board board, Piece[] pieces, ChessTimer timer) {
         this.board = board;
         this.pieces = pieces;
         this.timer = timer;

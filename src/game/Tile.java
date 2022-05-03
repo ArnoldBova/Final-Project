@@ -25,13 +25,15 @@ public class Tile {
     private Tile left;
     private Tile right;
     protected Point location;
+    private boolean highlighted;
+    private boolean highlightedForCapture;
 
     /**
      *
      * Constructs a new tile, setting all the surrounding tiles to null
      * and the piece to null, as a tile will not always have a piece on it.
      *
-     * @param color the color of the tile, either black or white
+     * @param isWhite the color of the tile, either black or white
      */
     public Tile(boolean isWhite, int x, int y) {
         this.piece = null;
@@ -41,6 +43,8 @@ public class Tile {
         this.left = null;
         this.isWhite = isWhite;
         this.location = new Point(x, y);
+        this.highlighted = false;
+        this.highlightedForCapture = false;
     }
 
     /**
@@ -48,7 +52,7 @@ public class Tile {
      * 
      * @param piece the piece to be stored
      */
-    void setPiece(Piece piece) {
+    public void setPiece(Piece piece) {
         this.piece = piece;
     }
 
@@ -136,4 +140,24 @@ public class Tile {
         return location;
     }
 
+    public boolean isHighlighted() {
+        return highlighted;
+    }
+
+    public void highlight() {
+        this.highlighted = true;
+    }
+
+    public void highlightForCapture() {
+        this.highlightedForCapture = true;
+    }
+
+    public boolean isHighlightedForCapture() {
+        return highlightedForCapture;
+    }
+
+    public void unHighlight(){
+        this.highlighted = false;
+        this.highlightedForCapture = false;
+    }
 }

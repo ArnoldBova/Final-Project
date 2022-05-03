@@ -4,78 +4,120 @@ import src.pieces.*;
 import src.structures.Piece;
 import src.game.*;
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Chess extends MouseAdapter implements Runnable, ActionListener {
     JButton restartGame = new JButton("Restart Game");
-    JButton speedChess = new JButton("Speed Chess Mode Toggle");
-    JLabel playerOne = new JLabel("Player One: White");
-    JLabel playerTwo = new JLabel("Player Two: Black");
-    boolean speedChessMode = false;
-    // these two labels aren't used yet but are there for speed chess mode
-    JLabel playerOneClock = new JLabel("Time Remaining: ");
-    JLabel playerTwoClock = new JLabel("Time Remaining: ");
+    JButton pause = new JButton("Pause");
+    JLabel playerOne = new JLabel("Player One: WhiteTime Remaining: ");
+    JLabel playerTwo = new JLabel("Player Two: BlackTime Remaining: ");
+    boolean paused = false;
+    JPanel boardPanel;
 
     Board board;
 
+    Timer test = new Timer(1000, this);
+
+
+    boolean currentlySelectingMove = false;
+    ArrayList<Tile> moves = null;
+    Tile currTile = null;
+
     public void run() {
+
         JFrame frame = new JFrame("Chess");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JFrame.setDefaultLookAndFeelDecorated(true);
         frame.setPreferredSize(new Dimension(500, 550));
-        JPanel gamePanel = new JPanel(new BorderLayout());
-        // frame.add(gamePanel);
-        // the player panel will hold the players and if they are in speed chess mode,
-        // the timers
-        JPanel playerPanel = new JPanel(new FlowLayout());
-        gamePanel.add(playerPanel, BorderLayout.NORTH);
-        playerPanel.add(playerOne);
-        playerPanel.add(playerTwo);
-        // the board panel will hold the game board that is being played on
-        JPanel boardPanel = new JPanel(new FlowLayout()) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                board.paintComponent(g);
-            }
-        };
-        board = new Board(boardPanel);
-        frame.add(boardPanel);
-        // the button panel will hold the buttons, such as restart game, speed chess
-        // mode, and other buttons as needed
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        gamePanel.add(buttonPanel, BorderLayout.SOUTH);
-        restartGame.addActionListener(this);
-        speedChess.addActionListener(this);
-        buttonPanel.add(restartGame);
-        buttonPanel.add(speedChess);
+        frame.setResizable(false);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel container = new JPanel(new BorderLayout());
+
+        JPanel playContainer = new JPanel();
+        playContainer.add(playerOne);
+        playContainer.add(playerTwo);
+
+        this.boardPanel = new JPanel() {
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                board.paint(g);
+            };
+        };
+        boardPanel.addMouseListener(this);
+        board = new Board(boardPanel);
+
+        JPanel buttonContainer = new JPanel();
+        restartGame.addActionListener(this);
+        pause.addActionListener(this);
+        buttonContainer.add(restartGame);
+        buttonContainer.add(pause);
+
+        container.add(boardPanel, BorderLayout.CENTER);
+        container.add(playContainer, BorderLayout.NORTH);
+        container.add(buttonContainer, BorderLayout.SOUTH);
+
+        frame.add(container);
+
         frame.pack();
         frame.setVisible(true);
+        test.start();
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == speedChess) {
-            speedChessMode = !speedChessMode;
+        if (e.getSource() == pause) {
+            paused = !paused;
             // add or remove chess clock labels
         }
         if (e.getSource() == restartGame) {
-            // Get the game to restart
+            this.board = new Board(this.boardPanel);
+            boardPanel.repaint();
         }
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        /*
-         * TODO:
-         * if the mouse is pressed on a tile with a piece of the active player's color,
-         * all the possible moves for that tile should be highlighted
-         * if the mouse has already pressed on a piece, pressing on a tile that is a
-         * legal move should result in the move happening
-         * if the mouse has already pressed on a piece, pressing on a new piece of the
-         * active player's color should unhighlight all the previously highlighted spots
-         * and highlight the new legal moves
-         */
+    public void mouseClicked(MouseEvent e) {
+
+        Point clickedPoint = e.getPoint();
+
+        Tile tileOnClick = board.getTile(clickedPoint);
+
+        if (currentlySelectingMove) {
+            if (moves.contains(tileOnClick)) {
+                tileOnClick.setPiece(currTile.piece());
+                currTile.setPiece(null);
+            }
+            currentlySelectingMove = false;
+            currTile = null;
+            for(Tile tile : moves) {
+                tile.unHighlight();
+            }
+            moves = null;
+        } else {
+            if (tileOnClick.hasPiece()) {
+                Piece currentPiece = tileOnClick.piece();
+                currTile = tileOnClick;
+                currentlySelectingMove = true;
+                ArrayList<Tile> moves = currentPiece.getValidMoves();
+                this.moves = moves;
+                for (Tile tile : moves) {
+                    if (tile.hasPiece()) {
+                        tile.highlightForCapture();
+                    } else {
+                        tile.highlight();
+                    }
+                }
+
+            }
+        }
+        boardPanel.repaint();
+
+
+
+
+
     }
 
     public static void main(String[] args) {

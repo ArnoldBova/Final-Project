@@ -32,126 +32,60 @@ public class Rook extends Piece {
     @Override
     public ArrayList<Tile> getValidMoves() {
         ArrayList<Tile> outcomes = new ArrayList<>();
+        boolean white = this.isWhite();
+        Tile up = tile.up();
+        Tile down = tile.down();
+        Tile left = tile.left();
+        Tile right = tile.right();
+        boolean loopDone = false;
+        while (!loopDone && up != null) {
+            if (up.hasPiece()) {
+                if (up.piece().isWhite() != white) {
+                    outcomes.add(up);
+                }
+                loopDone = true;
+            } else {
+                outcomes.add(up);
+                up = up.up();
+            }
+        }
+        loopDone = false;
+        while (!loopDone && down != null) {
+            if (down.hasPiece()) {
+                if (down.piece().isWhite() != white) {
+                    outcomes.add(down);
+                }
+                loopDone = true;
+            } else {
+                outcomes.add(down);
+                down = down.down();
+            }
+        }
+        loopDone = false;
+        while (!loopDone && right != null) {
+            if (right.hasPiece()) {
+                if (right.piece().isWhite() != white) {
+                    outcomes.add(right);
+                }
+                loopDone = true;
+            } else {
+                outcomes.add(right);
+                right = right.right();
+            }
+        }
+        loopDone = false;
+        while (!loopDone && left != null) {
+            if (left.hasPiece()) {
+                if (left.piece().isWhite() != white) {
+                    outcomes.add(left);
+                }
+                loopDone = true;
+            } else {
+                outcomes.add(left);
+                left = left.left();
+            }
+        }
 
-        Tile captureTileRight;
-        Tile captureTileLeft;
-        Tile captureTileUp;
-        Tile captureTileDown;
-        Tile nonCaptureTile1 = null;
-        Tile nonCpatureTile2 = null;
-
-        captureTileLeft = tile.left();
-        captureTileRight = tile.right();
-        captureTileUp = tile.up();
-        captureTileDown = tile.down();
-        boolean wall = false;
-        if(isWhite){
-        while(captureTileLeft != null && wall == false){
-            if(captureTileLeft.hasPiece() && captureTileLeft.piece().isWhite()!= true){
-                outcomes.add(captureTileLeft);
-                wall = true;
-            }else{
-                if(!captureTileLeft.hasPiece()){
-                    outcomes.add(captureTileLeft);
-                    captureTileLeft = captureTileLeft.left();
-                }else{
-                    wall = true;
-                }
-            }
-        }
-        wall = false;
-        while(captureTileRight != null && wall == false){
-            if(captureTileRight.hasPiece() && captureTileRight.piece().isWhite() != true){
-                outcomes.add(captureTileRight);
-                wall = true;
-            }else{
-                if(!captureTileRight.hasPiece()){
-                    outcomes.add(captureTileRight);
-                    captureTileRight = captureTileRight.right();
-                }
-            }
-        }
-        wall = false;
-        captureTileUp = tile.up();
-        while(captureTileUp != null && wall == false){
-            if(captureTileUp.hasPiece() && captureTileUp.piece().isWhite() != true){
-                outcomes.add(captureTileUp);
-                wall = true;
-            }else{
-                if(!captureTileUp.hasPiece()){
-                    outcomes.add(captureTileUp);
-                    captureTileUp = captureTileUp.up();
-                }
-            }
-        }
-        wall = false;
-        captureTileDown = tile.down();
-        while(captureTileDown != null && wall == false){
-            if(captureTileDown.hasPiece() && captureTileDown.piece().isWhite() != true){
-                outcomes.add(captureTileDown);
-                wall = true;
-            }else{
-                if(!captureTileDown.hasPiece()){
-                    outcomes.add(captureTileDown);
-                    captureTileDown = captureTileDown.down();
-                }
-            }
-        }
-    }else{
-    while(captureTileLeft != null && wall == false){
-        if(captureTileLeft.hasPiece() && captureTileLeft.piece().isWhite()){
-            outcomes.add(captureTileLeft);
-            wall = true;
-        }else{
-            if(!captureTileLeft.hasPiece()){
-                outcomes.add(captureTileLeft);
-                captureTileLeft = captureTileLeft.left();
-            }else{
-                wall = true;
-            }
-        }
-    }
-    wall = false;
-    while(captureTileRight != null && wall == false){
-        if(captureTileRight.hasPiece() && captureTileRight.piece().isWhite()){
-            outcomes.add(captureTileRight);
-            wall = true;
-        }else{
-            if(!captureTileRight.hasPiece()){
-                outcomes.add(captureTileRight);
-                captureTileRight = captureTileRight.right();
-            }
-        }
-    }
-    wall = false;
-    captureTileUp = tile.up();
-    while(captureTileUp != null && wall == false){
-        if(captureTileUp.hasPiece() && captureTileUp.piece().isWhite()){
-            outcomes.add(captureTileUp);
-            wall = true;
-        }else{
-            if(!captureTileUp.hasPiece()){
-                outcomes.add(captureTileUp);
-                captureTileUp = captureTileUp.up();
-            }
-        }
-    }
-    wall = false;
-    captureTileDown = tile.down();
-    while(captureTileDown != null && wall == false){
-        if(captureTileDown.hasPiece() && captureTileDown.piece().isWhite()){
-            outcomes.add(captureTileDown);
-            wall = true;
-        }else{
-            if(!captureTileDown.hasPiece()){
-                outcomes.add(captureTileDown);
-                captureTileDown = captureTileDown.down();
-            }
-        }
-    }
-}
-
-        
 
         return outcomes;
     }

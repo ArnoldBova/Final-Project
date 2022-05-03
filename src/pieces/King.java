@@ -19,7 +19,7 @@ import java.io.IOException;
  * 
  * @author Emma Flatland, Arnold Bova, Ethan Tubia, Nicholas Morgan
  */
-public class King extends Piece implements ImageObserver {
+public class King extends Piece {
 
     /**
      * Constructs a King object

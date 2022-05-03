@@ -37,7 +37,7 @@ public class Pawn extends Piece {
         Tile captureTileRight;
         Tile captureTileLeft;
         Tile nonCaptureTile1 = null;
-        Tile nonCpatureTile2 = null;
+        Tile nonCaptureTile2 = null;
 
         if (isWhite) {
 
@@ -61,15 +61,15 @@ public class Pawn extends Piece {
 
             if (tile.up() != null) {
                 nonCaptureTile1 = tile.up();
-            }
-
-            if (!hasMoved && nonCaptureTile1 != null && !nonCaptureTile1.hasPiece()) {
-                nonCpatureTile2 = nonCaptureTile1.up();
                 outcomes.add(nonCaptureTile1);
             }
 
-            if (nonCpatureTile2 != null && !nonCpatureTile2.hasPiece()) {
-                outcomes.add(nonCaptureTile1);
+            if (!hasMoved) {
+                nonCaptureTile2 = nonCaptureTile1.up();
+            }
+
+            if (nonCaptureTile2 != null && !nonCaptureTile2.hasPiece()) {
+                outcomes.add(nonCaptureTile2);
             }
         } else {
             captureTileLeft = tile.left();
@@ -95,12 +95,12 @@ public class Pawn extends Piece {
             }
 
             if (!hasMoved && nonCaptureTile1 != null && !nonCaptureTile1.hasPiece()) {
-                nonCpatureTile2 = nonCaptureTile1.down();
+                nonCaptureTile2 = nonCaptureTile1.down();
                 outcomes.add(nonCaptureTile1);
             }
 
-            if (nonCpatureTile2 != null && !nonCpatureTile2.hasPiece()) {
-                outcomes.add(nonCaptureTile1);
+            if (nonCaptureTile2 != null && !nonCaptureTile2.hasPiece()) {
+                outcomes.add(nonCaptureTile2);
             }
         }
 
@@ -111,4 +111,5 @@ public class Pawn extends Piece {
     public void run() {
 
     }
+
 }

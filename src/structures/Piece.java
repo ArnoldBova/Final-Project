@@ -67,6 +67,7 @@ public abstract class Piece extends Thread implements ImageObserver {
      * @param g The graphics object needed to display the piece
      */
     public void paint(Graphics g) {
+
         g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y * 50, this);
     };
 

@@ -33,272 +33,73 @@ public class Bishop extends Piece {
         // do any other calculations per piece here if needed
     }
 
-    // saving this implementation as a comment for reference later
 
-    // public list getMovements(int moves){
-    // if(moves > 0) {
-    // movemnts.remove(0);
-    // return movements;
-    // }else{
-    // return moves;
-    // }
-    // }
 
     @Override
     public ArrayList<Tile> getValidMoves() {
         ArrayList<Tile> outcomes = new ArrayList<>();
-
-        // create a new arraylist and add the end position tile of valid moves to it
-        // doesn't need to be an instance variable because we don't care about old
-        // possible moves
-        // only ones based on the current position.
-
-        Tile captureTileUpR;
-        Tile captureTileUpL;
-        Tile captureTileDL;
-        Tile captureTileDR;
-        Tile nonCaptureTile1 = null;
-        Tile nonCpatureTile2 = null;
-        boolean wall = false;
-        if (tile.up() != null) {
-            captureTileUpR = tile.up();
-            if (captureTileUpR.right() != null) {
-                captureTileUpR = captureTileUpR.right();
-            } else {
-                captureTileUpR = null;
-            }
-
-        } else {
-            captureTileUpR = null;
+        boolean white = this.isWhite();
+        Tile up = this.getTile().up();
+        Tile down = this.getTile().down();
+        Tile upLeft = null;
+        Tile upRight = null;
+        Tile downLeft = null;
+        Tile downRight = null;
+        if (up != null) {
+            upLeft = up.left();
+            upRight = up.right();
         }
-
-        if (tile.up() != null) {
-            captureTileUpL = tile.up();
-            if (captureTileUpL.left() != null) {
-                captureTileUpL = captureTileUpL.left();
-            } else {
-                captureTileUpL = null;
-            }
-        } else {
-            captureTileUpL = null;
+        if (down != null) {
+            downLeft = down.left();
+            downRight = down.right();
         }
-
-        if (tile.down() != null) {
-            captureTileDL = tile.down();
-            if (captureTileDL.left() != null) {
-                captureTileDL = captureTileDL.left();
+        boolean loopDone = false;
+        while (!loopDone && upLeft != null) {
+            if (upLeft.hasPiece()) {
+                if (upLeft.piece().isWhite() != white) {
+                    outcomes.add(upLeft);
+                }
+                loopDone = true;
             } else {
-                captureTileDL = null;
+                outcomes.add(upLeft);
+                upLeft = upLeft.up().left();
             }
-
-        } else {
-            captureTileDL = null;
         }
-        if (tile.down() != null) {
-            captureTileDR = tile.down();
-            if (captureTileDR.right() != null) {
-                captureTileDR = captureTileDR.right();
+        loopDone = false;
+        while (!loopDone && upRight != null) {
+            if (upRight.hasPiece()) {
+                if (upRight.piece().isWhite() != white) {
+                    outcomes.add(upRight);
+                }
+                loopDone = true;
             } else {
-                captureTileDR = null;
+                outcomes.add(upRight);
+                upRight = upRight.up().right();
             }
-        } else {
-            captureTileDR = null;
         }
-
-        if (isWhite) {
-            wall = false;
-            while (captureTileUpR != null && wall == false) {
-                if (captureTileUpR.hasPiece() && !captureTileUpR.piece().isWhite()) {
-                    outcomes.add(captureTileUpR);
-                    wall = true;
-                } else {
-                    if (!captureTileUpR.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileUpR);
-                        if (captureTileUpR.right() != null) {
-                            captureTileUpR = captureTileUpR.right();
-                            if (captureTileUpR.up() != null) {
-                                captureTileUpR = captureTileUpR.up();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
+        loopDone = false;
+        while (!loopDone && downLeft != null) {
+            if (downLeft.hasPiece()) {
+                if (downLeft.piece().isWhite() != white) {
+                    outcomes.add(downLeft);
                 }
+                loopDone = true;
+            } else {
+                outcomes.add(downLeft);
+                downLeft = downLeft.down().left();
             }
-
-            wall = false;
-            while (captureTileUpL != null && wall == false) {
-                if (captureTileUpL.hasPiece() && !captureTileUpL.piece().isWhite()) {
-                    outcomes.add(captureTileUpL);
-                    wall = true;
-                } else {
-                    if (captureTileUpL.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileUpL);
-                        if (captureTileUpL.left() != null) {
-                            captureTileUpL = captureTileUpL.left();
-                            if (captureTileUpL.up() != null) {
-                                captureTileUpL = captureTileUpL.up();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
+        }
+        loopDone = false;
+        while (!loopDone && downRight != null) {
+            if (downRight.hasPiece()) {
+                if (downRight.piece().isWhite() != white) {
+                    outcomes.add(downRight);
                 }
+                loopDone = true;
+            } else {
+                outcomes.add(downRight);
+                downRight = downRight.down().right();
             }
-
-            wall = false;
-            while (captureTileDR != null && wall == false) {
-                if (captureTileDR.hasPiece() && !captureTileDR.piece().isWhite()) {
-                    outcomes.add(captureTileDR);
-                    wall = true;
-                } else {
-                    if (captureTileDR.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileDR);
-                        if (captureTileDR.right() != null) {
-                            captureTileDR = captureTileDR.left();
-                            if (captureTileDR.down() != null) {
-                                captureTileDR = captureTileDR.down();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
-                }
-            }
-
-            wall = false;
-            while (captureTileDL != null && wall == false) {
-                if (captureTileDL.hasPiece() && !captureTileDL.piece().isWhite()) {
-                    outcomes.add(captureTileDL);
-                    wall = true;
-                } else {
-                    if (captureTileDR.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileDL);
-                        if (captureTileDL.left() != null) {
-                            captureTileDL = captureTileDL.left();
-                            if (captureTileDL.down() != null) {
-                                captureTileDL = captureTileDL.down();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
-                }
-            }
-
-        } else {
-            wall = false;
-            while (captureTileUpR != null && wall == false) {
-                if (captureTileUpR.hasPiece() && captureTileUpR.piece().isWhite()) {
-                    outcomes.add(captureTileUpR);
-                    wall = true;
-                } else {
-                    if (captureTileUpR.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileUpR);
-                        if (captureTileUpR.right() != null) {
-                            captureTileUpR = captureTileUpR.right();
-                            if (captureTileUpR.up() != null) {
-                                captureTileUpR = captureTileUpR.up();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
-                }
-            }
-
-            wall = false;
-            while (captureTileUpL != null && wall == false) {
-                if (captureTileUpL.hasPiece() && captureTileUpL.piece().isWhite()) {
-                    outcomes.add(captureTileUpL);
-                    wall = true;
-                } else {
-                    if (captureTileUpL.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileUpL);
-                        if (captureTileUpL.left() != null) {
-                            captureTileUpL = captureTileUpL.left();
-                            if (captureTileUpL.up() != null) {
-                                captureTileUpL = captureTileUpL.up();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
-                }
-            }
-
-            wall = false;
-            while (captureTileDR != null && wall == false) {
-                if (captureTileDR.hasPiece() && captureTileDR.piece().isWhite()) {
-                    outcomes.add(captureTileDR);
-                    wall = true;
-                } else {
-                    if (captureTileDR.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileDR);
-                        if (captureTileDR.right() != null) {
-                            captureTileDR = captureTileDR.left();
-                            if (captureTileDR.down() != null) {
-                                captureTileDR = captureTileDR.down();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
-                }
-            }
-
-            wall = false;
-            while (captureTileDL != null && wall == false) {
-                if (captureTileDL.hasPiece() && captureTileDL.piece().isWhite()) {
-                    outcomes.add(captureTileDL);
-                    wall = true;
-                } else {
-                    if (captureTileDR.hasPiece()) {
-                        wall = true;
-                    } else {
-                        outcomes.add(captureTileDL);
-                        if (captureTileDL.left() != null) {
-                            captureTileDL = captureTileDL.left();
-                            if (captureTileDL.down() != null) {
-                                captureTileDL = captureTileDL.down();
-                            } else {
-                                wall = true;
-                            }
-                        } else {
-                            wall = true;
-                        }
-                    }
-                }
-            }
-
         }
 
         return outcomes;

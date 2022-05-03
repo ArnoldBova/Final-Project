@@ -4,18 +4,10 @@ import src.pieces.*;
 import src.structures.Piece;
 
 import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.awt.Color;
-import java.awt.Graphics;
 
-/**
- * Implementation of an object representing a board. Will be the overall
- * structure that contains all the
- * moving game components
- *
- * @version 1.0
- * @author Arnold Bova
- */
 public class Board {
     Tile[][] tiles;
 
@@ -27,7 +19,7 @@ public class Board {
     /**
      * constructs a new board, populating the 2d array of tile objects with each
      * piece in the correct place to start a new game.
-     * 
+     *
      * The board will be oriented such that the white piece player will be at the
      * bottom of the screen.
      */
@@ -36,58 +28,51 @@ public class Board {
         whitePieces = new ArrayList<>();
         blackPieces = new ArrayList<>();
         this.container = container;
-        populate();
+        generateBoard();
         createLinks();
     }
 
-    /**
-     * Populates the Tiles 2d array with tiles and generates Pieces where needed
-     */
-    private void populate() {
-        for (int i = 0; i < tiles.length; i++) {
-            switch (i) {
-                // generating black back line
+    private void generateBoard() {
+        for (int y = 0; y < 8; y++) {
+            switch (y) {
                 case 0:
-                    for (int j = 0; j < tiles[i].length; j++) {
-                        tiles[i][j] = createTile(j, j % 2 == 0, false, i, j);
+                    for (int x = 0; x < 8; x++) {
+                        tiles[y][x] = createTile(x % 2 == 0, false, x, y);
                     }
                     break;
-                // Generating black pawn line
                 case 1:
-                    for (int j = 0; j < tiles[i].length; j++) {
-                        Tile tile = new Tile(j % 2 != 0, j, i);
+                    for (int x = 0; x < 8; x++) {
+                        Tile tile = new Tile(x % 2 != 0, x, y);
                         Piece piece = new Pawn(tile, false, this.container);
                         blackPieces.add(piece);
                         tile.setPiece(piece);
-                        tiles[i][j] = tile;
+                        tiles[y][x] = tile;
                     }
                     break;
                 case 2:
                 case 4:
-                    for (int j = 0; j < tiles[i].length; j++) {
-                        tiles[i][j] = new Tile(j % 2 == 0, i, j);
+                    for (int x = 0; x < 8; x++) {
+                        tiles[y][x] = new Tile(x % 2 == 0, x, y);
                     }
                     break;
                 case 3:
                 case 5:
-                    for (int j = 0; j < tiles[i].length; j++) {
-                        tiles[i][j] = new Tile(j % 2 != 0, i, j);
+                    for (int x = 0; x < 8; x++) {
+                        tiles[y][x] = new Tile(x % 2 != 0, x, y);
                     }
                     break;
-                // Generating White pawn line
                 case 6:
-                    for (int j = 0; j < tiles[i].length; j++) {
-                        Tile tile = new Tile(j % 2 == 0, j, i);
+                    for (int x = 0; x < 8; x++) {
+                        Tile tile = new Tile(x % 2 == 0, x, y);
                         Piece piece = new Pawn(tile, true, this.container);
                         whitePieces.add(piece);
                         tile.setPiece(piece);
-                        tiles[i][j] = tile;
+                        tiles[y][x] = tile;
                     }
                     break;
-                // Generating White back line
                 case 7:
-                    for (int j = 0; j < tiles[i].length; j++) {
-                        tiles[i][j] = createTile(j, j % 2 != 0, true, i, j);
+                    for (int x = 0; x < 8; x++) {
+                        tiles[y][x] = createTile(x % 2 != 0, true, x, y);
                     }
                     break;
                 default:
@@ -96,41 +81,50 @@ public class Board {
         }
     }
 
-    /**
-     * Helper method that creates a tile and will create a piece if it is necessary
-     * for the current pos
-     * 
-     * @param pos          The position within a given row
-     * @param isWhiteTile  The color of the tile represented as a boolean
-     * @param isWhitePiece The color of the piece represented as a boolean
-     * @return A tile with a piece bound to it if necessary
-     */
-    private Tile createTile(int pos, boolean isWhiteTile, boolean isWhitePiece, int y, int x) {
+    private void createLinks() {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                Tile currTile = tiles[y][x];
+
+                // up
+                if (!(y - 1 < 0)) {
+                    currTile.setUp(tiles[y - 1][x]);
+                }
+                //down
+                if (!(y + 1 >=8)) {
+                    currTile.setDown(tiles[y + 1][x]);
+                }
+                //left
+                if (!(x - 1 < 0)) {
+                    currTile.setLeft(tiles[y][x - 1]);
+                }
+                //right
+                if(!(x + 1 >=8)) {
+                    currTile.setRight(tiles[y][x + 1]);
+                }
+            }
+        }
+    }
+
+    private Tile createTile(boolean isWhiteTile, boolean isWhitePiece, int x, int y) {
         Piece piece;
         Tile tile = new Tile(isWhiteTile, x, y);
-        // determine which piece should be generated
-        switch (pos) {
-            // rook case
+        switch (x) {
             case 0:
             case 7:
                 piece = new Rook(tile, isWhitePiece, this.container);
                 break;
-            // Knight case
             case 1:
             case 6:
                 piece = new Knight(tile, isWhitePiece, this.container);
                 break;
-            // Bishop case
             case 2:
-                // rest of the case are the same just mirrored;
             case 5:
                 piece = new Bishop(tile, isWhitePiece, this.container);
                 break;
-            // Queen case
             case 3:
                 piece = new Queen(tile, isWhitePiece, this.container);
                 break;
-            // King case
             case 4:
                 piece = new King(tile, isWhitePiece, this.container);
                 break;
@@ -138,13 +132,13 @@ public class Board {
                 piece = null;
                 break;
         }
-        ;
 
         if (piece != null) {
-            if (isWhitePiece)
+            if (isWhitePiece) {
                 whitePieces.add(piece);
-            else
+            } else {
                 blackPieces.add(piece);
+            }
         }
 
         tile.setPiece(piece);
@@ -152,50 +146,44 @@ public class Board {
         return tile;
     }
 
-    /**
-     * Links the tiles together
-     */
-    private void createLinks() {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-                Tile tile = tiles[i][j];
-                if (!(i - 1 < 0)) {
-                    tile.setUp(tiles[i - 1][j]);
+    public void paint(Graphics g) {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                Tile drawingTile = tiles[y][x];
+                if (drawingTile.isHighlighted()) {
+                    g.setColor(Color.green);
+                } else if (drawingTile.isHighlightedForCapture()) {
+                    g.setColor(Color.red);
+                } else if (drawingTile.isWhite) {
+                    g.setColor(Color.white);
+                } else {
+                    g.setColor(Color.black);
                 }
-                if (!(i + 1 <= tiles.length)) {
-                    tile.setDown(tiles[i + 1][j]);
-                }
-                if (!(j - 1 < 0)) {
-                    tile.setLeft(tiles[i][j - 1]);
-                }
-                if (!(j + 1 <= tiles[i].length)) {
-                    tile.setRight(tiles[i][j + 1]);
-                }
+
+                g.fillRect(x * 50 + 40, y * 50, 50, 50);
+                g.setColor(Color.BLACK);
+                g.drawRect(x * 50 + 40, y * 50, 50, 50);
             }
+        }
+        for(Piece piece : whitePieces) {
+            piece.paint(g);
+        }
+
+        for (Piece piece : blackPieces) {
+            piece.paint(g);
         }
     }
 
-    public void paintComponent(Graphics g) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                Tile drawingTile = tiles[i][j];
-                if (drawingTile.isWhite) {
-                    g.setColor(Color.WHITE);
-                } else {
-                    g.setColor(Color.BLACK);
-                }
-                g.fillRect(i * 50 + 40 , j * 50, 50, 50);
-                g.setColor(Color.BLACK);
-                g.drawRect(i * 50 + 40, j * 50, 50, 50);
+    public Tile getTile(Point point) {
+        Tile tile = null;
 
-            }
-        }
+        int x = point.x, y = point.y;
+        int tileX = (x + 10)/50 - 1;
+        int tileY = y / 50;
 
-        for (Piece whitePiece: whitePieces) {
-            whitePiece.paint(g);
-        }
-        for(Piece blackPiece: blackPieces) {
-            blackPiece.paint(g);
-        }
+        tile = tiles[tileY][tileX];
+
+
+        return tile;
     }
 }

@@ -20,7 +20,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
 
     boolean isWhitePlayerTurn = true;
 
-
     boolean currentlySelectingMove = false;
     ArrayList<Tile> moves = null;
     Tile currTile = null;
@@ -67,21 +66,23 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pause) {
             paused = !paused;
-            // String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
+            // String input = JOptionPane.showInputDialog(frame, "Enter which Piece you
+            // want");
             // boolean inputIsValid = false;
             // while(!inputIsValid){
-            //     input = input.toLowerCase();
-            //     if(input.equals("queen")){
-            //         inputIsValid = true;
-            //     }else if(input.equals("bishop")){
-            //         inputIsValid = true;
-            //     }else if(input.equals("rook")){
-            //         inputIsValid = true;
-            //     }else if(input.equals("knight")){
-            //         inputIsValid = true;
-            //     }else{
-            //         input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece Name");
-            //     }
+            // input = input.toLowerCase();
+            // if(input.equals("queen")){
+            // inputIsValid = true;
+            // }else if(input.equals("bishop")){
+            // inputIsValid = true;
+            // }else if(input.equals("rook")){
+            // inputIsValid = true;
+            // }else if(input.equals("knight")){
+            // inputIsValid = true;
+            // }else{
+            // input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece
+            // Name");
+            // }
             // }
             // add or remove chess clock labels
         }
@@ -100,7 +101,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         Point clickedPoint = e.getPoint();
         try {
 
-
             Tile tileOnClick = board.getTile(clickedPoint);
 
             if (currentlySelectingMove) {
@@ -108,7 +108,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     if (currTile.piece() instanceof Pawn) {
                         ((Pawn) currTile.piece()).moved();
                     }
-                    if(tileOnClick.hasPiece()){
+                    if (tileOnClick.hasPiece()) {
                         tileOnClick.piece().setCapture();
                         tileOnClick.removePiece();
                     }
@@ -116,15 +116,15 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     currTile.piece().setTile(tileOnClick);
                     currTile.setPiece(null);
                     isWhitePlayerTurn = !isWhitePlayerTurn;
-                    if(tileOnClick.piece() instanceof Pawn){
-                        if(tileOnClick.piece().isWhite()){
-                            if(tileOnClick.location().y == 0){
+                    if (tileOnClick.piece() instanceof Pawn) {
+                        if (tileOnClick.piece().isWhite()) {
+                            if (tileOnClick.location().y == 0) {
                                 String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
                                 boolean inputIsValid = false;
-                                while(!inputIsValid){
-                                 input = input.toLowerCase();
+                                while (!inputIsValid) {
+                                    input = input.toLowerCase();
                                     switch (input) {
-                                        case "queen" : {
+                                        case "queen": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Queen(tileOnClick, true, boardPanel);
@@ -132,7 +132,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        case "bishop" : {
+                                        case "bishop": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Bishop(tileOnClick, true, boardPanel);
@@ -140,7 +140,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        case "rook" : {
+                                        case "rook": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Rook(tileOnClick, true, boardPanel);
@@ -148,7 +148,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        case "knight" : {
+                                        case "knight": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Knight(tileOnClick, true, boardPanel);
@@ -156,19 +156,20 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        default :
-                                                input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece Name");
+                                        default:
+                                            input = JOptionPane.showInputDialog(frame,
+                                                    "Please Enter a Valid Piece Name");
                                     }
                                 }
-                            }  
-                    }else{
-                            if(tileOnClick.location().y == 7){
+                            }
+                        } else {
+                            if (tileOnClick.location().y == 7) {
                                 String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
                                 boolean inputIsValid = false;
-                                while(!inputIsValid){
-                                 input = input.toLowerCase();
+                                while (!inputIsValid) {
+                                    input = input.toLowerCase();
                                     switch (input) {
-                                        case "queen" : {
+                                        case "queen": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Queen(tileOnClick, false, boardPanel);
@@ -176,7 +177,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        case "bishop" : {
+                                        case "bishop": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Bishop(tileOnClick, false, boardPanel);
@@ -184,7 +185,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        case "rook" : {
+                                        case "rook": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Rook(tileOnClick, false, boardPanel);
@@ -192,7 +193,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        case "knight" : {
+                                        case "knight": {
                                             inputIsValid = true;
                                             tileOnClick.piece().setCapture();
                                             Piece newPiece = new Knight(tileOnClick, false, boardPanel);
@@ -200,13 +201,14 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                             board.addPiece(newPiece);
                                             break;
                                         }
-                                        default :
-                                                input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece Name");
+                                        default:
+                                            input = JOptionPane.showInputDialog(frame,
+                                                    "Please Enter a Valid Piece Name");
                                     }
                                 }
                             }
-                            }
-                     }
+                        }
+                    }
                     boardPanel.repaint();
                 }
                 currentlySelectingMove = false;
@@ -245,9 +247,21 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
             }
         }
 
+    }
 
+    /**
+     * Checks if the king has been put into check
+     */
+    public void inCheck() {
 
-
+        // Determine which king may have been put into check
+        if (isWhitePlayerTurn) {
+            King king = board.getKing(true);
+            king.seeIfInCheck();
+        } else {
+            King king = board.getKing(false);
+            king.seeIfInCheck();
+        }
 
     }
 

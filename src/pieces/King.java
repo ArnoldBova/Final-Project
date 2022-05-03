@@ -162,6 +162,14 @@ public class King extends Piece {
         return isCheck;
     }
 
+    /**
+     * Sees if the king is currently in check (incomplete)
+     */
+    public void seeIfInCheck() {
+
+        this.inCheck = false;
+    }
+
     @Override
     public void run() {
 

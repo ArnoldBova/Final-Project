@@ -198,4 +198,12 @@ public class Board {
 
         return tile;
     }
+
+    public void addPiece(Piece piece){
+        if(piece.isWhite()){
+            whitePieces.add(piece);
+        }else{
+            blackPieces.add(piece);
+        }
+    }
 }

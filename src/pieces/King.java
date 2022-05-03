@@ -23,7 +23,10 @@ import java.io.IOException;
 public class King extends Piece {
 
     // The board the king is on
-    Board board;
+    protected Board board;
+
+    // True if the king has been put into check
+    protected boolean inCheck;
 
     /**
      * Constructs a King object

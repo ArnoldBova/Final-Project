@@ -19,8 +19,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
 
     Board board;
 
-    Timer test = new Timer(1000, this);
-
 
     boolean currentlySelectingMove = false;
     ArrayList<Tile> moves = null;
@@ -63,7 +61,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
 
         frame.pack();
         frame.setVisible(true);
-        test.start();
     }
 
     public void actionPerformed(ActionEvent e) {

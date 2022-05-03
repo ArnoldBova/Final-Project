@@ -72,34 +72,13 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
         gamePaused = !gamePaused;
         if (e.getSource() == pause) {
-<<<<<<< HEAD
             if(isWhitePlayerTurn){
                 //whitePlayerTimer.pause();
             }else{
                 //blackPlayerTimer.pause();
             }
-=======
+
             paused = !paused;
-            // String input = JOptionPane.showInputDialog(frame, "Enter which Piece you
-            // want");
-            // boolean inputIsValid = false;
-            // while(!inputIsValid){
-            // input = input.toLowerCase();
-            // if(input.equals("queen")){
-            // inputIsValid = true;
-            // }else if(input.equals("bishop")){
-            // inputIsValid = true;
-            // }else if(input.equals("rook")){
-            // inputIsValid = true;
-            // }else if(input.equals("knight")){
-            // inputIsValid = true;
-            // }else{
-            // input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece
-            // Name");
-            // }
-            // }
-            // add or remove chess clock labels
->>>>>>> b5575489a0500c222634ad8081beced3cb9f1f8d
         }
         if (e.getSource() == restartGame) {
             this.board = new Board(this.boardPanel);

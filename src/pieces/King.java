@@ -30,7 +30,6 @@ public class King extends Piece {
     public King(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
 
-
         // Try to read in the piece's image, and scale it to the proper size
         try {
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -60,8 +59,19 @@ public class King extends Piece {
 
         // all tiles neighboring the king
         ArrayList<Tile> potentialMoves = new ArrayList<>(
-                Arrays.asList(tile.left(), tile.right(), tile.down(), tile.up(),
-                        tile.left().up(), tile.right().up(), tile.down().left(), tile.down().right()));
+                Arrays.asList(tile.left(), tile.right(), tile.down(), tile.up()));
+        if (tile.left() != null) {
+            potentialMoves.add(tile.left().up());
+        }
+        if (tile.right() != null) {
+            potentialMoves.add(tile.right().up());
+        }
+        if (tile.down() != null) {
+            potentialMoves.add(tile.down().right());
+            potentialMoves.add(tile.down().left());
+        }
+        // tile.left().up(), tile.right().up(), tile.down().left(),
+        // tile.down().right()));
 
         // Go through the neighboring tiles and filter out the ones that are valid next
         // moves
@@ -73,7 +83,7 @@ public class King extends Piece {
     }
 
     public boolean isValidMove(Tile tile) {
-        return !this.isCheck(tile) && (tile.piece() == null || this.isOpponent(tile.piece()));
+        return tile != null && !this.isCheck(tile) && (tile.piece() == null || this.isOpponent(tile.piece()));
     }
 
     /**

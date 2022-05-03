@@ -165,6 +165,7 @@ public class Board {
                 g.drawRect(x * 50 + 40, y * 50, 50, 50);
             }
         }
+
         for (Piece piece : whitePieces) {
             piece.paint(g);
         }
@@ -172,6 +173,27 @@ public class Board {
         for (Piece piece : blackPieces) {
             piece.paint(g);
         }
+
+        for (int i = 0; i < whitePieces.size(); i++) {
+            Piece piece = whitePieces.get(i);
+            if (piece.isCaptured()) {
+                whitePieces.remove(i);
+                i--;
+                continue;
+            }
+            piece.paint(g);
+        }
+
+        for (int i = 0; i < blackPieces.size(); i++) {
+            Piece piece = blackPieces.get(i);
+            if (piece.isCaptured()) {
+                blackPieces.remove(i);
+                i--;
+                continue;
+            }
+            piece.paint(g);
+        }
+
     }
 
     public Tile getTile(Point point) {

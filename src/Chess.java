@@ -1,6 +1,5 @@
 package src;
 
-import src.game.Timer;
 import src.pieces.*;
 import src.structures.Piece;
 import src.game.*;
@@ -44,7 +43,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 board.paint(g);
-            };
+            }
         };
         boardPanel.addMouseListener(this);
         board = new Board(boardPanel);
@@ -68,8 +67,22 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == pause) {
             paused = !paused;
-            JOptionPane.showConfirmDialog(frame, "Yo yo it's Snop Dogg");
-
+            // String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
+            // boolean inputIsValid = false;
+            // while(!inputIsValid){
+            //     input = input.toLowerCase();
+            //     if(input.equals("queen")){
+            //         inputIsValid = true;
+            //     }else if(input.equals("bishop")){
+            //         inputIsValid = true;
+            //     }else if(input.equals("rook")){
+            //         inputIsValid = true;
+            //     }else if(input.equals("knight")){
+            //         inputIsValid = true;
+            //     }else{
+            //         input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece Name");
+            //     }
+            // }
             // add or remove chess clock labels
         }
         if (e.getSource() == restartGame) {
@@ -103,6 +116,97 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     currTile.piece().setTile(tileOnClick);
                     currTile.setPiece(null);
                     isWhitePlayerTurn = !isWhitePlayerTurn;
+                    if(tileOnClick.piece() instanceof Pawn){
+                        if(tileOnClick.piece().isWhite()){
+                            if(tileOnClick.location().y == 0){
+                                String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
+                                boolean inputIsValid = false;
+                                while(!inputIsValid){
+                                 input = input.toLowerCase();
+                                    switch (input) {
+                                        case "queen" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Queen(tileOnClick, true, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        case "bishop" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Bishop(tileOnClick, true, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        case "rook" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Rook(tileOnClick, true, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        case "knight" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Knight(tileOnClick, true, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        default :
+                                                input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece Name");
+                                    }
+                                }
+                            }  
+                    }else{
+                            if(tileOnClick.location().y == 7){
+                                String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
+                                boolean inputIsValid = false;
+                                while(!inputIsValid){
+                                 input = input.toLowerCase();
+                                    switch (input) {
+                                        case "queen" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Queen(tileOnClick, false, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        case "bishop" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Bishop(tileOnClick, false, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        case "rook" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Rook(tileOnClick, false, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        case "knight" : {
+                                            inputIsValid = true;
+                                            tileOnClick.piece().setCapture();
+                                            Piece newPiece = new Knight(tileOnClick, false, boardPanel);
+                                            tileOnClick.setPiece(newPiece);
+                                            board.addPiece(newPiece);
+                                            break;
+                                        }
+                                        default :
+                                                input = JOptionPane.showInputDialog(frame, "Please Enter a Valid Piece Name");
+                                    }
+                                }
+                            }
+                            }
+                     }
                     boardPanel.repaint();
                 }
                 currentlySelectingMove = false;

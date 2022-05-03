@@ -1,5 +1,6 @@
 package src.pieces;
 
+import src.game.Board;
 import src.game.Tile;
 import src.structures.Piece;
 import javax.swing.*;
@@ -21,13 +22,16 @@ import java.io.IOException;
  */
 public class King extends Piece {
 
+    // The board the king is on
+    Board board;
+
     /**
      * Constructs a King object
      * 
      * @param tile    The tile that the king starts on
      * @param isWhite Whether the king is white or not
      */
-    public King(Tile tile, boolean isWhite, JComponent container) {
+    public King(Tile tile, boolean isWhite, JComponent container, Board board) {
         super(tile, isWhite, container);
 
         // Try to read in the piece's image, and scale it to the proper size
@@ -43,6 +47,8 @@ public class King extends Piece {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        this.board = board;
 
     }
 
@@ -70,8 +76,6 @@ public class King extends Piece {
             potentialMoves.add(tile.down().right());
             potentialMoves.add(tile.down().left());
         }
-        // tile.left().up(), tile.right().up(), tile.down().left(),
-        // tile.down().right()));
 
         // Go through the neighboring tiles and filter out the ones that are valid next
         // moves
@@ -97,22 +101,59 @@ public class King extends Piece {
 
         // Go through each tile on the board, and get the piece that is on it
         // (we would need a reference to the board before this will work)
-        ArrayList<Tile> tiles = new ArrayList<>();
-        for (Tile currentTile : tiles) {
-            Piece nextPiece = currentTile.piece();
+        Tile[][] tiles = board.getTiles();
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                Piece nextPiece = tiles[i][j].piece();
+                // Go through the valid moves of each opposing piece
+                // Determine if any valid move would kill the king
 
-            // Go through the valid moves of each opposing piece
-            // Determine if any valid move would kill the king
-            if (nextPiece != null && this.isOpponent(nextPiece)) {
-                ArrayList<Tile> validMoves = nextPiece.getValidMoves();
-                int i = 0;
-                while (!isCheck && i < validMoves.size()) {
-                    Tile validMove = validMoves.get(i);
-                    if (validMove == tile) {
+                if (!(nextPiece instanceof King) && nextPiece != null && this.isOpponent(nextPiece)) {
+                    ArrayList<Tile> validMoves = nextPiece.getValidMoves();
+                    if (validMoves.contains(tile)) {
+                        isCheck = true;
+                        break;
+                    }
+                }
+                // If the next piece is the other king, the getValidMoves cannot be called
+                // because it
+                // would cause infinite recursion
+                else if (nextPiece != this && nextPiece != null && this.isOpponent(nextPiece)) {
+                    ArrayList<Tile> validMoves = new ArrayList();
+                    Tile left = nextPiece.getTile().left();
+                    if (left != null) {
+                        validMoves.add(left);
+                        if (left.up() != null) {
+                            validMoves.add(left.up());
+                        }
+                        if (left.down() != null) {
+                            validMoves.add(left.down());
+                        }
+                    }
+
+                    Tile right = nextPiece.getTile().right();
+                    if (right != null) {
+                        validMoves.add(right);
+                        if (right.up() != null) {
+                            validMoves.add(right.up());
+                        }
+                        if (right.down() != null) {
+                            validMoves.add(right.down());
+                        }
+                    }
+                    Tile up = nextPiece.getTile().up();
+                    if (up != null) {
+                        validMoves.add(up);
+                    }
+                    Tile down = nextPiece.getTile().down();
+                    if (down != null) {
+                        validMoves.add(down);
+                    }
+                    if (validMoves.contains(tile)) {
                         isCheck = true;
                     }
-                    i++;
                 }
+
             }
         }
         return isCheck;

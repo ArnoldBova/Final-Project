@@ -107,7 +107,10 @@ public class Queen extends Piece {
                 loopDone = true;
             } else {
                 outcomes.add(upLeft);
-                upLeft = upLeft.up().left();
+                upLeft = upLeft.up();
+                if (upLeft != null) {
+                    upLeft = upLeft.left();
+                }
             }
         }
         loopDone = false;
@@ -119,7 +122,10 @@ public class Queen extends Piece {
                 loopDone = true;
             } else {
                 outcomes.add(upRight);
-                upRight = upRight.up().right();
+                upRight = upRight.up();
+                if (upRight != null) {
+                    upRight = upRight.right();
+                }
             }
         }
         loopDone = false;
@@ -131,7 +137,10 @@ public class Queen extends Piece {
                 loopDone = true;
             } else {
                 outcomes.add(downLeft);
-                downLeft = downLeft.down().left();
+                downLeft = downLeft.down();
+                if (downLeft != null) {
+                    downLeft = downLeft.left();
+                }
             }
         }
         loopDone = false;
@@ -143,7 +152,10 @@ public class Queen extends Piece {
                 loopDone = true;
             } else {
                 outcomes.add(downRight);
-                downRight = downRight.down().right();
+                downRight = downRight.down();
+                if (downRight != null) {
+                    downRight = downRight.right();
+                }
             }
         }
 

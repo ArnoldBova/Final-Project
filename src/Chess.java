@@ -73,6 +73,9 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         }
         if (e.getSource() == restartGame) {
             this.board = new Board(this.boardPanel);
+            currentlySelectingMove = false;
+            currTile = null;
+            moves = null;
             boardPanel.repaint();
         }
     }
@@ -81,38 +84,52 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     public void mouseClicked(MouseEvent e) {
 
         Point clickedPoint = e.getPoint();
+        try {
 
-        Tile tileOnClick = board.getTile(clickedPoint);
 
-        if (currentlySelectingMove) {
-            if (moves.contains(tileOnClick)) {
-                tileOnClick.setPiece(currTile.piece());
-                currTile.setPiece(null);
-            }
-            currentlySelectingMove = false;
-            currTile = null;
-            for(Tile tile : moves) {
-                tile.unHighlight();
-            }
-            moves = null;
-        } else {
-            if (tileOnClick.hasPiece()) {
-                Piece currentPiece = tileOnClick.piece();
-                currTile = tileOnClick;
-                currentlySelectingMove = true;
-                ArrayList<Tile> moves = currentPiece.getValidMoves();
-                this.moves = moves;
-                for (Tile tile : moves) {
-                    if (tile.hasPiece()) {
-                        tile.highlightForCapture();
-                    } else {
-                        tile.highlight();
-                    }
+            Tile tileOnClick = board.getTile(clickedPoint);
+
+            if (currentlySelectingMove) {
+                if (moves.contains(tileOnClick)) {
+                    tileOnClick.setPiece(currTile.piece());
+                    currTile.piece().setTile(tileOnClick);
+                    currTile.setPiece(null);
                 }
+                currentlySelectingMove = false;
+                currTile = null;
+                for (Tile tile : moves) {
+                    tile.unHighlight();
+                }
+                moves = null;
+            } else {
+                if (tileOnClick.hasPiece()) {
+                    Piece currentPiece = tileOnClick.piece();
+                    currTile = tileOnClick;
+                    currentlySelectingMove = true;
+                    ArrayList<Tile> moves = currentPiece.getValidMoves();
+                    this.moves = moves;
+                    for (Tile tile : moves) {
+                        if (tile.hasPiece()) {
+                            tile.highlightForCapture();
+                        } else {
+                            tile.highlight();
+                        }
+                    }
 
+                }
+            }
+            boardPanel.repaint();
+        } catch (ArrayIndexOutOfBoundsException error) {
+            if (currentlySelectingMove) {
+                currentlySelectingMove = false;
+                currTile = null;
+                for (Tile tile : moves) {
+                    tile.unHighlight();
+                }
+                moves = null;
+                boardPanel.repaint();
             }
         }
-        boardPanel.repaint();
 
 
 

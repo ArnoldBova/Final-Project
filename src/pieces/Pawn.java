@@ -59,7 +59,7 @@ public class Pawn extends Piece {
                 outcomes.add(captureTileRight);
             }
 
-            if (tile.up() != null) {
+            if (tile.up() != null && !tile.up().hasPiece()) {
                 nonCaptureTile1 = tile.up();
                 outcomes.add(nonCaptureTile1);
             }
@@ -82,27 +82,27 @@ public class Pawn extends Piece {
                 captureTileRight = captureTileRight.down();
             }
 
-            if (captureTileLeft != null && captureTileLeft.hasPiece()) {
+            if (captureTileLeft != null && captureTileLeft.hasPiece() && captureTileLeft.piece().isOpponent(this)) {
                 outcomes.add(captureTileLeft);
             }
 
-            if (captureTileRight != null && captureTileRight.hasPiece() && !captureTileRight.piece().isWhite()) {
+            if (captureTileRight != null && captureTileRight.hasPiece() && captureTileRight.piece().isOpponent(this)) {
                 outcomes.add(captureTileRight);
             }
 
-            if (tile.down() != null) {
+            if (tile.up() != null && !tile.down().hasPiece()) {
                 nonCaptureTile1 = tile.down();
+                outcomes.add(nonCaptureTile1);
             }
 
-            if (!hasMoved && nonCaptureTile1 != null && !nonCaptureTile1.hasPiece()) {
+            if (!hasMoved) {
                 nonCaptureTile2 = nonCaptureTile1.down();
-                outcomes.add(nonCaptureTile1);
             }
 
             if (nonCaptureTile2 != null && !nonCaptureTile2.hasPiece()) {
                 outcomes.add(nonCaptureTile2);
-            }
         }
+    }
 
         return outcomes;
     }

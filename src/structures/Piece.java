@@ -19,6 +19,8 @@ public abstract class Piece extends Thread implements ImageObserver {
 
     protected Image image;
 
+    private static final int DELAY_TIME = 33;
+
     protected JComponent container;
 
     protected static final int SIZE = 50;
@@ -59,7 +61,16 @@ public abstract class Piece extends Thread implements ImageObserver {
         return other.isWhite() != this.isWhite();
     }
 
-    public abstract void run();
+    // public void run(){
+    //     while(!captured){
+    //         try {
+    //             sleep(DELAY_TIME);
+    //         } catch (InterruptedException e) {
+    //         }
+
+
+    //     }
+    // }
 
     /**
      * Displays a piece

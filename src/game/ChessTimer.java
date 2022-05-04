@@ -52,7 +52,7 @@ public class ChessTimer extends Thread {
                 } else {
                     this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + minutes + ":" + seconds);
                 }
-                System.out.println(minutes + ":" + seconds);
+                //System.out.println(minutes + ":" + seconds);
                 label.repaint();
             }
             if (timeElapsed == gameLength) {
@@ -75,6 +75,6 @@ public class ChessTimer extends Thread {
 
     public void unPause() {
         this.running = true;
-        System.out.println("Unpause");
+        //System.out.println("Unpause");
     }
 }

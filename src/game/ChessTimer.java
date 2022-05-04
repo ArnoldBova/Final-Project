@@ -1,5 +1,6 @@
 package src.game;
 
+import javax.swing.*;
 import java.awt.Graphics;
 import java.lang.Math;
 
@@ -11,31 +12,48 @@ public class ChessTimer extends Thread {
     int gameLength;
 
     // True if the timer is on, and false if it is off
-    boolean on;
 
     // The time that the timer will display (how long the player has spent on their
     // turns so far)
     int timeElapsed;
 
+    String time;
+    JLabel label;
+    boolean isWhitePlayer;
+
     // The number of milliseconds the program waits before changing animation frames
     public static final int DELAY_TIME = 1000;
 
-    public ChessTimer(int gameLength) {
+    public ChessTimer(int gameLength, JLabel label, boolean isWhitePlayer) {
         this.timeElapsed = 0;
         this.running = false;
         this.gameLength = gameLength;
+        this.label = label;
+        this.isWhitePlayer = isWhitePlayer;
     }
 
     // Keeps track of the current time, and updates the elapsed time every second
+    @Override
     public void run() {
-        while (on) {
-            if (running) {
-                try {
-                    sleep(DELAY_TIME);
-                    timeElapsed++;
+        while (true) {
 
-                } catch (InterruptedException e) {
+            try {
+                sleep(DELAY_TIME);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (running) {
+                timeElapsed++;
+                int minutes = (gameLength - timeElapsed)/60;
+                int seconds = (gameLength - timeElapsed) - minutes * 60;
+                if (seconds < 10) {
+                    this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + minutes + ":0" + seconds);
+
+                } else {
+                    this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + minutes + ":" + seconds);
                 }
+                System.out.println(minutes + ":" + seconds);
+                label.repaint();
             }
             if (timeElapsed == gameLength) {
                 running = false;
@@ -43,38 +61,20 @@ public class ChessTimer extends Thread {
         }
     }
 
-    // Paints the current elapsed time
-    public void paint(Graphics g) {
-        int minutes = (int) Math.floor(timeElapsed / 60);
-        int seconds = timeElapsed - (int) (minutes * 60);
-        String timeToDisplay = Integer.toString(minutes) + ":" + Integer.toString(seconds);
-        g.drawString(timeToDisplay, 0, 0);
-
-    }
-
     // Resets the elapsed time to zero
     public void reset() {
         this.timeElapsed = 0;
+        this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + "10:00");
+        this.label.repaint();
 
     }
-
     // Temporarily pauses the timer
     public void pause() {
         this.running = false;
     }
 
-    // Starts the timer
-    public void start() {
+    public void unPause() {
         this.running = true;
-    }
-
-    // Turns the timer on
-    public void turnOn() {
-        this.on = true;
-    }
-
-    // Turns the timer off
-    public void turnOff() {
-        this.on = false;
+        System.out.println("Unpause");
     }
 }

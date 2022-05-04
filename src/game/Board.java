@@ -165,14 +165,14 @@ public class Board {
                 g.drawRect(x * 50 + 40, y * 50, 50, 50);
             }
         }
-
-        for (Piece piece : whitePieces) {
-            piece.paint(g);
-        }
-
-        for (Piece piece : blackPieces) {
-            piece.paint(g);
-        }
+//
+//        for (Piece piece : whitePieces) {
+//            piece.paint(g);
+//        }
+//
+//        for (Piece piece : blackPieces) {
+//            piece.paint(g);
+//        }
 
         for (int i = 0; i < whitePieces.size(); i++) {
             Piece piece = whitePieces.get(i);
@@ -223,7 +223,7 @@ public class Board {
     /**
      * Gets the king
      * 
-     * @param Whether the king to get is white or not
+     * @param white Whether the king to get is white or not
      */
     public King getKing(boolean white) {
         if (white) {
@@ -241,5 +241,13 @@ public class Board {
         }
         return null;
 
+    }
+
+    public ArrayList<Piece> getBlackPieces() {
+        return blackPieces;
+    }
+
+    public ArrayList<Piece> getWhitePieces() {
+        return whitePieces;
     }
 }

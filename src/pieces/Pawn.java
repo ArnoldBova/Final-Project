@@ -4,6 +4,7 @@ import src.game.Tile;
 import src.structures.Piece;
 
 import javax.swing.*;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -110,6 +111,32 @@ public class Pawn extends Piece {
     @Override
     public void run() {
 
+    }
+
+    public ArrayList<Tile> getPossibleCaptureTiles() {
+        ArrayList<Tile> outcomes = new ArrayList<>();
+
+        Tile captureTile1, captureTile2;
+
+        if (isWhite) {
+            captureTile1 = tile.up();
+            if (captureTile1 != null) {
+                captureTile1  =captureTile1.left();
+                captureTile2 = tile.up().right();
+                outcomes.add(captureTile1);
+                outcomes.add(captureTile2);
+            }
+        } else {
+            captureTile1 = tile.down();
+            if (captureTile1 != null) {
+                captureTile1  = captureTile1.left();
+                captureTile2 = tile.down().right();
+                outcomes.add(captureTile1);
+                outcomes.add(captureTile2);
+            }
+        }
+
+        return outcomes;
     }
 
     public void moved () {

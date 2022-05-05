@@ -39,8 +39,8 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         playerOne = new JLabel("White Player: 10:00");
         playerTwo = new JLabel("Black Player: 10:00");
 
-        whitePlayerTimer = new ChessTimer(600, playerOne, true);
-        blackPlayerTimer = new ChessTimer(600, playerTwo, false);
+        whitePlayerTimer = new ChessTimer(600, playerOne, true, frame);
+        blackPlayerTimer = new ChessTimer(600, playerTwo, false, frame);
 
         isWhitePlayerTurn = true;
         currentlySelectingMove = false;

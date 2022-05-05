@@ -16,20 +16,23 @@ public class ChessTimer extends Thread {
     // The time that the timer will display (how long the player has spent on their
     // turns so far)
     int timeElapsed;
-
+    Boolean messageSent;
     String time;
     JLabel label;
     boolean isWhitePlayer;
+    JFrame frame;
 
     // The number of milliseconds the program waits before changing animation frames
     public static final int DELAY_TIME = 1000;
 
-    public ChessTimer(int gameLength, JLabel label, boolean isWhitePlayer) {
+    public ChessTimer(int gameLength, JLabel label, boolean isWhitePlayer, JFrame frame) {
         this.timeElapsed = 0;
         this.running = false;
         this.gameLength = gameLength;
         this.label = label;
         this.isWhitePlayer = isWhitePlayer;
+        this.frame = frame;
+        messageSent = false;
     }
 
     // Keeps track of the current time, and updates the elapsed time every second
@@ -57,6 +60,14 @@ public class ChessTimer extends Thread {
             }
             if (timeElapsed == gameLength) {
                 running = false;
+                if(messageSent == false){
+                    if(isWhitePlayer){
+                        JOptionPane.showMessageDialog(frame, "White Player lost due to Time");
+                    }else{
+                        JOptionPane.showMessageDialog(frame, "Black Player lost due to Time");
+                    }
+                    messageSent = true;
+                }
             }
         }
     }

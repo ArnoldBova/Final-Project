@@ -248,7 +248,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 if (currentTurn.isInCheck()) {
                     King king = board.getKing(currentTurn.isWhite());
                     ArrayList<Tile> validMoves = king.getValidMoves();
-                    System.out.println("HELLO");
                     ArrayList<Piece> outOfCheckPieces = king.getOutOfCheckPieces();
                     if (validMoves.size() == 0 && outOfCheckPieces.size() == 0) {
                         // handle player loosing
@@ -262,11 +261,10 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     }
 
                 }
-                //may need to fix later, it was an ugly fix
-                if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() != currentTurn.isWhite()) {
-                    if ((whitePlayer.isInCheck() && this.isWhitePlayerTurn) || (blackPlayer.isInCheck() && !isWhitePlayerTurn)){
 
-                        // only be able to move the king in this case because it is in check
+                if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == currentTurn.isWhite()) {
+
+                    // only be able to move the king in this case because it is in check
                     Piece currentPiece = tileOnClick.piece();
                     if (currentPiece instanceof King) {
                         currTile = tileOnClick;
@@ -280,16 +278,10 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                 tile.highlight();
                             }
                         }
-                    }
-                }
-
-                    
-
-
                     } else {
                         currTile = tileOnClick;
                         currentlySelectingMove = true;
-                        ArrayList<Tile> moves = currTile.piece().getValidMoves();
+                        ArrayList<Tile> moves = currentPiece.getValidMoves();
                         this.moves = moves;
                         for (Tile tile : moves) {
                             if (tile.hasPiece()) {
@@ -300,17 +292,18 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                         }
                     }
                 }
-        }catch(ArrayIndexOutOfBoundsException error)
-    {
-        if (currentlySelectingMove) {
-            currentlySelectingMove = false;
-            currTile = null;
-            for (Tile tile : moves) {
-                tile.unHighlight();
             }
-            moves = null;
+        } catch (ArrayIndexOutOfBoundsException error) {
+            if (currentlySelectingMove) {
+                currentlySelectingMove = false;
+                currTile = null;
+                for (Tile tile : moves) {
+                    tile.unHighlight();
+                }
+                moves = null;
+            }
         }
-    }boardPanel.repaint();
+        boardPanel.repaint();
 
     }
 
@@ -326,16 +319,10 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         // Determine which king may have been put into check
         if (currentTurn == whitePlayer) {
             King king = board.getKing(true);
-            if (king.seeIfInCheck()) {
-                whitePlayer.inCheck();
-            }
-            ;
+            king.seeIfInCheck();
         } else {
             King king = board.getKing(false);
-            if (king.seeIfInCheck()) {
-                blackPlayer.inCheck();
-            }
-            ;
+            king.seeIfInCheck();
         }
 
     }

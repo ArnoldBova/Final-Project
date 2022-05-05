@@ -2,7 +2,7 @@ package src;
 
 import src.pieces.*;
 import src.structures.Piece;
-import src.structures.movingThread;
+import src.structures.MovingThread;
 import src.game.*;
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     ArrayList<Tile> moves = null;
     Tile currTile = null;
 
-    movingThread mover;
+    MovingThread mover;
 
 
     public void run() {

@@ -248,6 +248,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 if (currentTurn.isInCheck()) {
                     King king = board.getKing(currentTurn.isWhite());
                     ArrayList<Tile> validMoves = king.getValidMoves();
+                    System.out.println("HELLO");
                     ArrayList<Piece> outOfCheckPieces = king.getOutOfCheckPieces();
                     if (validMoves.size() == 0 && outOfCheckPieces.size() == 0) {
                         // handle player loosing
@@ -261,8 +262,8 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     }
 
                 }
-
-                if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == currentTurn.isWhite()) {
+                //may need to fix later, it was an ugly fix
+                if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() != currentTurn.isWhite()) {
                     if ((whitePlayer.isInCheck() && this.isWhitePlayerTurn) || (blackPlayer.isInCheck() && !isWhitePlayerTurn)){
 
                         // only be able to move the king in this case because it is in check
@@ -288,7 +289,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     } else {
                         currTile = tileOnClick;
                         currentlySelectingMove = true;
-                        ArrayList<Tile> moves = currentPiece.getValidMoves();
+                        ArrayList<Tile> moves = currTile.piece().getValidMoves();
                         this.moves = moves;
                         for (Tile tile : moves) {
                             if (tile.hasPiece()) {
@@ -299,10 +300,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                         }
                     }
                 }
-            }
-        }catch(
-
-    ArrayIndexOutOfBoundsException error)
+        }catch(ArrayIndexOutOfBoundsException error)
     {
         if (currentlySelectingMove) {
             currentlySelectingMove = false;

@@ -33,7 +33,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
 
     movingThread mover;
 
-
     public void run() {
 
         restartGame = new JButton("Restart Game");
@@ -66,7 +65,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         whitePlayerTimer.unPause();
         blackPlayerTimer.start();
 
-
         this.boardPanel = new JPanel() {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -83,7 +81,6 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         container.add(boardPanel, BorderLayout.CENTER);
         container.add(playContainer, BorderLayout.NORTH);
         container.add(buttonContainer, BorderLayout.SOUTH);
-
 
         frame.add(container);
 
@@ -113,17 +110,19 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
 
         Point clickedPoint = e.getPoint();
 
-//        if ()
+        // if ()
         try {
 
             Tile tileOnClick = board.getTile(clickedPoint);
 
             if (currentlySelectingMove) {
                 if (moves.contains(tileOnClick)) {
-                    if(currentTurn == whitePlayer){
+                    // Pause the timer of the player who just went,
+                    // & start the timer of the player whose turn it is now
+                    if (currentTurn == whitePlayer) {
                         whitePlayerTimer.pause();
                         blackPlayerTimer.unPause();
-                    }else {
+                    } else {
                         blackPlayerTimer.pause();
                         whitePlayerTimer.unPause();
                     }
@@ -134,11 +133,15 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     if (tileOnClick.hasPiece()) {
                         tileOnClick.piece().setCapture();
                     }
-                    //mover = new movingThread(currTile.piece(), currTile, tileOnClick, boardPanel);
+                    // mover = new movingThread(currTile.piece(), currTile, tileOnClick,
+                    // boardPanel);
                     tileOnClick.setPiece(currTile.piece());
                     tileOnClick.piece().setTile(tileOnClick);
                     currTile.setPiece(null);
                     if (tileOnClick.piece() instanceof Pawn) {
+                        // Display an input dialog where the player can specify the piece they want to
+                        // capture
+                        // This occurs when the white player has reached the end of the board
                         if (tileOnClick.piece().isWhite()) {
                             if (tileOnClick.location().y == 0) {
                                 String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
@@ -183,7 +186,11 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                                     "Please Enter a Valid Piece Name");
                                     }
                                 }
-                            } else if (tileOnClick.location().y == 7) {
+                            }
+                            // Display an input dialog where the player can specify the piece they want to
+                            // capture
+                            // This occurs when the black player has reached the end of the board
+                            else if (tileOnClick.location().y == 7) {
                                 String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
                                 boolean inputIsValid = false;
                                 while (!inputIsValid) {
@@ -232,6 +239,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 }
                 currentlySelectingMove = false;
                 currTile = null;
+                // remove the green & red coloring from the tiles
                 for (Tile tile : moves) {
                     tile.unHighlight();
                 }
@@ -243,13 +251,18 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     ArrayList<Tile> validMoves = king.getValidMoves();
                     ArrayList<Piece> outOfCheckPieces = king.getOutOfCheckPieces();
                     if (validMoves.size() == 0 && outOfCheckPieces.size() == 0) {
-                        //handle player loosing
+                        // handle player loosing
                     }
-                    if (tileOnClick.hasPiece() && ((tileOnClick.piece() instanceof King) || (outOfCheckPieces.contains(tileOnClick.piece()))) && tileOnClick.piece().isWhite() == currentTurn.isInCheck()) {
-                        // each piece in outofcheckpieces should return a list of valid moves to get the king out of check
+                    if (tileOnClick.hasPiece()
+                            && ((tileOnClick.piece() instanceof King)
+                                    || (outOfCheckPieces.contains(tileOnClick.piece())))
+                            && tileOnClick.piece().isWhite() == currentTurn.isInCheck()) {
+                        // each piece in outofcheckpieces should return a list of valid moves to get the
+                        // king out of check
                     }
 
                 }
+
                 if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == currentTurn.isWhite()) {
 
                     // only be able to move the king in this case because it is in check

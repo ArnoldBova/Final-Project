@@ -65,7 +65,7 @@ public class Pawn extends Piece {
                 outcomes.add(nonCaptureTile1);
             }
 
-            if (!hasMoved) {
+            if (!hasMoved && nonCaptureTile1 != null) {
                 nonCaptureTile2 = nonCaptureTile1.up();
             }
 
@@ -96,7 +96,7 @@ public class Pawn extends Piece {
                 outcomes.add(nonCaptureTile1);
             }
 
-            if (!hasMoved) {
+            if (!hasMoved && nonCaptureTile1 != null) {
                 nonCaptureTile2 = nonCaptureTile1.down();
             }
 

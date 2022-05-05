@@ -118,7 +118,13 @@ public class King extends Piece {
                         if (possiblePawnMoves.contains(tile)) {
                             return true;
                         }
-                    } else {
+                    } else if(piece instanceof Rook){
+                        ArrayList<Tile> possibleRookMoves = ((Rook) piece).getValidMovesAgainstKing();
+                        if (possibleRookMoves.contains(tile)) {
+                            return true;
+                        }
+                    } 
+                    else {
                         ArrayList<Tile> validMovesFromOpposingPiece = piece.getValidMoves();
                         if (validMovesFromOpposingPiece.contains(tile)) {
                             return true;
@@ -135,7 +141,13 @@ public class King extends Piece {
                         if (possiblePawnMoves.contains(tile)) {
                             return true;
                         }
-                    } else {
+                    }else if(piece instanceof Rook){
+                        ArrayList<Tile> possibleRookMoves = ((Rook) piece).getValidMovesAgainstKing();
+                        if (possibleRookMoves.contains(tile)) {
+                            return true;
+                        }
+                    } 
+                    else {
                         ArrayList<Tile> validMovesFromOpposingPiece = piece.getValidMoves();
                         if (validMovesFromOpposingPiece.contains(tile)) {
                             return true;

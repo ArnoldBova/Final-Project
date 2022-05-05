@@ -6,6 +6,7 @@ import java.util.List;
 import src.game.Tile;
 import src.structures.Piece;
 
+import javax.print.attribute.standard.DialogOwner;
 import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -102,9 +103,11 @@ public class Rook extends Piece {
             if (up.hasPiece()) {
                 if (up.piece().isWhite() != white) {
                     outcomes.add(up);
-                    if(up.piece() instanceof King){
-                    }else{
-                       loopDone = true; 
+                    
+                    if(!(up.piece() instanceof King)){
+                        loopDone = true; 
+                    } else {
+                        up = up.up();
                     }
                 }else{
                     loopDone = true;
@@ -117,9 +120,9 @@ public class Rook extends Piece {
         loopDone = false;
         while (!loopDone && down != null) {
             if (down.hasPiece()) {
-                if (up.piece().isWhite() != white) {
-                    outcomes.add(up);
-                    if(up.piece() instanceof King){
+                if (down.piece().isWhite() != white) {
+                    outcomes.add(down);
+                    if(down.piece() instanceof King){
                     }else{
                        loopDone = true; 
                     }
@@ -134,9 +137,9 @@ public class Rook extends Piece {
         loopDone = false;
         while (!loopDone && right != null) {
             if (right.hasPiece()) {
-                if (up.piece().isWhite() != white) {
-                    outcomes.add(up);
-                    if(up.piece() instanceof King){
+                if (right.piece().isWhite() != white) {
+                    outcomes.add(right);
+                    if(right.piece() instanceof King){
                     }else{
                        loopDone = true; 
                     }
@@ -151,9 +154,9 @@ public class Rook extends Piece {
         loopDone = false;
         while (!loopDone && left != null) {
             if (left.hasPiece()) {
-                if (up.piece().isWhite() != white) {
-                    outcomes.add(up);
-                    if(up.piece() instanceof King){
+                if (left.piece().isWhite() != white) {
+                    outcomes.add(left);
+                    if(left.piece() instanceof King){
                     }else{
                        loopDone = true; 
                     }

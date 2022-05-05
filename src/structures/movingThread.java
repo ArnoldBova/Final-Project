@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class movingThread extends Thread {
+public class MovingThread extends Thread {
     Piece piece;
     Tile startTile;
     Tile endTile;

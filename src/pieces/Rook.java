@@ -90,6 +90,86 @@ public class Rook extends Piece {
         return outcomes;
     }
 
+    public ArrayList<Tile> getValidMovesAgainstKing(){
+        ArrayList<Tile> outcomes = new ArrayList<>();
+        boolean white = this.isWhite();
+        Tile up = tile.up();
+        Tile down = tile.down();
+        Tile left = tile.left();
+        Tile right = tile.right();
+        boolean loopDone = false;
+        while (!loopDone && up != null) {
+            if (up.hasPiece()) {
+                if (up.piece().isWhite() != white) {
+                    outcomes.add(up);
+                    if(up.piece() instanceof King){
+                    }else{
+                       loopDone = true; 
+                    }
+                }else{
+                    loopDone = true;
+                }
+            } else {
+                outcomes.add(up);
+                up = up.up();
+            }
+        }
+        loopDone = false;
+        while (!loopDone && down != null) {
+            if (down.hasPiece()) {
+                if (up.piece().isWhite() != white) {
+                    outcomes.add(up);
+                    if(up.piece() instanceof King){
+                    }else{
+                       loopDone = true; 
+                    }
+                }else{
+                    loopDone = true;
+                }
+            } else {
+                outcomes.add(down);
+                down = down.down();
+            }
+        }
+        loopDone = false;
+        while (!loopDone && right != null) {
+            if (right.hasPiece()) {
+                if (up.piece().isWhite() != white) {
+                    outcomes.add(up);
+                    if(up.piece() instanceof King){
+                    }else{
+                       loopDone = true; 
+                    }
+                }else{
+                    loopDone = true;
+                }
+            } else {
+                outcomes.add(right);
+                right = right.right();
+            }
+        }
+        loopDone = false;
+        while (!loopDone && left != null) {
+            if (left.hasPiece()) {
+                if (up.piece().isWhite() != white) {
+                    outcomes.add(up);
+                    if(up.piece() instanceof King){
+                    }else{
+                       loopDone = true; 
+                    }
+                }else{
+                    loopDone = true;
+                }
+            } else {
+                outcomes.add(left);
+                left = left.left();
+            }
+        }
+
+
+        return outcomes;
+    }
+
     @Override
     public void run() {
 

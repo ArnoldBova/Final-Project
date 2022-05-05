@@ -24,4 +24,12 @@ public class Player {
     public void outOfCheck() {
         inCheck = false;
     }
+
+    @Override
+    public String toString(){
+        if(isWhite){
+            return "White Player";
+        }
+        return "Black Player";
+    }
 }

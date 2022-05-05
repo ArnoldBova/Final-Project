@@ -238,6 +238,17 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 }
                 currentlySelectingMove = false;
                 currTile = null;
+                King king = board.getKing(currentTurn.isWhite());
+                if(king.isCheck(king.getTile())){
+                    currentTurn.inCheck();
+                }
+                if (currentTurn.isInCheck()) {
+                    ArrayList<Tile> validMoves = king.getValidMoves();
+                    if (validMoves.size() == 0) {
+                        JOptionPane.showMessageDialog(frame, currentTurn + " lost");
+                    }
+
+                }
                 // remove the green & red coloring from the tiles
                 for (Tile tile : moves) {
                     tile.unHighlight();
@@ -245,22 +256,14 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 moves = null;
             } else {
 
-                if (currentTurn.isInCheck()) {
-                    King king = board.getKing(currentTurn.isWhite());
-                    ArrayList<Tile> validMoves = king.getValidMoves();
-                    ArrayList<Piece> outOfCheckPieces = king.getOutOfCheckPieces();
-                    if (validMoves.size() == 0 && outOfCheckPieces.size() == 0) {
-                        // handle player loosing
-                    }
-                    if (tileOnClick.hasPiece()
-                            && ((tileOnClick.piece() instanceof King)
-                                    || (outOfCheckPieces.contains(tileOnClick.piece())))
-                            && tileOnClick.piece().isWhite() == currentTurn.isInCheck()) {
-                        // each piece in outofcheckpieces should return a list of valid moves to get the
-                        // king out of check
-                    }
+                // if (currentTurn.isInCheck()) {
+                //     King king = board.getKing(currentTurn.isWhite());
+                //     ArrayList<Tile> validMoves = king.getValidMoves();
+                //     if (validMoves.size() == 0) {
+                //         JOptionPane.showMessageDialog(frame, currentTurn + "lost");
+                //     }
 
-                }
+                // }
 
                 if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == currentTurn.isWhite()) {
 

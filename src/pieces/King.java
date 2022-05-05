@@ -110,7 +110,7 @@ public class King extends Piece {
     public boolean isCheck(Tile tile) {
         ArrayList<Piece> whitePieces = board.getWhitePieces();
         ArrayList<Piece> blackPieces = board.getBlackPieces();
-        if(isWhite) {
+        if (isWhite) {
             for (Piece piece : blackPieces) {
                 if (!(piece instanceof King)) {
                     if (piece instanceof Pawn) {
@@ -151,10 +151,11 @@ public class King extends Piece {
     public ArrayList<Piece> getOutOfCheckPieces() {
         ArrayList<Piece> outOfCheckMoves = new ArrayList<>();
 
-        // there is a tile within the arraylist of moves for the passed piece that hits the king
+        // there is a tile within the arraylist of moves for the passed piece that hits
+        // the king
         // our goal is to determine which piece can block that square
 
-        for (Piece piece: board.getWhitePieces()) {
+        for (Piece piece : board.getWhitePieces()) {
 
         }
 
@@ -164,9 +165,9 @@ public class King extends Piece {
     /**
      * Sees if the king is currently in check (incomplete)
      */
-    public void seeIfInCheck() {
+    public boolean seeIfInCheck() {
 
-        this.inCheck = false;
+        return isCheck(this.tile);
     }
 
     @Override

@@ -263,8 +263,9 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 }
 
                 if (tileOnClick.hasPiece() && tileOnClick.piece().isWhite() == currentTurn.isWhite()) {
+                    if ((whitePlayer.isInCheck() && this.isWhitePlayerTurn) || (blackPlayer.isInCheck() && !isWhitePlayerTurn)){
 
-                    // only be able to move the king in this case because it is in check
+                        // only be able to move the king in this case because it is in check
                     Piece currentPiece = tileOnClick.piece();
                     if (currentPiece instanceof King) {
                         currTile = tileOnClick;
@@ -278,6 +279,12 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                 tile.highlight();
                             }
                         }
+                    }
+                }
+
+                    
+
+
                     } else {
                         currTile = tileOnClick;
                         currentlySelectingMove = true;
@@ -293,17 +300,19 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     }
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException error) {
-            if (currentlySelectingMove) {
-                currentlySelectingMove = false;
-                currTile = null;
-                for (Tile tile : moves) {
-                    tile.unHighlight();
-                }
-                moves = null;
+        }catch(
+
+    ArrayIndexOutOfBoundsException error)
+    {
+        if (currentlySelectingMove) {
+            currentlySelectingMove = false;
+            currTile = null;
+            for (Tile tile : moves) {
+                tile.unHighlight();
             }
+            moves = null;
         }
-        boardPanel.repaint();
+    }boardPanel.repaint();
 
     }
 
@@ -319,10 +328,16 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         // Determine which king may have been put into check
         if (currentTurn == whitePlayer) {
             King king = board.getKing(true);
-            king.seeIfInCheck();
+            if (king.seeIfInCheck()) {
+                whitePlayer.inCheck();
+            }
+            ;
         } else {
             King king = board.getKing(false);
-            king.seeIfInCheck();
+            if (king.seeIfInCheck()) {
+                blackPlayer.inCheck();
+            }
+            ;
         }
 
     }

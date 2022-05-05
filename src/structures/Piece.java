@@ -25,10 +25,13 @@ public abstract class Piece extends Thread implements ImageObserver {
 
     protected static final int SIZE = 50;
 
+    protected Point position;
+
     public Piece(Tile tile, boolean isWhite, JComponent container) {
         this.tile = tile;
         this.isWhite = isWhite;
         this.container = container;
+        position = new Point(tile.location().x * 50 + 40, tile.location().y * 50);
     }
 
     // retuns an array of tiles representing the end point for all valid moves for
@@ -49,6 +52,10 @@ public abstract class Piece extends Thread implements ImageObserver {
 
     public boolean isCaptured() {
         return captured;
+    }
+
+    public Point getPosition(){
+        return position;
     }
 
     /**
@@ -79,7 +86,7 @@ public abstract class Piece extends Thread implements ImageObserver {
      */
     public void paint(Graphics g) {
 
-        g.drawImage(this.image, tile.location().x * 50 + 40, tile.location().y * 50, this);
+        g.drawImage(this.image, position.x, position.y, this);
 
     };
 

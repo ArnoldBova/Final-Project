@@ -16,25 +16,30 @@ public class MovingThread extends Thread {
     JPanel panel;
     private static final int DELAY_TIME = 33;
 
-    public void movingThread(Piece piece, Tile startTile, Tile endTile, JPanel panel){
+
+    public MovingThread(Piece piece, Tile startTile, Tile endTile, JPanel panel){
         this.piece = piece;
         this.startTile = startTile;
         this.endTile = endTile;
+        this.panel = panel;
     }
     
     public void run(){
-        int xMove = (startTile.location().x - endTile.location().x)/6;
-        int yMove = (startTile.location().y - endTile.location().y)/6;
+        int xMove = ((startTile.location().x * 50 + 40) - (endTile.location().x * 50 + 40))/6;
+        int yMove = ((startTile.location().y * 50) - (endTile.location().y * 50))/6;
 
-        while(!currPos.equals(endTile.location())){
+        while(piece.getPosition().distance(endTile.location().x * 50 + 40, endTile.location().y * 50) > 5){
+            System.out.println(piece.getPosition().distance(endTile.location().x * 50 + 40, endTile.location().y * 50));
             try {
                 sleep(DELAY_TIME);
             } catch (InterruptedException e) {
             }
 
-            currPos.translate(xMove, yMove);
+            piece.getPosition().translate(-xMove, -yMove);
             panel.repaint();
             
         }
+        piece.getPosition().setLocation(endTile.location().x * 50 + 40, endTile.location().y * 50);
+        panel.repaint();
     }
 }

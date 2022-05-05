@@ -134,7 +134,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     if (tileOnClick.hasPiece()) {
                         tileOnClick.piece().setCapture();
                     }
-                    mover = new movingThread(currTile.piece(), currTile, tileOnClick, boardPanel);
+                    //mover = new movingThread(currTile.piece(), currTile, tileOnClick, boardPanel);
                     tileOnClick.setPiece(currTile.piece());
                     tileOnClick.piece().setTile(tileOnClick);
                     currTile.setPiece(null);

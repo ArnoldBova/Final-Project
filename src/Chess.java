@@ -2,6 +2,7 @@ package src;
 
 import src.pieces.*;
 import src.structures.Piece;
+import src.structures.movingThread;
 import src.game.*;
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,8 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     ArrayList<Tile> moves = null;
     Tile currTile = null;
 
+    movingThread mover;
+
 
     public void run() {
 
@@ -52,6 +55,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         JFrame.setDefaultLookAndFeelDecorated(true);
         frame.setPreferredSize(new Dimension(500, 550));
         frame.setResizable(false);
+        mover.start();
 
         JPanel container = new JPanel(new BorderLayout());
 
@@ -130,6 +134,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     if (tileOnClick.hasPiece()) {
                         tileOnClick.piece().setCapture();
                     }
+                    mover = new movingThread(currTile.piece(), currTile, tileOnClick, boardPanel);
                     tileOnClick.setPiece(currTile.piece());
                     tileOnClick.piece().setTile(tileOnClick);
                     currTile.setPiece(null);

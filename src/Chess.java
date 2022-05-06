@@ -146,7 +146,10 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                 String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
                                 boolean inputIsValid = false;
                                 while (!inputIsValid) {
-                                    input = input.toLowerCase();
+                                    if (input != null) {
+                                        input = input.toLowerCase();
+                                    }
+
                                     switch (input) {
                                         case "queen": {
                                             inputIsValid = true;
@@ -186,51 +189,54 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                                     }
                                 }
                             }
-                            // Display an input dialog where the player can specify the piece they want to
-                            // capture
-                            // This occurs when the black player has reached the end of the board
-                            else if (tileOnClick.location().y == 7) {
-                                String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
-                                boolean inputIsValid = false;
-                                while (!inputIsValid) {
-                                    input = input.toLowerCase();
-                                    switch (input) {
-                                        case "queen": {
-                                            inputIsValid = true;
-                                            tileOnClick.piece().setCapture();
-                                            Piece newPiece = new Queen(tileOnClick, false, boardPanel);
-                                            tileOnClick.setPiece(newPiece);
-                                            board.addPiece(newPiece);
-                                            break;
-                                        }
-                                        case "bishop": {
-                                            inputIsValid = true;
-                                            tileOnClick.piece().setCapture();
-                                            Piece newPiece = new Bishop(tileOnClick, false, boardPanel);
-                                            tileOnClick.setPiece(newPiece);
-                                            board.addPiece(newPiece);
-                                            break;
-                                        }
-                                        case "rook": {
-                                            inputIsValid = true;
-                                            tileOnClick.piece().setCapture();
-                                            Piece newPiece = new Rook(tileOnClick, false, boardPanel);
-                                            tileOnClick.setPiece(newPiece);
-                                            board.addPiece(newPiece);
-                                            break;
-                                        }
-                                        case "knight": {
-                                            inputIsValid = true;
-                                            tileOnClick.piece().setCapture();
-                                            Piece newPiece = new Knight(tileOnClick, false, boardPanel);
-                                            tileOnClick.setPiece(newPiece);
-                                            board.addPiece(newPiece);
-                                            break;
-                                        }
-                                        default:
-                                            input = JOptionPane.showInputDialog(frame,
-                                                    "Please Enter a Valid Piece Name");
+
+                        }
+
+                        // Display an input dialog where the player can specify the piece they want to
+                        // capture
+                        // This occurs when the black player has reached the end of the board
+
+                        else if (tileOnClick.location().y == 7) {
+                            String input = JOptionPane.showInputDialog(frame, "Enter which Piece you want");
+                            boolean inputIsValid = false;
+                            while (!inputIsValid) {
+                                input = input.toLowerCase();
+                                switch (input) {
+                                    case "queen": {
+                                        inputIsValid = true;
+                                        tileOnClick.piece().setCapture();
+                                        Piece newPiece = new Queen(tileOnClick, false, boardPanel);
+                                        tileOnClick.setPiece(newPiece);
+                                        board.addPiece(newPiece);
+                                        break;
                                     }
+                                    case "bishop": {
+                                        inputIsValid = true;
+                                        tileOnClick.piece().setCapture();
+                                        Piece newPiece = new Bishop(tileOnClick, false, boardPanel);
+                                        tileOnClick.setPiece(newPiece);
+                                        board.addPiece(newPiece);
+                                        break;
+                                    }
+                                    case "rook": {
+                                        inputIsValid = true;
+                                        tileOnClick.piece().setCapture();
+                                        Piece newPiece = new Rook(tileOnClick, false, boardPanel);
+                                        tileOnClick.setPiece(newPiece);
+                                        board.addPiece(newPiece);
+                                        break;
+                                    }
+                                    case "knight": {
+                                        inputIsValid = true;
+                                        tileOnClick.piece().setCapture();
+                                        Piece newPiece = new Knight(tileOnClick, false, boardPanel);
+                                        tileOnClick.setPiece(newPiece);
+                                        board.addPiece(newPiece);
+                                        break;
+                                    }
+                                    default:
+                                        input = JOptionPane.showInputDialog(frame,
+                                                "Please Enter a Valid Piece Name");
                                 }
                             }
                         }
@@ -238,12 +244,18 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 }
                 currentlySelectingMove = false;
                 currTile = null;
+
+                // See if the king is in check
                 King king = board.getKing(currentTurn.isWhite());
-                if(king.isCheck(king.getTile())){
+                if (king.isCheck(king.getTile())) {
+                    System.out.println("seeing if king is in check");
                     currentTurn.inCheck();
                 }
+                // See if the King is in check mate
                 if (currentTurn.isInCheck()) {
+                    System.out.println("Seeing if king is in check mate");
                     ArrayList<Tile> validMoves = king.getValidMoves();
+
                     if (validMoves.size() == 0) {
                         JOptionPane.showMessageDialog(frame, currentTurn + " lost");
                     }
@@ -257,11 +269,11 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
             } else {
 
                 // if (currentTurn.isInCheck()) {
-                //     King king = board.getKing(currentTurn.isWhite());
-                //     ArrayList<Tile> validMoves = king.getValidMoves();
-                //     if (validMoves.size() == 0) {
-                //         JOptionPane.showMessageDialog(frame, currentTurn + "lost");
-                //     }
+                // King king = board.getKing(currentTurn.isWhite());
+                // ArrayList<Tile> validMoves = king.getValidMoves();
+                // if (validMoves.size() == 0) {
+                // JOptionPane.showMessageDialog(frame, currentTurn + "lost");
+                // }
 
                 // }
 

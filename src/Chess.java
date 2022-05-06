@@ -16,25 +16,36 @@ import java.util.ArrayList;
  *             computer.
  */
 public class Chess extends MouseAdapter implements Runnable, ActionListener {
+
+    // The timers for the players
+    ChessTimer whitePlayerTimer;
+    ChessTimer blackPlayerTimer;
+
+    // GUI components
+    JPanel boardPanel;
+    JFrame frame;
     JButton restartGame;
     JLabel playerOne;
     JLabel playerTwo;
-    ChessTimer whitePlayerTimer;
-    ChessTimer blackPlayerTimer;
-    JPanel boardPanel;
-    JFrame frame;
     Board board;
 
+    // Whether the white or black player is in check
     boolean blackCheck;
     boolean whiteCheck;
 
-    boolean isWhitePlayerTurn;
+    // The players
     Player whitePlayer;
     Player blackPlayer;
     Player currentTurn;
 
+    // What point of the game it is
+    boolean isWhitePlayerTurn;
     boolean currentlySelectingMove;
+
+    // The moves a given piece can legally make
     ArrayList<Tile> moves = null;
+
+    // The tile with the piece that the player wants to move
     Tile currTile = null;
 
     MovingThread mover;

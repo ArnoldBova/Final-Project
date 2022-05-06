@@ -16,6 +16,15 @@ public class Bishop extends Piece {
     // 'per piece' instance variables that can be defined, such as hasMoved for a
     // rook to check for castling.
 
+    /**
+    *Constructs a new Bishop object
+    *
+    *@param tile the position of the piece
+    *
+    *@param isWhite the color of the piece
+    *
+    */
+    
     public Bishop(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -33,7 +42,13 @@ public class Bishop extends Piece {
         // do any other calculations per piece here if needed
     }
 
-
+    /**
+    *returns an array of tiles containing
+    *all of the valid moves for the piece
+    *
+    *@returns array list of possible moves
+    *according to the rules of the piece
+    */
 
     @Override
     public ArrayList<Tile> getValidMoves() {
@@ -117,7 +132,15 @@ public class Bishop extends Piece {
 
         return outcomes;
     }
-
+    
+    /**
+    * Determines if any already valid moves would
+    * put the opposing King in check
+    *
+    * @return ArrayList of tiles that would be dangerous
+    * to the opposing player's king
+    */
+    
     public ArrayList<Tile> getValidMovesAgainstKing(){
         ArrayList<Tile> outcomes = new ArrayList<>();
         boolean white = this.isWhite();
@@ -254,7 +277,9 @@ public class Bishop extends Piece {
     //         left = left.left();
     //     }
     // }
-
+    /**
+    * Does not do much of anything
+    */
     @Override
     public void run() {
         // this is here for animation things

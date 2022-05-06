@@ -216,7 +216,7 @@ public class Bishop extends Piece {
                 
                     if(!(downRight.piece() instanceof King)){
                         loopDone = true;
-                }else{
+                    }else{
                     downRight = downRight.down();
                     if (downRight != null) {
                         downRight = downRight.right();

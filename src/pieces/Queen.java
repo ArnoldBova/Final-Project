@@ -11,8 +11,8 @@ import java.awt.Image;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A Queen piece used during a game of chess.
+ * @assignment Final project for CSIS 225
+ *             A Queen piece used during a game of chess.
  */
 public class Queen extends Piece {
 

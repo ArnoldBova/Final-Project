@@ -6,10 +6,11 @@ import java.lang.Math;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A timer to be used during chess. Each player gets one,
- *          and must capture the opposing king before they run out of time, or
- *          else they lose
+ * @assignment Final project for CSIS 225
+ *             A timer to be used during chess. Each player gets one,
+ *             and must capture the opposing king before they run out of time,
+ *             or
+ *             else they lose
  */
 public class ChessTimer extends Thread {
     // True only if the timer is running

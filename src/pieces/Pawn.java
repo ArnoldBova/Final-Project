@@ -12,8 +12,8 @@ import java.awt.Image;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A pawn playing piece used during a game of chess.
+ * @assignment Final project for CSIS 225
+ *             A pawn playing piece used during a game of chess.
  */
 public class Pawn extends Piece {
 

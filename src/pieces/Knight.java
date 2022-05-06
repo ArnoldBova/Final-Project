@@ -12,8 +12,8 @@ import java.awt.Image;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A Knight playing piece used during a game of chess.
+ * @assignment Final project for CSIS 225
+ *             A Knight playing piece used during a game of chess.
  */
 public class Knight extends Piece {
 

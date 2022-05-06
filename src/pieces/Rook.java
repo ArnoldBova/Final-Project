@@ -14,8 +14,8 @@ import java.awt.Image;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A rook used during a game of chess.
+ * @assignment Final project for CSIS 225
+ *             A rook used during a game of chess.
  */
 public class Rook extends Piece {
 

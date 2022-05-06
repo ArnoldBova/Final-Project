@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 /**
  * @authors Nicky Morgan, Arnold Bova, Ethan Tubia, Emma Flatland
- * 
- *          Moves a playing piece in an animated fashion
+ * @assignment Final project for CSIS 225
+ *             Moves a playing piece in an animated fashion
  */
 public class MovingThread extends Thread {
     Piece piece;

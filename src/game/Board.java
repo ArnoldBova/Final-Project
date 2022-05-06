@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A board for playing chess
+ * @assignment Final project for CSIS 225
+ *             A board for playing chess
  */
 public class Board {
     Tile[][] tiles;

@@ -12,8 +12,8 @@ import java.awt.Image;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A bishop used during a game of chess.
+ * @assignment Final project for CSIS 225
+ *             A bishop used during a game of chess.
  */
 public class Bishop extends Piece {
     // instance variables that are unanimous among all pieces are in the Pieces

@@ -4,8 +4,8 @@ import src.structures.Piece;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A player who plays chess
+ * @assignment Final project for CSIS 225
+ *             A player who plays chess
  */
 
 public class Player {

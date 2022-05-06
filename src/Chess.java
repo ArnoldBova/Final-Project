@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A chess game meant to be played between two people using the same
- *          computer.
+ * @assignment Final project for CSIS 225
+ *             A chess game meant to be played between two people using the same
+ *             computer.
  */
 public class Chess extends MouseAdapter implements Runnable, ActionListener {
     JButton restartGame;

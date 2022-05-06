@@ -12,8 +12,8 @@ import java.awt.Image;
 
 /**
  * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
- * 
- *          A chess piece class
+ * @assignment Final project for CSIS 225
+ *             A chess piece class
  */
 public abstract class Piece extends Thread implements ImageObserver {
     protected Tile tile;

@@ -12,6 +12,15 @@ import java.awt.Image;
 
 public class Knight extends Piece {
 
+    /**
+    *Constructs a new Knight object
+    *
+    *@param tile the position of the piece
+    *
+    *@param isWhite the color of the piece
+    *
+    */
+    
     public Knight(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -28,6 +37,14 @@ public class Knight extends Piece {
         }
     }
 
+    /**
+    *returns an array of tiles containing
+    *all of the valid moves for the piece
+    *
+    *@returns array list of possible moves
+    *according to the rules of the piece
+    */
+    
     @Override
     public ArrayList<Tile> getValidMoves() {
         ArrayList<Tile> outcomes = new ArrayList<>();
@@ -154,6 +171,10 @@ public class Knight extends Piece {
         return outcomes;
     }
 
+    /**
+    *Does not do much of anything
+    */
+    
     @Override
     public void run() {
     }

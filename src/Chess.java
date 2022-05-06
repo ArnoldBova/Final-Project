@@ -167,7 +167,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     currTile.setPiece(null);
                     if (tileOnClick.piece() instanceof Pawn) {
                         // Display an input dialog where the player can specify the piece they want to
-                        // capture
+                        // replace their pawn with
                         // This occurs when the white player has reached the end of the board
                         if (tileOnClick.piece().isWhite()) {
                             if (tileOnClick.location().y == 0) {
@@ -221,7 +221,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                         }
 
                         // Display an input dialog where the player can specify the piece they want to
-                        // capture
+                        // to replace their pawn with
                         // This occurs when the black player has reached the end of the board
 
                         else if (tileOnClick.location().y == 7) {

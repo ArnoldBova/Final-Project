@@ -122,9 +122,11 @@ public class Rook extends Piece {
             if (down.hasPiece()) {
                 if (down.piece().isWhite() != white) {
                     outcomes.add(down);
-                    if(down.piece() instanceof King){
-                    }else{
-                       loopDone = true; 
+                    
+                    if(!(down.piece() instanceof King)){
+                        loopDone = true; 
+                    } else {
+                        down = down.down();
                     }
                 }else{
                     loopDone = true;
@@ -138,10 +140,12 @@ public class Rook extends Piece {
         while (!loopDone && right != null) {
             if (right.hasPiece()) {
                 if (right.piece().isWhite() != white) {
-                    outcomes.add(right);
-                    if(right.piece() instanceof King){
-                    }else{
-                       loopDone = true; 
+                    outcomes.add(up);
+                    
+                    if(!(right.piece() instanceof King)){
+                        loopDone = true; 
+                    } else {
+                        right = right.right();
                     }
                 }else{
                     loopDone = true;
@@ -156,9 +160,11 @@ public class Rook extends Piece {
             if (left.hasPiece()) {
                 if (left.piece().isWhite() != white) {
                     outcomes.add(left);
-                    if(left.piece() instanceof King){
-                    }else{
-                       loopDone = true; 
+                    
+                    if(!(left.piece() instanceof King)){
+                        loopDone = true; 
+                    } else {
+                        left = left.left();
                     }
                 }else{
                     loopDone = true;

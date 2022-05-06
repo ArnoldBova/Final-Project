@@ -118,6 +118,143 @@ public class Bishop extends Piece {
         return outcomes;
     }
 
+    public ArrayList<Tile> getValidMovesAgainstKing(){
+        ArrayList<Tile> outcomes = new ArrayList<>();
+        boolean white = this.isWhite();
+        Tile up = this.getTile().up();
+        Tile down = this.getTile().down();
+        Tile upLeft = null;
+        Tile upRight = null;
+        Tile downLeft = null;
+        Tile downRight = null;
+        if (up != null) {
+            upLeft = up.left();
+            upRight = up.right();
+        }
+        if (down != null) {
+            downLeft = down.left();
+            downRight = down.right();
+        }
+        boolean loopDone = false;
+        loopDone = false;
+        while (!loopDone && upLeft != null) {
+            if (upLeft.hasPiece()) {
+                if (upLeft.piece().isWhite() != white) {
+                    outcomes.add(upLeft);
+                
+                    if(!(upLeft.piece() instanceof King)){
+                        loopDone = true;
+                }else{
+                    upLeft = upLeft.up();
+                    if (upLeft != null) {
+                        upLeft = upLeft.left();
+                    }   
+                }
+            }
+                
+            } else {
+                outcomes.add(upLeft);
+                upLeft = upLeft.up();
+                if (upLeft != null) {
+                    upLeft = upLeft.left();
+                }
+            }
+        }
+        loopDone = false;
+        while (!loopDone && upRight != null) {
+            if (upRight.hasPiece()) {
+                if (upRight.piece().isWhite() != white) {
+                    outcomes.add(upRight);
+                
+                    if(!(upRight.piece() instanceof King)){
+                        loopDone = true;
+                }else{
+                    upRight = upRight.up();
+                    if (upRight != null) {
+                        upRight = upRight.right();
+                    }   
+                }
+            }
+                
+            } else {
+                outcomes.add(upRight);
+                upRight = upRight.up();
+                if (upRight != null) {
+                    upRight = upRight.right();
+                }
+            }
+        }
+        loopDone = false;
+        while (!loopDone && downLeft != null) {
+            if (downLeft.hasPiece()) {
+                if (downRight.piece().isWhite() != white) {
+                    outcomes.add(downLeft);
+                
+                    if(!(downLeft.piece() instanceof King)){
+                        loopDone = true;
+                }else{
+                    downLeft = downRight.down();
+                    if (downLeft != null) {
+                        downLeft = downLeft.left();
+                    }   
+                }
+            }
+                
+            } else {
+                outcomes.add(downLeft);
+                downLeft = downLeft.down();
+                if (downLeft != null) {
+                    downLeft = downLeft.left();
+                }
+            }
+        }
+        loopDone = false;
+        while (!loopDone && downRight != null) {
+            if (downRight.hasPiece()) {
+                if (downRight.piece().isWhite() != white) {
+                    outcomes.add(downRight);
+                
+                    if(!(downRight.piece() instanceof King)){
+                        loopDone = true;
+                }else{
+                    downRight = downRight.down();
+                    if (downRight != null) {
+                        downRight = downRight.right();
+                    }   
+                }
+            }
+                
+            } else {
+                outcomes.add(downRight);
+                downRight = downRight.down();
+                if (downRight != null) {
+                    downRight = downRight.right();
+                }
+            }
+        }
+
+        return outcomes;
+    }
+
+    // while (!loopDone && left != null) {
+    //     if (left.hasPiece()) {
+    //         if (left.piece().isWhite() != white) {
+    //             outcomes.add(left);
+                
+    //             if(!(left.piece() instanceof King)){
+    //                 loopDone = true; 
+    //             } else {
+    //                 left = left.left();
+    //             }
+    //         }else{
+    //             loopDone = true;
+    //         }
+    //     } else {
+    //         outcomes.add(left);
+    //         left = left.left();
+    //     }
+    // }
+
     @Override
     public void run() {
         // this is here for animation things

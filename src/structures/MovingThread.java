@@ -28,7 +28,7 @@ public class MovingThread extends Thread {
         int xMove = ((startTile.location().x * 50 + 40) - (endTile.location().x * 50 + 40))/6;
         int yMove = ((startTile.location().y * 50) - (endTile.location().y * 50))/6;
 
-        while(piece.getPosition().distance(endTile.location().x * 50 + 40, endTile.location().y * 50) > 5){
+        while(piece.getPosition().distance(endTile.location().x * 50 + 40, endTile.location().y * 50) > 10){
             //System.out.println(piece.getPosition().distance(endTile.location().x * 50 + 40, endTile.location().y * 50));
             try {
                 sleep(DELAY_TIME);

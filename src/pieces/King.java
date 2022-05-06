@@ -146,6 +146,11 @@ public class King extends Piece {
                         if (possibleRookMoves.contains(tile)) {
                             return true;
                         }
+                    } else if(piece instanceof Bishop){
+                        ArrayList<Tile> possibleRookMoves = ((Bishop) piece).getValidMovesAgainstKing();
+                        if (possibleRookMoves.contains(tile)) {
+                            return true;
+                        }
                     } 
                     else {
                         ArrayList<Tile> validMovesFromOpposingPiece = piece.getValidMoves();

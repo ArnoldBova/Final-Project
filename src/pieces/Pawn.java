@@ -15,6 +15,15 @@ public class Pawn extends Piece {
 
     boolean hasMoved;
 
+    /**
+    *Constructs a new pawn object
+    *
+    *@param tile the position of the piece
+    *
+    *@param isWhite the color of the piece
+    *
+    */
+
     public Pawn(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -30,7 +39,15 @@ public class Pawn extends Piece {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+    *returns an array of tiles containing
+    *all of the valid moves for the piece
+    *
+    *@returns array list of possible moves
+    *according to the rules of the piece
+    */
+    
     @Override
     public ArrayList<Tile> getValidMoves() {
         ArrayList<Tile> outcomes = new ArrayList<>();
@@ -107,12 +124,24 @@ public class Pawn extends Piece {
 
         return outcomes;
     }
-
+    
+    /**
+    * does not do much of anything
+    */
+    
     @Override
     public void run() {
 
     }
-
+    
+    /**
+    * finds the potential captures available to
+    * the piece
+    *
+    * @return ArrayList of tiles containing potential capture
+    * tiles
+    */
+    
     public ArrayList<Tile> getPossibleCaptureTiles() {
         ArrayList<Tile> outcomes = new ArrayList<>();
 
@@ -139,6 +168,13 @@ public class Pawn extends Piece {
         return outcomes;
     }
 
+    /** 
+    *returns true if the pawn has moved
+    *
+    *@return  boolean the value stored in the hasMoved
+    *instance variable
+    */
+    
     public void moved () {
         this.hasMoved = true;
     }

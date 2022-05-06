@@ -32,6 +32,11 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
     Tile currTile = null;
 
     MovingThread mover;
+    
+    /**
+    *creates the window for the game, and 
+    *calls the paint method for the board
+    */
 
     public void run() {
 
@@ -86,6 +91,13 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         frame.pack();
         frame.setVisible(true);
     }
+    
+    /**
+    *provides functionality to the buttons in the window
+    *restarts the game when restart is clicked
+    *and pauses the game when pause is clicked
+    *@param e the action event
+    */
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == restartGame) {
@@ -103,6 +115,14 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
             boardPanel.repaint();
         }
     }
+    /**
+    *checks the piece being clicked, then checks the tile clicked
+    *moving the piece only when the tile clicked is in the piece’s
+    *valid moves array, and calls the repaint method of board
+    *when a change is made
+    *
+    *@param e the mouse event
+    */
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -341,6 +361,11 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         }
 
     }
+    
+    /**
+    *invokes the Chess class
+    */
+
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Chess());

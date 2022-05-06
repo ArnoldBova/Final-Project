@@ -268,12 +268,12 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                 // See if the king is in check
                 King king = board.getKing(currentTurn.isWhite());
                 if (king.isCheck(king.getTile())) {
-                    System.out.println("seeing if king is in check");
+                    //System.out.println("seeing if king is in check");
                     currentTurn.inCheck();
                 }
                 // See if the King is in check mate
                 if (currentTurn.isInCheck()) {
-                    System.out.println("Seeing if king is in check mate");
+                    //System.out.println("Seeing if king is in check mate");
                     ArrayList<Tile> validMoves = king.getValidMoves();
 
                     if (validMoves.size() == 0) {

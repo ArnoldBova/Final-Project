@@ -4,6 +4,14 @@ import javax.swing.*;
 import java.awt.Graphics;
 import java.lang.Math;
 
+/**
+ * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
+ * @assignment Final project for CSIS 225
+ *             A timer to be used during chess. Each player gets one,
+ *             and must capture the opposing king before they run out of time,
+ *             or
+ *             else they lose
+ */
 public class ChessTimer extends Thread {
     // True only if the timer is running
     boolean running;
@@ -26,9 +34,9 @@ public class ChessTimer extends Thread {
     public static final int DELAY_TIME = 1000;
 
     /**
-    * Constructs the ChesTimer object
-    */
-    
+     * Constructs the ChesTimer object
+     */
+
     public ChessTimer(int gameLength, JLabel label, boolean isWhitePlayer, JFrame frame) {
         this.timeElapsed = 0;
         this.running = false;
@@ -51,23 +59,25 @@ public class ChessTimer extends Thread {
             }
             if (running) {
                 timeElapsed++;
-                int minutes = (gameLength - timeElapsed)/60;
+                int minutes = (gameLength - timeElapsed) / 60;
                 int seconds = (gameLength - timeElapsed) - minutes * 60;
                 if (seconds < 10) {
-                    this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + minutes + ":0" + seconds);
+                    this.label.setText(
+                            ((isWhitePlayer) ? "White Player: " : "Black Player: ") + minutes + ":0" + seconds);
 
                 } else {
-                    this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + minutes + ":" + seconds);
+                    this.label
+                            .setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + minutes + ":" + seconds);
                 }
-                //System.out.println(minutes + ":" + seconds);
+                // System.out.println(minutes + ":" + seconds);
                 label.repaint();
             }
             if (timeElapsed == gameLength) {
                 running = false;
-                if(messageSent == false){
-                    if(isWhitePlayer){
+                if (messageSent == false) {
+                    if (isWhitePlayer) {
                         JOptionPane.showMessageDialog(frame, "White Player lost due to Time");
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(frame, "Black Player lost due to Time");
                     }
                     messageSent = true;
@@ -78,8 +88,8 @@ public class ChessTimer extends Thread {
 
     // Resets the elapsed time to zero
     /**
-    * Resets the elapsed time to zero
-    */
+     * Resets the elapsed time to zero
+     */
     public void reset() {
         this.timeElapsed = 0;
         this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + "10:00");
@@ -87,19 +97,19 @@ public class ChessTimer extends Thread {
 
     }
     // Temporarily pauses the timer
-    
-    /** 
-    * Temporarily pauses the timer
-    */
+
+    /**
+     * Temporarily pauses the timer
+     */
     public void pause() {
         this.running = false;
     }
 
     /**
-    * Unpauses the timer
-    */
+     * Unpauses the timer
+     */
     public void unPause() {
         this.running = true;
-        //System.out.println("Unpause");
+        // System.out.println("Unpause");
     }
 }

@@ -10,6 +10,11 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
 
+/**
+ * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
+ * @assignment Final project for CSIS 225
+ *             A bishop used during a game of chess.
+ */
 public class Bishop extends Piece {
     // instance variables that are unanimous among all pieces are in the Pieces
     // abstract class. There may be relevant
@@ -17,14 +22,14 @@ public class Bishop extends Piece {
     // rook to check for castling.
 
     /**
-    *Constructs a new Bishop object
-    *
-    *@param tile the position of the piece
-    *
-    *@param isWhite the color of the piece
-    *
-    */
-    
+     * Constructs a new Bishop object
+     *
+     * @param tile    the position of the piece
+     *
+     * @param isWhite the color of the piece
+     *
+     */
+
     public Bishop(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -43,12 +48,12 @@ public class Bishop extends Piece {
     }
 
     /**
-    *returns an array of tiles containing
-    *all of the valid moves for the piece
-    *
-    *@returns array list of possible moves
-    *according to the rules of the piece
-    */
+     * returns an array of tiles containing
+     * all of the valid moves for the piece
+     *
+     * @returns array list of possible moves
+     *          according to the rules of the piece
+     */
 
     @Override
     public ArrayList<Tile> getValidMoves() {
@@ -132,16 +137,16 @@ public class Bishop extends Piece {
 
         return outcomes;
     }
-    
+
     /**
-    * Determines if any already valid moves would
-    * put the opposing King in check
-    *
-    * @return ArrayList of tiles that would be dangerous
-    * to the opposing player's king
-    */
-    
-    public ArrayList<Tile> getValidMovesAgainstKing(){
+     * Determines if any already valid moves would
+     * put the opposing King in check
+     *
+     * @return ArrayList of tiles that would be dangerous
+     *         to the opposing player's king
+     */
+
+    public ArrayList<Tile> getValidMovesAgainstKing() {
         ArrayList<Tile> outcomes = new ArrayList<>();
         boolean white = this.isWhite();
         Tile up = this.getTile().up();
@@ -164,17 +169,17 @@ public class Bishop extends Piece {
             if (upLeft.hasPiece()) {
                 if (upLeft.piece().isWhite() != white) {
                     outcomes.add(upLeft);
-                
-                    if(!(upLeft.piece() instanceof King)){
+
+                    if (!(upLeft.piece() instanceof King)) {
                         loopDone = true;
-                }else{
-                    upLeft = upLeft.up();
-                    if (upLeft != null) {
-                        upLeft = upLeft.left();
-                    }   
+                    } else {
+                        upLeft = upLeft.up();
+                        if (upLeft != null) {
+                            upLeft = upLeft.left();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(upLeft);
                 upLeft = upLeft.up();
@@ -188,17 +193,17 @@ public class Bishop extends Piece {
             if (upRight.hasPiece()) {
                 if (upRight.piece().isWhite() != white) {
                     outcomes.add(upRight);
-                
-                    if(!(upRight.piece() instanceof King)){
+
+                    if (!(upRight.piece() instanceof King)) {
                         loopDone = true;
-                }else{
-                    upRight = upRight.up();
-                    if (upRight != null) {
-                        upRight = upRight.right();
-                    }   
+                    } else {
+                        upRight = upRight.up();
+                        if (upRight != null) {
+                            upRight = upRight.right();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(upRight);
                 upRight = upRight.up();
@@ -212,17 +217,17 @@ public class Bishop extends Piece {
             if (downLeft.hasPiece()) {
                 if (downRight.piece().isWhite() != white) {
                     outcomes.add(downLeft);
-                
-                    if(!(downLeft.piece() instanceof King)){
+
+                    if (!(downLeft.piece() instanceof King)) {
                         loopDone = true;
-                }else{
-                    downLeft = downRight.down();
-                    if (downLeft != null) {
-                        downLeft = downLeft.left();
-                    }   
+                    } else {
+                        downLeft = downRight.down();
+                        if (downLeft != null) {
+                            downLeft = downLeft.left();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(downLeft);
                 downLeft = downLeft.down();
@@ -236,17 +241,17 @@ public class Bishop extends Piece {
             if (downRight.hasPiece()) {
                 if (downRight.piece().isWhite() != white) {
                     outcomes.add(downRight);
-                
-                    if(!(downRight.piece() instanceof King)){
+
+                    if (!(downRight.piece() instanceof King)) {
                         loopDone = true;
-                    }else{
-                    downRight = downRight.down();
-                    if (downRight != null) {
-                        downRight = downRight.right();
-                    }   
+                    } else {
+                        downRight = downRight.down();
+                        if (downRight != null) {
+                            downRight = downRight.right();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(downRight);
                 downRight = downRight.down();
@@ -260,26 +265,26 @@ public class Bishop extends Piece {
     }
 
     // while (!loopDone && left != null) {
-    //     if (left.hasPiece()) {
-    //         if (left.piece().isWhite() != white) {
-    //             outcomes.add(left);
-                
-    //             if(!(left.piece() instanceof King)){
-    //                 loopDone = true; 
-    //             } else {
-    //                 left = left.left();
-    //             }
-    //         }else{
-    //             loopDone = true;
-    //         }
-    //     } else {
-    //         outcomes.add(left);
-    //         left = left.left();
-    //     }
+    // if (left.hasPiece()) {
+    // if (left.piece().isWhite() != white) {
+    // outcomes.add(left);
+
+    // if(!(left.piece() instanceof King)){
+    // loopDone = true;
+    // } else {
+    // left = left.left();
+    // }
+    // }else{
+    // loopDone = true;
+    // }
+    // } else {
+    // outcomes.add(left);
+    // left = left.left();
+    // }
     // }
     /**
-    * Does not do much of anything
-    */
+     * Does not do much of anything
+     */
     @Override
     public void run() {
         // this is here for animation things

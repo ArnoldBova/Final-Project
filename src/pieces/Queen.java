@@ -9,17 +9,22 @@ import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Image;
 
+/**
+ * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
+ * @assignment Final project for CSIS 225
+ *             A Queen piece used during a game of chess.
+ */
 public class Queen extends Piece {
 
     /**
-    *Constructs a new Queen object
-    *
-    *@param tile the position of the piece
-    *
-    *@param isWhite the color of the piece
-    *
-    */
-    
+     * Constructs a new Queen object
+     *
+     * @param tile    the position of the piece
+     *
+     * @param isWhite the color of the piece
+     *
+     */
+
     public Queen(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -35,14 +40,14 @@ public class Queen extends Piece {
             e.printStackTrace();
         }
     }
-    
+
     /**
-    *returns an array of tiles containing
-    *all of the valid moves for the piece
-    *
-    *@returns array list of possible moves
-    *according to the rules of the piece
-    */
+     * returns an array of tiles containing
+     * all of the valid moves for the piece
+     *
+     * @returns array list of possible moves
+     *          according to the rules of the piece
+     */
 
     @Override
     public ArrayList<Tile> getValidMoves() {
@@ -178,16 +183,16 @@ public class Queen extends Piece {
 
         return outcomes;
     }
-    
+
     /**
-    * determines if the queen has any valid
-    * moves against the opposing king
-    *
-    * @return ArrayList of tiles that would lead to
-    * putting the opposing King in check
-    */
-    
-    public ArrayList<Tile> getValidMovesAgainstKing(){
+     * determines if the queen has any valid
+     * moves against the opposing king
+     *
+     * @return ArrayList of tiles that would lead to
+     *         putting the opposing King in check
+     */
+
+    public ArrayList<Tile> getValidMovesAgainstKing() {
         ArrayList<Tile> outcomes = new ArrayList<>();
         boolean white = this.isWhite();
         // these can return null leading to null pointer exception
@@ -213,13 +218,13 @@ public class Queen extends Piece {
             if (up.hasPiece()) {
                 if (up.piece().isWhite() != white) {
                     outcomes.add(up);
-                    
-                    if(!(up.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(up.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         up = up.up();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -232,13 +237,13 @@ public class Queen extends Piece {
             if (down.hasPiece()) {
                 if (down.piece().isWhite() != white) {
                     outcomes.add(down);
-                    
-                    if(!(down.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(down.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         down = down.down();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -251,13 +256,13 @@ public class Queen extends Piece {
             if (right.hasPiece()) {
                 if (right.piece().isWhite() != white) {
                     outcomes.add(up);
-                    
-                    if(!(right.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(right.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         right = right.right();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -270,13 +275,13 @@ public class Queen extends Piece {
             if (left.hasPiece()) {
                 if (left.piece().isWhite() != white) {
                     outcomes.add(left);
-                    
-                    if(!(left.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(left.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         left = left.left();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -288,17 +293,17 @@ public class Queen extends Piece {
             if (upLeft.hasPiece()) {
                 if (upLeft.piece().isWhite() != white) {
                     outcomes.add(upLeft);
-                
-                    if(!(upLeft.piece() instanceof King)){
+
+                    if (!(upLeft.piece() instanceof King)) {
                         loopDone = true;
-                }else{
-                    upLeft = upLeft.up();
-                    if (upLeft != null) {
-                        upLeft = upLeft.left();
-                    }   
+                    } else {
+                        upLeft = upLeft.up();
+                        if (upLeft != null) {
+                            upLeft = upLeft.left();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(upLeft);
                 upLeft = upLeft.up();
@@ -312,17 +317,17 @@ public class Queen extends Piece {
             if (upRight.hasPiece()) {
                 if (upRight.piece().isWhite() != white) {
                     outcomes.add(upRight);
-                
-                    if(!(upRight.piece() instanceof King)){
+
+                    if (!(upRight.piece() instanceof King)) {
                         loopDone = true;
-                }else{
-                    upRight = upRight.up();
-                    if (upRight != null) {
-                        upRight = upRight.right();
-                    }   
+                    } else {
+                        upRight = upRight.up();
+                        if (upRight != null) {
+                            upRight = upRight.right();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(upRight);
                 upRight = upRight.up();
@@ -336,17 +341,17 @@ public class Queen extends Piece {
             if (downLeft.hasPiece()) {
                 if (downRight.piece().isWhite() != white) {
                     outcomes.add(downLeft);
-                
-                    if(!(downLeft.piece() instanceof King)){
+
+                    if (!(downLeft.piece() instanceof King)) {
                         loopDone = true;
-                }else{
-                    downLeft = downRight.down();
-                    if (downLeft != null) {
-                        downLeft = downLeft.left();
-                    }   
+                    } else {
+                        downLeft = downRight.down();
+                        if (downLeft != null) {
+                            downLeft = downLeft.left();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(downLeft);
                 downLeft = downLeft.down();
@@ -360,17 +365,17 @@ public class Queen extends Piece {
             if (downRight.hasPiece()) {
                 if (downRight.piece().isWhite() != white) {
                     outcomes.add(downRight);
-                
-                    if(!(downRight.piece() instanceof King)){
+
+                    if (!(downRight.piece() instanceof King)) {
                         loopDone = true;
-                }else{
-                    downRight = downRight.down();
-                    if (downRight != null) {
-                        downRight = downRight.right();
-                    }   
+                    } else {
+                        downRight = downRight.down();
+                        if (downRight != null) {
+                            downRight = downRight.right();
+                        }
+                    }
                 }
-            }
-                
+
             } else {
                 outcomes.add(downRight);
                 downRight = downRight.down();
@@ -383,19 +388,21 @@ public class Queen extends Piece {
     }
 
     /**
-    *Does not do much of anything
-    */
-    
+     * Does not do much of anything
+     */
+
     @Override
-    public void run() {}
-    
+    public void run() {
+    }
+
     /**
-    * generates a string consisting of
-    * the color and name of the piece
-    * @return String consisting of color and 
-    * name of the piece
-    */
-    
+     * generates a string consisting of
+     * the color and name of the piece
+     * 
+     * @return String consisting of color and
+     *         name of the piece
+     */
+
     @Override
     public String toString() {
         String color = (isWhite) ? "White" : "Black";

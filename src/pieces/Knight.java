@@ -10,17 +10,22 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
 
+/**
+ * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
+ * @assignment Final project for CSIS 225
+ *             A Knight playing piece used during a game of chess.
+ */
 public class Knight extends Piece {
 
     /**
-    *Constructs a new Knight object
-    *
-    *@param tile the position of the piece
-    *
-    *@param isWhite the color of the piece
-    *
-    */
-    
+     * Constructs a new Knight object
+     *
+     * @param tile    the position of the piece
+     *
+     * @param isWhite the color of the piece
+     *
+     */
+
     public Knight(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -38,13 +43,13 @@ public class Knight extends Piece {
     }
 
     /**
-    *returns an array of tiles containing
-    *all of the valid moves for the piece
-    *
-    *@returns array list of possible moves
-    *according to the rules of the piece
-    */
-    
+     * returns an array of tiles containing
+     * all of the valid moves for the piece
+     *
+     * @returns array list of possible moves
+     *          according to the rules of the piece
+     */
+
     @Override
     public ArrayList<Tile> getValidMoves() {
         ArrayList<Tile> outcomes = new ArrayList<>();
@@ -65,21 +70,23 @@ public class Knight extends Piece {
             if (horizontalL1 != null) {
                 horizontalL1 = horizontalL1.right();
                 if (horizontalL1 != null) {
-                    if ((horizontalL1.hasPiece() && horizontalL1.piece().isOpponent(this)) || (!horizontalL1.hasPiece())) {
+                    if ((horizontalL1.hasPiece() && horizontalL1.piece().isOpponent(this))
+                            || (!horizontalL1.hasPiece())) {
                         outcomes.add(horizontalL1);
                     }
                 }
             }
         }
 
-            // find horizontalL2 tile
+        // find horizontalL2 tile
         horizontalL2 = this.tile.down();
         if (horizontalL2 != null) {
             horizontalL2 = horizontalL2.right();
             if (horizontalL2 != null) {
                 horizontalL2 = horizontalL2.right();
                 if (horizontalL2 != null) {
-                    if ((horizontalL2.hasPiece() && horizontalL2.piece().isOpponent(this)) || (!horizontalL2.hasPiece())) {
+                    if ((horizontalL2.hasPiece() && horizontalL2.piece().isOpponent(this))
+                            || (!horizontalL2.hasPiece())) {
                         outcomes.add(horizontalL2);
                     }
                 }
@@ -93,7 +100,8 @@ public class Knight extends Piece {
             if (horizontalL3 != null) {
                 horizontalL3 = horizontalL3.left();
                 if (horizontalL3 != null) {
-                    if ((horizontalL3.hasPiece() && horizontalL3.piece().isOpponent(this)) || (!horizontalL3.hasPiece())) {
+                    if ((horizontalL3.hasPiece() && horizontalL3.piece().isOpponent(this))
+                            || (!horizontalL3.hasPiece())) {
                         outcomes.add(horizontalL3);
                     }
                 }
@@ -107,7 +115,8 @@ public class Knight extends Piece {
             if (horizontalL4 != null) {
                 horizontalL4 = horizontalL4.left();
                 if (horizontalL4 != null) {
-                    if ((horizontalL4.hasPiece() && horizontalL4.piece().isOpponent(this)) || (!horizontalL4.hasPiece())) {
+                    if ((horizontalL4.hasPiece() && horizontalL4.piece().isOpponent(this))
+                            || (!horizontalL4.hasPiece())) {
                         outcomes.add(horizontalL4);
                     }
                 }
@@ -172,9 +181,9 @@ public class Knight extends Piece {
     }
 
     /**
-    *Does not do much of anything
-    */
-    
+     * Does not do much of anything
+     */
+
     @Override
     public void run() {
     }

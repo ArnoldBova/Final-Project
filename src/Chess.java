@@ -9,34 +9,51 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**
+ * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
+ * @assignment Final project for CSIS 225
+ *             A chess game meant to be played between two people using the same
+ *             computer.
+ */
 public class Chess extends MouseAdapter implements Runnable, ActionListener {
+
+    // The timers for the players
+    ChessTimer whitePlayerTimer;
+    ChessTimer blackPlayerTimer;
+
+    // GUI components
+    JPanel boardPanel;
+    JFrame frame;
     JButton restartGame;
     JLabel playerOne;
     JLabel playerTwo;
-    ChessTimer whitePlayerTimer;
-    ChessTimer blackPlayerTimer;
-    JPanel boardPanel;
-    JFrame frame;
     Board board;
 
+    // Whether the white or black player is in check
     boolean blackCheck;
     boolean whiteCheck;
 
-    boolean isWhitePlayerTurn;
+    // The players
     Player whitePlayer;
     Player blackPlayer;
     Player currentTurn;
 
+    // What point of the game it is
+    boolean isWhitePlayerTurn;
     boolean currentlySelectingMove;
+
+    // The moves a given piece can legally make
     ArrayList<Tile> moves = null;
+
+    // The tile with the piece that the player wants to move
     Tile currTile = null;
 
     MovingThread mover;
-    
+
     /**
-    *creates the window for the game, and 
-    *calls the paint method for the board
-    */
+     * creates the window for the game, and
+     * calls the paint method for the board
+     */
 
     public void run() {
 
@@ -91,13 +108,14 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         frame.pack();
         frame.setVisible(true);
     }
-    
+
     /**
-    *provides functionality to the buttons in the window
-    *restarts the game when restart is clicked
-    *and pauses the game when pause is clicked
-    *@param e the action event
-    */
+     * provides functionality to the buttons in the window
+     * restarts the game when restart is clicked
+     * and pauses the game when pause is clicked
+     * 
+     * @param e the action event
+     */
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == restartGame) {
@@ -115,14 +133,15 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
             boardPanel.repaint();
         }
     }
+
     /**
-    *checks the piece being clicked, then checks the tile clicked
-    *moving the piece only when the tile clicked is in the piece’s
-    *valid moves array, and calls the repaint method of board
-    *when a change is made
-    *
-    *@param e the mouse event
-    */
+     * checks the piece being clicked, then checks the tile clicked
+     * moving the piece only when the tile clicked is in the piece’s
+     * valid moves array, and calls the repaint method of board
+     * when a change is made
+     *
+     * @param e the mouse event
+     */
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -159,7 +178,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                     currTile.setPiece(null);
                     if (tileOnClick.piece() instanceof Pawn) {
                         // Display an input dialog where the player can specify the piece they want to
-                        // capture
+                        // replace their pawn with
                         // This occurs when the white player has reached the end of the board
                         if (tileOnClick.piece().isWhite()) {
                             if (tileOnClick.location().y == 0) {
@@ -213,7 +232,7 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
                         }
 
                         // Display an input dialog where the player can specify the piece they want to
-                        // capture
+                        // to replace their pawn with
                         // This occurs when the black player has reached the end of the board
 
                         else if (tileOnClick.location().y == 7) {
@@ -361,11 +380,10 @@ public class Chess extends MouseAdapter implements Runnable, ActionListener {
         }
 
     }
-    
-    /**
-    *invokes the Chess class
-    */
 
+    /**
+     * invokes the Chess class
+     */
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Chess());

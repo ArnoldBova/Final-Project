@@ -16,13 +16,20 @@ public class MovingThread extends Thread {
     JPanel panel;
     private static final int DELAY_TIME = 33;
 
-
+    /**
+    *Constructs the MovingThread object
+    */
+    
     public MovingThread(Piece piece, Tile startTile, Tile endTile, JPanel panel){
         this.piece = piece;
         this.startTile = startTile;
         this.endTile = endTile;
         this.panel = panel;
     }
+    
+    /**
+    * Animates the piece movement
+    */
     
     public void run(){
         int xMove = ((startTile.location().x * 50 + 40) - (endTile.location().x * 50 + 40))/6;

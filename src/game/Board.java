@@ -31,7 +31,14 @@ public class Board {
         generateBoard();
         createLinks();
     }
-
+    
+    /**
+    *Generates the two dimensional array
+    *containing all tiles in the board
+    *as well as adding piece objects to the 
+    *tiles that require them
+    */
+    
     private void generateBoard() {
         for (int y = 0; y < 8; y++) {
             switch (y) {
@@ -81,6 +88,11 @@ public class Board {
         }
     }
 
+    /**
+    *connect the tiles to their neighbors
+    *in similar fashion to the graph structure
+    */
+    
     private void createLinks() {
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
@@ -105,6 +117,22 @@ public class Board {
             }
         }
     }
+    
+    /**
+    *
+    *@param isWhiteTile boolean determining if the tile white or black
+    *
+    *@param isWhitePiece boolean determining the color of the piece on 
+    *the tile
+    *
+    *@param x the horizontal placement of the tile
+    *
+    *@param y the vertical placement of the tile
+    *
+    *Constructs the tile and pieces within the tile
+    *
+    *@return tile that has been created
+    */
 
     private Tile createTile(boolean isWhiteTile, boolean isWhitePiece, int x, int y) {
         Piece piece;
@@ -146,6 +174,16 @@ public class Board {
         return tile;
     }
 
+    /**
+    *
+    *@param g a graphics object
+    *
+    *Draws the board to the user’s screen, highlights the
+    *tiles that are valid moves for the player to do
+    *as well as draws all of the pieces that are supposed
+    *to be on the board
+    */
+    
     public void paint(Graphics g) {
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
@@ -196,6 +234,16 @@ public class Board {
 
     }
 
+    
+    /**
+    *
+    *@param point the position of the tile that is desired
+    *
+    *returns the tile who’s top left corner is on the point
+    *passed in
+    *@return tile object at the point passed in 
+    */
+    
     public Tile getTile(Point point) {
         Tile tile = null;
 
@@ -207,10 +255,24 @@ public class Board {
 
         return tile;
     }
-
+    /**
+    *returns the array of tiles
+    *stored in the tiles
+    *array instance variable
+    */
+    
     public Tile[][] getTiles() {
         return this.tiles;
     }
+    
+    /**
+    *
+    *@param Piece that is to be added
+    *
+    *adds the piece to the array
+    *of tiles corresponding to 
+    *the piece color
+    */
 
     public void addPiece(Piece piece) {
         if (piece.isWhite()) {
@@ -243,10 +305,20 @@ public class Board {
 
     }
 
+    /**
+    *returns the arraylist of black pieces
+    *
+    *@return arraylist of black pieces
+    */
+    
     public ArrayList<Piece> getBlackPieces() {
         return blackPieces;
     }
-
+    /**
+    *returns the arraylist of white pieces
+    *
+    *@return arraylist of white pieces
+    */
     public ArrayList<Piece> getWhitePieces() {
         return whitePieces;
     }

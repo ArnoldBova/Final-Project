@@ -97,6 +97,12 @@ public class King extends Piece {
         return validMoves;
     }
 
+    /**
+    * Determins if moving to the selected tile is 
+    * a valid move
+    * @return boolean true if the move is valid
+    */
+    
     public boolean isValidMove(Tile tile) {
         return tile != null && !this.isCheck(tile) && (tile.piece() == null || this.isOpponent(tile.piece()));
     }
@@ -160,6 +166,11 @@ public class King extends Piece {
         return false;
     }
 
+    /**
+    * @return ArrayList of pieces that would 
+    * bring the King out of check
+    */
+    
     public ArrayList<Piece> getOutOfCheckPieces() {
         ArrayList<Piece> outOfCheckMoves = new ArrayList<>();
 
@@ -176,12 +187,18 @@ public class King extends Piece {
 
     /**
      * Sees if the king is currently in check (incomplete)
+     *
+     * @return boolean value true if the king is in check
      */
     public boolean seeIfInCheck() {
 
         return isCheck(this.tile);
     }
 
+    /**
+    * Does not do much of anything
+    */
+    
     @Override
     public void run() {
 

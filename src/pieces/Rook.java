@@ -12,17 +12,22 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
 
+/**
+ * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
+ * 
+ *          A rook used during a game of chess.
+ */
 public class Rook extends Piece {
 
     /**
-    *Constructs a new Rook object
-    *
-    *@param tile the position of the piece
-    *
-    *@param isWhite the color of the piece
-    *
-    */
-    
+     * Constructs a new Rook object
+     *
+     * @param tile    the position of the piece
+     *
+     * @param isWhite the color of the piece
+     *
+     */
+
     public Rook(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -40,13 +45,13 @@ public class Rook extends Piece {
     }
 
     /**
-    *returns an array of tiles containing
-    *all of the valid moves for the piece
-    *
-    *@returns array list of possible moves
-    *according to the rules of the piece
-    */
-    
+     * returns an array of tiles containing
+     * all of the valid moves for the piece
+     *
+     * @returns array list of possible moves
+     *          according to the rules of the piece
+     */
+
     @Override
     public ArrayList<Tile> getValidMoves() {
         ArrayList<Tile> outcomes = new ArrayList<>();
@@ -104,19 +109,18 @@ public class Rook extends Piece {
             }
         }
 
-
         return outcomes;
     }
-    
-    /**
-    * Determines if any already valid moves would
-    * put the opposing King in check
-    *
-    * @return ArrayList of tiles that would be dangerous
-    * to the opposing player's king
-    */
 
-    public ArrayList<Tile> getValidMovesAgainstKing(){
+    /**
+     * Determines if any already valid moves would
+     * put the opposing King in check
+     *
+     * @return ArrayList of tiles that would be dangerous
+     *         to the opposing player's king
+     */
+
+    public ArrayList<Tile> getValidMovesAgainstKing() {
         ArrayList<Tile> outcomes = new ArrayList<>();
         boolean white = this.isWhite();
         Tile up = tile.up();
@@ -128,13 +132,13 @@ public class Rook extends Piece {
             if (up.hasPiece()) {
                 if (up.piece().isWhite() != white) {
                     outcomes.add(up);
-                    
-                    if(!(up.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(up.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         up = up.up();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -147,13 +151,13 @@ public class Rook extends Piece {
             if (down.hasPiece()) {
                 if (down.piece().isWhite() != white) {
                     outcomes.add(down);
-                    
-                    if(!(down.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(down.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         down = down.down();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -166,13 +170,13 @@ public class Rook extends Piece {
             if (right.hasPiece()) {
                 if (right.piece().isWhite() != white) {
                     outcomes.add(up);
-                    
-                    if(!(right.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(right.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         right = right.right();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -185,13 +189,13 @@ public class Rook extends Piece {
             if (left.hasPiece()) {
                 if (left.piece().isWhite() != white) {
                     outcomes.add(left);
-                    
-                    if(!(left.piece() instanceof King)){
-                        loopDone = true; 
+
+                    if (!(left.piece() instanceof King)) {
+                        loopDone = true;
                     } else {
                         left = left.left();
                     }
-                }else{
+                } else {
                     loopDone = true;
                 }
             } else {
@@ -200,14 +204,13 @@ public class Rook extends Piece {
             }
         }
 
-
         return outcomes;
     }
 
     /**
-    * Does not do much of anything
-    */
-    
+     * Does not do much of anything
+     */
+
     @Override
     public void run() {
 

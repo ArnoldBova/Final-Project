@@ -10,19 +10,23 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.Image;
 
-
+/**
+ * @authors Arnold Bova, Nicky Morgan, Ethan Tubia, Emma Flatland
+ * 
+ *          A pawn playing piece used during a game of chess.
+ */
 public class Pawn extends Piece {
 
     boolean hasMoved;
 
     /**
-    *Constructs a new pawn object
-    *
-    *@param tile the position of the piece
-    *
-    *@param isWhite the color of the piece
-    *
-    */
+     * Constructs a new pawn object
+     *
+     * @param tile    the position of the piece
+     *
+     * @param isWhite the color of the piece
+     *
+     */
 
     public Pawn(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
@@ -39,15 +43,15 @@ public class Pawn extends Piece {
             e.printStackTrace();
         }
     }
-    
+
     /**
-    *returns an array of tiles containing
-    *all of the valid moves for the piece
-    *
-    *@returns array list of possible moves
-    *according to the rules of the piece
-    */
-    
+     * returns an array of tiles containing
+     * all of the valid moves for the piece
+     *
+     * @returns array list of possible moves
+     *          according to the rules of the piece
+     */
+
     @Override
     public ArrayList<Tile> getValidMoves() {
         ArrayList<Tile> outcomes = new ArrayList<>();
@@ -119,29 +123,29 @@ public class Pawn extends Piece {
 
             if (nonCaptureTile2 != null && !nonCaptureTile2.hasPiece()) {
                 outcomes.add(nonCaptureTile2);
+            }
         }
-    }
 
         return outcomes;
     }
-    
+
     /**
-    * does not do much of anything
-    */
-    
+     * does not do much of anything
+     */
+
     @Override
     public void run() {
 
     }
-    
+
     /**
-    * finds the potential captures available to
-    * the piece
-    *
-    * @return ArrayList of tiles containing potential capture
-    * tiles
-    */
-    
+     * finds the potential captures available to
+     * the piece
+     *
+     * @return ArrayList of tiles containing potential capture
+     *         tiles
+     */
+
     public ArrayList<Tile> getPossibleCaptureTiles() {
         ArrayList<Tile> outcomes = new ArrayList<>();
 
@@ -150,7 +154,7 @@ public class Pawn extends Piece {
         if (isWhite) {
             captureTile1 = tile.up();
             if (captureTile1 != null) {
-                captureTile1  =captureTile1.left();
+                captureTile1 = captureTile1.left();
                 captureTile2 = tile.up().right();
                 outcomes.add(captureTile1);
                 outcomes.add(captureTile2);
@@ -158,7 +162,7 @@ public class Pawn extends Piece {
         } else {
             captureTile1 = tile.down();
             if (captureTile1 != null) {
-                captureTile1  = captureTile1.left();
+                captureTile1 = captureTile1.left();
                 captureTile2 = tile.down().right();
                 outcomes.add(captureTile1);
                 outcomes.add(captureTile2);
@@ -168,14 +172,14 @@ public class Pawn extends Piece {
         return outcomes;
     }
 
-    /** 
-    *returns true if the pawn has moved
-    *
-    *@return  boolean the value stored in the hasMoved
-    *instance variable
-    */
-    
-    public void moved () {
+    /**
+     * returns true if the pawn has moved
+     *
+     * @return boolean the value stored in the hasMoved
+     *         instance variable
+     */
+
+    public void moved() {
         this.hasMoved = true;
     }
 

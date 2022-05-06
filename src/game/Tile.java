@@ -128,39 +128,88 @@ public class Tile {
         return right;
     }
 
+    /**
+    *returns true if the tile contains a piece
+    *
+    *@returns boolean depending on if piece is not equal to null
+    */
+    
     public boolean hasPiece() {
         return piece != null;
     }
+    
+    /** 
+    *returns the piece on the tile
+    *
+    *@return a piece object that is stored in the piece instance 
+    *variable
+    */
 
     public Piece piece() {
         return piece;
     }
+    
+    /**
+    *returns the location of the tile
+    *
+    *@return the value stored in the location
+    *instance variable
+    */
 
     public Point location() {
         return location;
     }
 
+    /**
+    *returns whether the tile is highlighted
+    *
+    *@retrun what is stored in the highlighted instance variable
+    */
+    
     public boolean isHighlighted() {
         return highlighted;
     }
 
+    /**
+    *changes the highlighted instance variable to true
+    */
+
     public void highlight() {
         this.highlighted = true;
     }
+    
+    /**
+    *changes the highlighted for capture instance variable
+    *to true
+    */
 
     public void highlightForCapture() {
         this.highlightedForCapture = true;
     }
+    
+    /**
+    *returns the boolean value in isHIghlightedForCapturen instance
+    *variable
+    *@return boolean
+    */
 
     public boolean isHighlightedForCapture() {
         return highlightedForCapture;
     }
 
+    /**
+    *sets both highlight instanced variables to false
+    */
+    
     public void unHighlight(){
         this.highlighted = false;
         this.highlightedForCapture = false;
     }
 
+    /**
+    *sets piece instance variable to null
+    */
+    
     public void removePiece(){
         this.piece = null;
     }

@@ -25,6 +25,10 @@ public class ChessTimer extends Thread {
     // The number of milliseconds the program waits before changing animation frames
     public static final int DELAY_TIME = 1000;
 
+    /**
+    * Constructs the ChesTimer object
+    */
+    
     public ChessTimer(int gameLength, JLabel label, boolean isWhitePlayer, JFrame frame) {
         this.timeElapsed = 0;
         this.running = false;
@@ -73,6 +77,9 @@ public class ChessTimer extends Thread {
     }
 
     // Resets the elapsed time to zero
+    /**
+    * Resets the elapsed time to zero
+    */
     public void reset() {
         this.timeElapsed = 0;
         this.label.setText(((isWhitePlayer) ? "White Player: " : "Black Player: ") + "10:00");
@@ -80,10 +87,17 @@ public class ChessTimer extends Thread {
 
     }
     // Temporarily pauses the timer
+    
+    /** 
+    * Temporarily pauses the timer
+    */
     public void pause() {
         this.running = false;
     }
 
+    /**
+    * Unpauses the timer
+    */
     public void unPause() {
         this.running = true;
         //System.out.println("Unpause");

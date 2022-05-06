@@ -11,6 +11,15 @@ import java.awt.Image;
 
 public class Queen extends Piece {
 
+    /**
+    *Constructs a new Queen object
+    *
+    *@param tile the position of the piece
+    *
+    *@param isWhite the color of the piece
+    *
+    */
+    
     public Queen(Tile tile, boolean isWhite, JComponent container) {
         super(tile, isWhite, container);
         try {
@@ -26,6 +35,14 @@ public class Queen extends Piece {
             e.printStackTrace();
         }
     }
+    
+    /**
+    *returns an array of tiles containing
+    *all of the valid moves for the piece
+    *
+    *@returns array list of possible moves
+    *according to the rules of the piece
+    */
 
     @Override
     public ArrayList<Tile> getValidMoves() {
@@ -161,7 +178,15 @@ public class Queen extends Piece {
 
         return outcomes;
     }
-
+    
+    /**
+    * determines if the queen has any valid
+    * moves against the opposing king
+    *
+    * @return ArrayList of tiles that would lead to
+    * putting the opposing King in check
+    */
+    
     public ArrayList<Tile> getValidMovesAgainstKing(){
         ArrayList<Tile> outcomes = new ArrayList<>();
         boolean white = this.isWhite();
@@ -357,11 +382,20 @@ public class Queen extends Piece {
         return outcomes;
     }
 
-
-
+    /**
+    *Does not do much of anything
+    */
+    
     @Override
     public void run() {}
-
+    
+    /**
+    * generates a string consisting of
+    * the color and name of the piece
+    * @return String consisting of color and 
+    * name of the piece
+    */
+    
     @Override
     public String toString() {
         String color = (isWhite) ? "White" : "Black";
